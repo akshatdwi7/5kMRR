@@ -124,46 +124,46 @@ export const Screener: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 pb-4">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0 px-4 sm:px-0 pt-4 sm:pt-0">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Stock Screener
           </h1>
-          <p className="text-gray-400 mt-2">Find stocks that match your investment criteria</p>
+          <p className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-base">Find stocks that match your investment criteria</p>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="text-sm text-gray-400 bg-gray-800 px-4 py-2 rounded-lg">
+        <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
+          <div className="text-xs sm:text-sm text-gray-400 bg-gray-800 px-3 sm:px-4 py-2 rounded-lg flex-1 sm:flex-none text-center">
             {filteredStocks.length} of {stocks.length} stocks
           </div>
           <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Export
+            <Download className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Export</span>
           </Button>
         </div>
       </div>
 
       {/* Quick Filters */}
-      <Card className="bg-gradient-to-r from-gray-800 to-gray-700 border-gray-600">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-white flex items-center">
-            <Star className="h-5 w-5 text-yellow-400 mr-2" />
+      <Card className="bg-gradient-to-r from-gray-800 to-gray-700 border-gray-600 mx-4 sm:mx-0 p-4">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h3 className="text-sm sm:text-lg font-semibold text-white flex items-center">
+            <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 mr-2" />
             Quick Filters
           </h3>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {presetFilters.map((preset, index) => (
             <Button
               key={index}
               variant="outline"
               size="sm"
-              className="justify-start text-left h-auto py-3"
+              className="justify-start text-left h-auto py-2 px-2 sm:px-3"
               onClick={() => setFilters(preset.filters)}
             >
               <div>
-                <div className="font-medium">{preset.name}</div>
-                <div className="text-xs text-gray-400">{preset.description}</div>
+                <div className="text-xs sm:text-base font-medium">{preset.name}</div>
+                <div className="text-xs text-gray-400 truncate">{preset.description}</div>
               </div>
             </Button>
           ))}
@@ -171,72 +171,75 @@ export const Screener: React.FC = () => {
       </Card>
 
       {/* Search and Filters */}
-      <Card className="bg-gradient-to-br from-gray-800 to-gray-700 border-gray-600">
-        <div className="space-y-6">
+      <Card className="bg-gradient-to-br from-gray-800 to-gray-700 border-gray-600 mx-4 sm:mx-0 p-4 sm:p-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Search Bar */}
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
             <div className="flex-1">
               <Input
                 placeholder="Search stocks by symbol or company name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 icon={<Search className="h-4 w-4" />}
-                className="bg-gray-700/50 border-gray-600 focus:border-blue-500"
+                className="bg-gray-700/50 border-gray-600 focus:border-blue-500 text-sm"
               />
             </div>
-            <Button
-              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              variant="outline"
-              className="flex items-center space-x-2"
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              <span>Advanced</span>
-            </Button>
-            <Button onClick={clearFilters} variant="outline">
-              Clear All
-            </Button>
+            <div className="flex space-x-2">
+              <Button
+                onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                variant="outline"
+                size="sm"
+                className="flex items-center space-x-1 sm:space-x-2 flex-1 sm:flex-none"
+              >
+                <SlidersHorizontal className="h-4 w-4" />
+                <span className="text-sm">Advanced</span>
+              </Button>
+              <Button onClick={clearFilters} variant="outline" size="sm" className="flex-1 sm:flex-none">
+                <span className="text-sm">Clear All</span>
+              </Button>
+            </div>
           </div>
 
           {/* Basic Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Min Price (₹)</label>
+              <label className="block text-xs font-medium text-gray-300 mb-2">Min Price (₹)</label>
               <Input
                 type="number"
                 placeholder="0"
                 value={filters.minPrice || ''}
                 onChange={(e) => updateFilter('minPrice', parseFloat(e.target.value))}
-                className="bg-gray-700/50 border-gray-600"
+                className="bg-gray-700/50 border-gray-600 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Max Price (₹)</label>
+              <label className="block text-xs font-medium text-gray-300 mb-2">Max Price (₹)</label>
               <Input
                 type="number"
                 placeholder="10000"
                 value={filters.maxPrice || ''}
                 onChange={(e) => updateFilter('maxPrice', parseFloat(e.target.value))}
-                className="bg-gray-700/50 border-gray-600"
+                className="bg-gray-700/50 border-gray-600 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Min P/E</label>
+              <label className="block text-xs font-medium text-gray-300 mb-2">Min P/E</label>
               <Input
                 type="number"
                 placeholder="0"
                 value={filters.minPE || ''}
                 onChange={(e) => updateFilter('minPE', parseFloat(e.target.value))}
-                className="bg-gray-700/50 border-gray-600"
+                className="bg-gray-700/50 border-gray-600 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Max P/E</label>
+              <label className="block text-xs font-medium text-gray-300 mb-2">Max P/E</label>
               <Input
                 type="number"
                 placeholder="100"
                 value={filters.maxPE || ''}
                 onChange={(e) => updateFilter('maxPE', parseFloat(e.target.value))}
-                className="bg-gray-700/50 border-gray-600"
+                className="bg-gray-700/50 border-gray-600 text-sm"
               />
             </div>
           </div>
@@ -247,15 +250,15 @@ export const Screener: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="space-y-4 border-t border-gray-600 pt-4"
+              className="space-y-3 sm:space-y-4 border-t border-gray-600 pt-3 sm:pt-4"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Sector</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-2">Sector</label>
                   <select
                     value={filters.sector || ''}
                     onChange={(e) => updateFilter('sector', e.target.value)}
-                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-blue-500"
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-white focus:border-blue-500 text-sm"
                   >
                     <option value="">All Sectors</option>
                     <option value="Technology">Technology</option>
@@ -267,7 +270,7 @@ export const Screener: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Market Cap Range</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-2">Market Cap Range</label>
                   <select
                     value={filters.minMarketCap ? (filters.minMarketCap >= 1e12 ? 'large' : filters.minMarketCap >= 1e9 ? 'mid' : 'small') : ''}
                     onChange={(e) => {
@@ -286,7 +289,7 @@ export const Screener: React.FC = () => {
                         updateFilter('maxMarketCap', undefined);
                       }
                     }}
-                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-blue-500"
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-white focus:border-blue-500 text-sm"
                   >
                     <option value="">All Caps</option>
                     <option value="large">Large Cap ({'>'}₹1T)</option>
@@ -296,13 +299,13 @@ export const Screener: React.FC = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Min Volume</label>
+                <label className="block text-xs font-medium text-gray-300 mb-2">Min Volume</label>
                 <Input
                   type="number"
                   placeholder="1000000"
                   value={filters.minVolume || ''}
                   onChange={(e) => updateFilter('minVolume', parseFloat(e.target.value))}
-                  className="bg-gray-700/50 border-gray-600"
+                  className="bg-gray-700/50 border-gray-600 text-sm"
                 />
               </div>
             </motion.div>
@@ -311,7 +314,7 @@ export const Screener: React.FC = () => {
       </Card>
 
       {/* Results */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 px-4 sm:px-0">
         {filteredStocks.map((stock, index) => (
           <motion.div
             key={stock.symbol}
@@ -325,10 +328,10 @@ export const Screener: React.FC = () => {
       </div>
 
       {filteredStocks.length === 0 && (
-        <Card className="text-center py-16">
-          <Filter className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-300 mb-2">No stocks match your criteria</h3>
-          <p className="text-gray-400 mb-6">Try adjusting your filters or search terms to find more results</p>
+        <Card className="text-center py-8 sm:py-12 lg:py-16 mx-4 sm:mx-0 p-6">
+          <Filter className="h-10 w-10 sm:h-16 sm:w-16 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-base sm:text-xl font-semibold text-gray-300 mb-2">No stocks match your criteria</h3>
+          <p className="text-xs sm:text-base text-gray-400 mb-4 sm:mb-6 px-4">Try adjusting your filters or search terms to find more results</p>
           <Button onClick={clearFilters} variant="outline">
             Clear All Filters
           </Button>

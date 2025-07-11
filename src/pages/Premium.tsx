@@ -8,7 +8,7 @@ export const Premium: React.FC = () => {
   const plans = [
     {
       name: 'Pro',
-      price: 29,
+      price: 299,
       period: 'month',
       popular: false,
       features: [
@@ -22,7 +22,7 @@ export const Premium: React.FC = () => {
     },
     {
       name: 'Premium',
-      price: 79,
+      price: 799,
       period: 'month',
       popular: true,
       features: [
@@ -37,7 +37,7 @@ export const Premium: React.FC = () => {
     },
     {
       name: 'Enterprise',
-      price: 199,
+      price: 1999,
       period: 'month',
       popular: false,
       features: [
@@ -76,7 +76,7 @@ export const Premium: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 sm:space-y-12 px-4 sm:px-0 pb-8">
       {/* Hero Section */}
       <div className="text-center">
         <motion.div
@@ -84,21 +84,21 @@ export const Premium: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-center mb-6"
         >
-          <Crown className="h-12 w-12 text-yellow-500 mr-4" />
-          <h1 className="text-4xl font-bold text-white">Upgrade to Premium</h1>
+          <Crown className="h-8 w-8 sm:h-12 sm:w-12 text-yellow-500 mr-3 sm:mr-4" />
+          <h1 className="text-2xl sm:text-4xl font-bold text-white">Upgrade to Premium</h1>
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-xl text-gray-300 max-w-2xl mx-auto"
+          className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto px-4"
         >
           Unlock advanced features and take your trading to the next level with our premium plans.
         </motion.p>
       </div>
 
       {/* Pricing Plans */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         {plans.map((plan, index) => (
           <motion.div
             key={plan.name}
@@ -116,15 +116,15 @@ export const Premium: React.FC = () => {
             )}
             <Card className={`h-full ${plan.popular ? 'ring-2 ring-blue-500' : ''}`}>
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{plan.name}</h3>
                 <div className="flex items-center justify-center mb-4">
-                  <span className="text-4xl font-bold text-white">${plan.price}</span>
+                  <span className="text-2xl sm:text-4xl font-bold text-white">₹{plan.price}</span>
                   <span className="text-gray-400 ml-2">/{plan.period}</span>
                 </div>
                 <Button
                   variant={plan.popular ? 'primary' : 'outline'}
                   className="w-full"
-                  size="lg"
+                  size={plan.popular ? 'lg' : 'md'}
                 >
                   {plan.popular ? 'Start Free Trial' : 'Get Started'}
                 </Button>
@@ -133,7 +133,7 @@ export const Premium: React.FC = () => {
                 {plan.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center">
                     <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
+                    <span className="text-gray-300 text-sm sm:text-base">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -144,8 +144,8 @@ export const Premium: React.FC = () => {
 
       {/* Features Section */}
       <div>
-        <h2 className="text-3xl font-bold text-white text-center mb-12">Why Choose Premium?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <h2 className="text-xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12">Why Choose Premium?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -154,9 +154,9 @@ export const Premium: React.FC = () => {
               transition={{ delay: index * 0.1 }}
             >
               <Card className="text-center h-full">
-                <feature.icon className="h-12 w-12 text-blue-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <feature.icon className="h-8 w-8 sm:h-12 sm:w-12 text-blue-500 mx-auto mb-3 sm:mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400 text-sm sm:text-base">{feature.description}</p>
               </Card>
             </motion.div>
           ))}
@@ -166,11 +166,11 @@ export const Premium: React.FC = () => {
       {/* CTA Section */}
       <Card className="text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Trading Like a Pro?</h2>
-          <p className="text-gray-300 mb-6">
+          <h2 className="text-xl sm:text-3xl font-bold text-white mb-4">Ready to Start Trading Like a Pro?</h2>
+          <p className="text-gray-300 mb-6 text-sm sm:text-base px-4">
             Join thousands of traders who trust Screeno for their investment decisions.
           </p>
-          <div className="flex items-center justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
             <Button size="lg" variant="primary">
               Start Free Trial
             </Button>
@@ -178,7 +178,7 @@ export const Premium: React.FC = () => {
               View Demo
             </Button>
           </div>
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-xs sm:text-sm text-gray-400 mt-4">
             14-day free trial • No credit card required • Cancel anytime
           </p>
         </div>

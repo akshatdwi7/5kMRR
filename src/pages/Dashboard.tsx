@@ -87,43 +87,45 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-2 px-2">
           Ask AI About Any Stock
         </h1>
-        <p className="text-gray-600 text-lg">Get instant, intelligent answers about Indian stocks</p>
+        <p className="text-gray-600 text-sm sm:text-base lg:text-lg px-2">Get instant, intelligent answers about Indian stocks</p>
       </div>
 
       {/* Portfolio Summary - Simplified */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-200">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg sm:rounded-xl lg:rounded-2xl p-3 sm:p-4 lg:p-6 xl:p-8 border border-blue-200 mx-1 sm:mx-0">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Invested Amount</div>
-            <div className="text-2xl font-bold text-gray-900">
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600 mb-1">Invested</div>
+            <div className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900">
               ₹{(portfolioSummary.totalInvested / 100000).toFixed(1)}L
             </div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Current Value</div>
-            <div className="text-2xl font-bold text-gray-900">
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600 mb-1">Current</div>
+            <div className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900">
               ₹{(portfolioSummary.totalCurrent / 100000).toFixed(1)}L
             </div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Total Gain</div>
-            <div className={`text-2xl font-bold ${portfolioSummary.totalGainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600 mb-1">Gain</div>
+            <div className={`text-base sm:text-lg lg:text-xl xl:text-2xl font-bold ${portfolioSummary.totalGainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {portfolioSummary.totalGainLoss >= 0 ? '+' : ''}₹{(Math.abs(portfolioSummary.totalGainLoss) / 1000).toFixed(1)}K
+            <div className="text-xs text-gray-600 mb-1">Returns</div>
+            <div className={`text-sm sm:text-lg lg:text-2xl font-bold flex items-center justify-center ${portfolioSummary.totalGainLossPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
             </div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Returns</div>
-            <div className={`text-2xl font-bold flex items-center justify-center ${portfolioSummary.totalGainLossPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            <div className="text-xs sm:text-sm text-gray-600 mb-1">Returns</div>
+            <div className={`text-lg sm:text-xl lg:text-2xl font-bold flex items-center justify-center ${portfolioSummary.totalGainLossPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {portfolioSummary.totalGainLossPercent >= 0 ? (
-                <ArrowUpRight className="h-5 w-5 mr-1" />
+                <ArrowUpRight className="h-3 w-3 sm:h-5 sm:w-5 mr-1" />
               ) : (
-                <ArrowDownRight className="h-5 w-5 mr-1" />
+                <ArrowDownRight className="h-3 w-3 sm:h-5 sm:w-5 mr-1" />
               )}
               {portfolioSummary.totalGainLossPercent >= 0 ? '+' : ''}{portfolioSummary.totalGainLossPercent.toFixed(1)}%
             </div>
@@ -132,25 +134,25 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Main Stock Search - Core Feature */}
-      <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-        <div className="text-center mb-8">
+      <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm border border-gray-200 mx-4 sm:mx-0">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center space-x-3 mb-4">
-            <div className="p-3 bg-blue-100 rounded-xl">
-              <MessageCircle className="h-6 w-6 text-blue-600" />
+            <div className="p-2 bg-blue-100 rounded-xl">
+              <MessageCircle className="h-5 w-5 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Stock Query Assistant</h2>
+            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Stock Query Assistant</h2>
           </div>
-          <p className="text-gray-600">Search any Indian stock and ask AI anything about it</p>
+          <p className="text-xs sm:text-base text-gray-600 px-4 sm:px-0">Search any Indian stock and ask AI anything about it</p>
         </div>
         
         <div className="max-w-2xl mx-auto">
-          <div className="relative mb-6">
+          <div className="relative mb-4 sm:mb-6">
             <Input
               placeholder="Search stocks (e.g., RELIANCE, TCS, HDFC Bank)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               icon={<Search className="h-5 w-5 text-gray-400" />}
-              className="text-lg py-4 bg-gray-50 border-gray-200 focus:border-blue-500 focus:bg-white"
+              className="text-sm sm:text-lg py-3 sm:py-4 bg-gray-50 border-gray-200 focus:border-blue-500 focus:bg-white"
             />
             
             {isSearching && (
@@ -162,44 +164,44 @@ export const Dashboard: React.FC = () => {
 
           {/* Search Results */}
           {searchResults.length > 0 && (
-            <div className="space-y-3 mb-8">
+            <div className="space-y-3 mb-6 sm:mb-8">
               {searchResults.slice(0, 4).map((stock) => (
                 <motion.div
                   key={stock.symbol}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors space-y-3 sm:space-y-0"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                       <div>
-                        <h4 className="font-bold text-gray-900">{stock.symbol}</h4>
-                        <p className="text-sm text-gray-600 truncate max-w-xs">{stock.name}</p>
+                        <h4 className="font-bold text-gray-900 text-sm sm:text-base">{stock.symbol}</h4>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">{stock.name}</p>
                       </div>
-                      <div className="text-right">
-                        <div className="text-lg font-bold text-gray-900">₹{stock.price.toFixed(2)}</div>
-                        <div className={`text-sm font-medium ${stock.change > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      <div className="text-left sm:text-right">
+                        <div className="text-base sm:text-lg font-bold text-gray-900">₹{stock.price.toFixed(2)}</div>
+                        <div className={`text-xs sm:text-sm font-medium ${stock.change > 0 ? 'text-green-600' : 'text-red-600'}`}>
                           {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2 ml-4">
+                  <div className="flex items-center space-x-2 sm:ml-4">
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => handleAddToWatchlist(stock)}
-                      className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                      className="border-gray-300 text-gray-600 hover:bg-gray-50 text-xs sm:text-sm"
                     >
-                      <Star className="h-3 w-3 mr-1" />
-                      Watch
+                      <Star className="h-3 w-3 sm:mr-1" />
+                      <span className="hidden sm:inline">Watch</span>
                     </Button>
                     <Button 
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm"
                       onClick={() => handleStockSelect(stock)}
                     >
-                      <MessageCircle className="h-4 w-4 mr-2" />
-                      Ask AI
+                      <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Ask AI</span>
                     </Button>
                   </div>
                 </motion.div>
@@ -208,10 +210,10 @@ export const Dashboard: React.FC = () => {
           )}
 
           {/* Quick Examples */}
-          {!selectedStock && (
+          {!selectedStock && searchResults.length === 0 && (
             <div className="text-center">
-              <p className="text-gray-500 text-sm mb-4">Try asking:</p>
-              <div className="flex flex-wrap justify-center gap-2">
+              <p className="text-gray-500 text-xs mb-3 sm:mb-4">Try asking:</p>
+              <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
                 {[
                   "Should I buy RELIANCE?",
                   "TCS vs Infosys comparison",
@@ -221,7 +223,7 @@ export const Dashboard: React.FC = () => {
                   <button
                     key={index}
                     onClick={() => setSearchQuery(example.split(' ')[2] || example.split(' ')[0])}
-                    className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm hover:bg-blue-100 transition-colors"
+                    className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs hover:bg-blue-100 transition-colors"
                   >
                     "{example}"
                   </button>
@@ -245,7 +247,7 @@ export const Dashboard: React.FC = () => {
       )}
 
       {/* General AI Query Interface (when no stock selected) */}
-      {!selectedStock && searchQuery === '' && (
+      {!selectedStock && searchQuery === '' && searchResults.length === 0 && (
         <AIQueryInterface
           onUpgrade={() => {
             window.location.href = '/premium';
@@ -254,32 +256,32 @@ export const Dashboard: React.FC = () => {
       )}
 
       {/* Top Movers - Secondary Feature */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+      <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200 mx-4 sm:mx-0">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-gray-900 flex items-center">
-            <Activity className="h-5 w-5 text-orange-500 mr-2" />
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 flex items-center">
+            <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 mr-2" />
             Top Movers Today
           </h3>
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-600 font-medium">Live</span>
+            <span className="text-xs sm:text-sm text-green-600 font-medium">Live</span>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {topMovers.slice(0, 6).map((stock, index) => (
             <motion.div
               key={stock.symbol}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+              className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
               onClick={() => handleStockSelect(stock)}
             >
               <div className="flex items-center justify-between mb-2">
                 <div>
-                  <h4 className="font-bold text-gray-900">{stock.symbol}</h4>
-                  <p className="text-xs text-gray-600">{stock.sector}</p>
+                  <h4 className="text-sm font-bold text-gray-900">{stock.symbol}</h4>
+                  <p className="text-xs text-gray-600 truncate">{stock.sector}</p>
                 </div>
                 <div className={`px-2 py-1 rounded-full text-xs font-medium ${
                   stock.change > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
@@ -288,10 +290,10 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-lg font-bold text-gray-900">₹{stock.price.toFixed(2)}</span>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-xs">
+                <span className="text-sm font-bold text-gray-900">₹{stock.price.toFixed(2)}</span>
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-xs px-2">
                   <MessageCircle className="h-3 w-3 mr-1" />
-                  Ask AI
+                  <span className="hidden xs:inline">Ask AI</span>
                 </Button>
               </div>
             </motion.div>
@@ -301,22 +303,25 @@ export const Dashboard: React.FC = () => {
 
       {/* Usage Stats for Free Users */}
       {profile?.subscription_tier === 'free' && (
-        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 border border-yellow-200">
-          <div className="flex items-center justify-between">
+        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 sm:p-6 border border-yellow-200 mx-4 sm:mx-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Daily Usage</h3>
-              <p className="text-gray-600">
+              <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-2">Daily Usage</h3>
+              <p className="text-xs sm:text-base text-gray-600">
                 You've used {profile.ai_queries_used} of {profile.ai_queries_limit} free AI queries today
               </p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                <div 
+              <div className="w-full sm:w-80 bg-gray-200 rounded-full h-2 mt-2 sm:mt-3">
+                <div
                   className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${(profile.ai_queries_used / profile.ai_queries_limit) * 100}%` }}
-                ></div>
+                />
               </div>
             </div>
-            <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white">
-              <Sparkles className="h-4 w-4 mr-2" />
+            <Button 
+              size="sm"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white w-full sm:w-auto text-xs sm:text-sm"
+            >
+              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
               Upgrade to Pro
             </Button>
           </div>
@@ -324,4 +329,3 @@ export const Dashboard: React.FC = () => {
       )}
     </div>
   );
-};

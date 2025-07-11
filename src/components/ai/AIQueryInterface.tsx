@@ -83,19 +83,19 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Query Interface */}
-      <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <MessageCircle className="h-5 w-5 text-blue-600" />
+      <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200 p-4 sm:p-6 mx-4 sm:mx-0">
+        <div className="flex items-center space-x-2 sm:space-x-3 mb-4">
+          <div className="p-1.5 bg-blue-100 rounded-lg">
+            <MessageCircle className="h-4 w-4 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">
+            <h3 className="text-sm sm:text-lg font-semibold text-gray-900">
               AI Stock Analysis
               {stockSymbol && <span className="text-blue-600"> - {stockSymbol}</span>}
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-xs text-gray-600">
               {profile.subscription_tier === 'free' 
                 ? `${profile.ai_queries_used}/${profile.ai_queries_limit} queries used today`
                 : 'Unlimited queries'
@@ -104,8 +104,8 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex space-x-2">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
             <Input
               placeholder={stockSymbol 
                 ? `Ask anything about ${stockSymbol}...` 
@@ -113,30 +113,34 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
               }
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 border-blue-200 focus:border-blue-500"
+              className="flex-1 border-blue-200 focus:border-blue-500 text-sm"
               disabled={isLoading}
             />
             <Button
               type="submit"
               disabled={!query.trim() || isLoading || !canMakeAIQuery()}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
+              size="sm"
             >
               {isLoading ? (
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
               ) : (
-                <Send className="h-4 w-4" />
+                <>
+                  <Send className="h-4 w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Send</span>
+                </>
               )}
             </Button>
           </div>
 
           {/* Suggested Queries */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1">
             {suggestedQueries.map((suggestion, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => setQuery(suggestion)}
-                className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200 transition-colors"
+                className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs hover:bg-blue-200 transition-colors"
                 disabled={isLoading}
               >
                 {suggestion}
@@ -150,15 +154,17 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-2"
+            className="mt-3 sm:mt-4 p-3 bg-red-50 border border-red-200 rounded-lg flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mx-4 sm:mx-0"
           >
-            <AlertCircle className="h-4 w-4 text-red-500" />
-            <span className="text-red-700 text-sm">{error}</span>
+            <div className="flex items-center space-x-2">
+              <AlertCircle className="h-4 w-4 text-red-500" />
+              <span className="text-red-700 text-xs">{error}</span>
+            </div>
             {error.includes('query limit') && onUpgrade && (
               <Button
                 size="sm"
                 onClick={onUpgrade}
-                className="ml-auto bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
+                className="w-full sm:w-auto sm:ml-auto bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-xs px-3"
               >
                 <Crown className="h-3 w-3 mr-1" />
                 Upgrade
@@ -176,35 +182,35 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <Card className="bg-white border-gray-200">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
+            <Card className="bg-white border-gray-200 p-4 sm:p-6 mx-4 sm:mx-0">
+              <div className="flex items-center space-x-2 sm:space-x-3 mb-4">
+                <div className="p-1.5 bg-purple-100 rounded-lg">
+                  <Sparkles className="h-4 w-4 text-purple-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">AI Analysis</h3>
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">AI Analysis</h3>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 text-xs text-gray-600">
                     <span>Confidence: {response.confidence}%</span>
-                    <span>•</span>
+                    <span className="hidden sm:inline">•</span>
                     <span>Sources: {response.sources.join(', ')}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-line text-gray-700">
+              <div className="prose prose-sm max-w-none text-sm sm:text-base">
+                <div className="whitespace-pre-line text-gray-700 leading-relaxed text-xs sm:text-sm">
                   {response.response}
                 </div>
               </div>
 
               {/* Recommendations */}
               {response.recommendations && (
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center space-x-2 mb-3">
+                <div className="mt-4 sm:mt-6 p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center space-x-2 mb-2 sm:mb-3">
                     <TrendingUp className="h-4 w-4 text-green-600" />
-                    <span className="font-semibold text-gray-900">AI Recommendation</span>
+                    <span className="text-xs sm:text-base font-semibold text-gray-900">AI Recommendation</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 text-xs">
                     <div>
                       <span className="text-gray-600">Action:</span>
                       <div className={`font-semibold ${
@@ -232,7 +238,7 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
                       </div>
                     )}
                   </div>
-                  <div className="mt-3 text-sm text-gray-600">
+                  <div className="mt-2 sm:mt-3 text-xs text-gray-600">
                     <strong>Reasoning:</strong> {response.recommendations.reasoning}
                   </div>
                 </div>
