@@ -8,9 +8,9 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-50 pb-safe">
+    <div className="min-h-screen bg-gray-50">
       <Header />
-      <main className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-8 max-w-7xl mx-auto">
+      <main className="px-6 py-8 max-w-7xl mx-auto">
         {children}
       </main>
       <ChatWidget />
