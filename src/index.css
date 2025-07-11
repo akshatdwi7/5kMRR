@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pause animation on hover */
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}

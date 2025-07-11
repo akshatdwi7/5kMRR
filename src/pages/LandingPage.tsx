@@ -87,7 +87,6 @@ export const LandingPage: React.FC = () => {
     { name: "HDFC Securities", logo: "🔴", connected: true },
     { name: "Kotak Securities", logo: "🟣", connected: true },
     { name: "Groww", logo: "🟢", connected: true },
-    { name: "5paisa", logo: "🔵", connected: true },
   ];
 
   const benefits = [
@@ -453,29 +452,26 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-12">
-            {brokers.map((broker, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group hover:-translate-y-2"
-              >
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">
-                  {broker.logo}
+          <div className="overflow-hidden mb-12">
+            <div className="flex animate-marquee space-x-6 w-max">
+              {[...brokers, ...brokers].map((broker, index) => (
+                <div
+                  key={index}
+                  className="min-w-[160px] bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center flex-shrink-0"
+                >
+                  <div className="text-3xl mb-3">{broker.logo}</div>
+                  <div className="font-semibold text-gray-900 text-sm mb-2">
+                    {broker.name}
+                  </div>
+                  <div className="flex items-center justify-center space-x-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-xs text-green-600 font-medium">
+                      Connected
+                    </span>
+                  </div>
                 </div>
-                <div className="font-semibold text-gray-900 text-sm mb-2">
-                  {broker.name}
-                </div>
-                <div className="flex items-center justify-center space-x-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-green-600 font-medium">
-                    Connected
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
