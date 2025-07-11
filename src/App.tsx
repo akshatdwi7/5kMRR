@@ -8,6 +8,7 @@ import { StockDetail } from './pages/StockDetail';
 import { Premium } from './pages/Premium';
 import { Chat } from './pages/Chat';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -33,11 +34,13 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

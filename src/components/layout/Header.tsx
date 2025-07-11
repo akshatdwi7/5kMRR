@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Search, Bell, User, TrendingUp, LogOut, BarChart3, MessageCircle, Star, Settings, Crown, Activity, PieChart, Calendar, BookOpen, ChevronDown } from 'lucide-react';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import { useAuth } from '../../contexts/AuthContext';
 
 const navItems = [
@@ -69,6 +70,9 @@ export const Header: React.FC = () => {
               <Bell className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full text-xs"></span>
             </Button>
+            
+            {/* Theme Toggle */}
+            <ThemeToggle />
             
             {/* Premium Button */}
             {profile?.subscription_tier === 'free' && (

@@ -1,0 +1,166 @@
+/* CSS Custom Properties for Theme Variables */
+:root {
+  /* Light theme colors */
+  --color-primary: 59 130 246; /* blue-500 */
+  --color-primary-foreground: 255 255 255;
+  --color-secondary: 107 114 128; /* gray-500 */
+  --color-secondary-foreground: 255 255 255;
+  
+  --color-background: 255 255 255;
+  --color-foreground: 17 24 39; /* gray-900 */
+  --color-muted: 249 250 251; /* gray-50 */
+  --color-muted-foreground: 107 114 128; /* gray-500 */
+  
+  --color-card: 255 255 255;
+  --color-card-foreground: 17 24 39;
+  --color-popover: 255 255 255;
+  --color-popover-foreground: 17 24 39;
+  
+  --color-border: 229 231 235; /* gray-200 */
+  --color-input: 229 231 235;
+  --color-ring: 59 130 246;
+  
+  --color-success: 34 197 94; /* green-500 */
+  --color-success-foreground: 255 255 255;
+  --color-warning: 245 158 11; /* amber-500 */
+  --color-warning-foreground: 255 255 255;
+  --color-error: 239 68 68; /* red-500 */
+  --color-error-foreground: 255 255 255;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --transition-colors: color 150ms ease-in-out, background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  --transition-theme: all 200ms ease-in-out;
+}
+
+/* Dark theme colors */
+.dark {
+  --color-primary: 59 130 246; /* blue-500 */
+  --color-primary-foreground: 255 255 255;
+  --color-secondary: 75 85 99; /* gray-600 */
+  --color-secondary-foreground: 255 255 255;
+  
+  --color-background: 17 24 39; /* gray-900 */
+  --color-foreground: 249 250 251; /* gray-50 */
+  --color-muted: 31 41 55; /* gray-800 */
+  --color-muted-foreground: 156 163 175; /* gray-400 */
+  
+  --color-card: 31 41 55; /* gray-800 */
+  --color-card-foreground: 249 250 251;
+  --color-popover: 31 41 55;
+  --color-popover-foreground: 249 250 251;
+  
+  --color-border: 75 85 99; /* gray-600 */
+  --color-input: 75 85 99;
+  --color-ring: 59 130 246;
+  
+  --color-success: 34 197 94; /* green-500 */
+  --color-success-foreground: 255 255 255;
+  --color-warning: 245 158 11; /* amber-500 */
+  --color-warning-foreground: 17 24 39;
+  --color-error: 239 68 68; /* red-500 */
+  --color-error-foreground: 255 255 255;
+  
+  /* Dark shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: 0 0 0;
+    --color-ring: 0 0 0;
+  }
+  
+  .dark {
+    --color-border: 255 255 255;
+    --color-ring: 255 255 255;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-colors: none;
+    --transition-theme: none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Base styles with theme variables */
+* {
+  transition: var(--transition-colors);
+}
+
+body {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  transition: var(--transition-theme);
+}
+
+/* Utility classes using CSS variables */
+.bg-background { background-color: rgb(var(--color-background)); }
+.bg-foreground { background-color: rgb(var(--color-foreground)); }
+.bg-muted { background-color: rgb(var(--color-muted)); }
+.bg-card { background-color: rgb(var(--color-card)); }
+.bg-popover { background-color: rgb(var(--color-popover)); }
+.bg-primary { background-color: rgb(var(--color-primary)); }
+.bg-secondary { background-color: rgb(var(--color-secondary)); }
+.bg-success { background-color: rgb(var(--color-success)); }
+.bg-warning { background-color: rgb(var(--color-warning)); }
+.bg-error { background-color: rgb(var(--color-error)); }
+
+.text-background { color: rgb(var(--color-background)); }
+.text-foreground { color: rgb(var(--color-foreground)); }
+.text-muted-foreground { color: rgb(var(--color-muted-foreground)); }
+.text-card-foreground { color: rgb(var(--color-card-foreground)); }
+.text-popover-foreground { color: rgb(var(--color-popover-foreground)); }
+.text-primary { color: rgb(var(--color-primary)); }
+.text-primary-foreground { color: rgb(var(--color-primary-foreground)); }
+.text-secondary-foreground { color: rgb(var(--color-secondary-foreground)); }
+.text-success-foreground { color: rgb(var(--color-success-foreground)); }
+.text-warning-foreground { color: rgb(var(--color-warning-foreground)); }
+.text-error-foreground { color: rgb(var(--color-error-foreground)); }
+
+.border-border { border-color: rgb(var(--color-border)); }
+.border-input { border-color: rgb(var(--color-input)); }
+.border-ring { border-color: rgb(var(--color-ring)); }
+
+.ring-ring { --tw-ring-color: rgb(var(--color-ring)); }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* Focus visible styles for better accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid rgb(var(--color-ring));
+  outline-offset: 2px;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

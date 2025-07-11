@@ -4,7 +4,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light dark" />
     <title>Screeno - Stock Analysis Platform</title>
+    <script>
+      // Prevent flash of unstyled content (FOUC)
+      (function() {
+        const theme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const resolvedTheme = theme === 'system' || !theme ? systemTheme : theme;
+        
+        document.documentElement.classList.add(resolvedTheme);
+        document.documentElement.setAttribute('data-theme', resolvedTheme);
+        
+        // Update theme-color meta tag
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (metaThemeColor) {
+          metaThemeColor.setAttribute('content', resolvedTheme === 'dark' ? '#1f2937' : '#ffffff');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
