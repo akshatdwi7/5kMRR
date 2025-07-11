@@ -21,12 +21,11 @@ import {
   Brain,
   Clock,
   DollarSign,
-  TrendingDown,
   Activity,
 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
-import { Card } from "../components/ui/Card";
+
 import { useAuth } from "../contexts/AuthContext";
 
 export const LandingPage: React.FC = () => {
