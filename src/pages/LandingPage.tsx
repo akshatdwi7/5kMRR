@@ -34,8 +34,9 @@ import icicidirect from "../assets/logos/icicidirect.png";
 import hdfc from "../assets/logos/hdfc.png";
 import kotak from "../assets/logos/kotak.png";
 import ss from "../assets/logos/ss.png";
-
+import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
+import { StarsBackground } from "../components/ui/stars-background";
 
 export const LandingPage: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -243,12 +244,9 @@ export const LandingPage: React.FC = () => {
             >
               Pricing
             </a>
-            <ButtonRotatingBackgroundGradient
-              onClick={() => {
-                setIsLoginMode(false);
-                setShowAuthModal(true);
-              }}
-            />
+            <ButtonRotatingBackgroundGradient>
+              Get started
+            </ButtonRotatingBackgroundGradient>
             <button className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition">
               Sign in
             </button>
@@ -390,6 +388,9 @@ export const LandingPage: React.FC = () => {
               </motion.div>
             </div>
           </div>
+          <StarsBackground />
+
+          <ShootingStars />
         </div>
       </section>
 
