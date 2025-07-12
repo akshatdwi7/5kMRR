@@ -25,6 +25,13 @@ import {
 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
+import zerodha from "../assets/logos/zerodha.png";
+import upstocks from "../assets/logos/upstocks.png";
+import angelone from "../assets/logos/angelone.png";
+import groww from "../assets/logos/groww.png";
+import icicidirect from "../assets/logos/icicidirect.png";
+import hdfc from "../assets/logos/hdfc.png";
+import kotak from "../assets/logos/kotak.png";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -77,16 +84,20 @@ export const LandingPage: React.FC = () => {
       setIsLoading(false);
     }
   };
+  type Broker = {
+    name: string;
+    logo: string;
+    connected: boolean;
+  };
 
-  const brokers = [
-    { name: "Zerodha", logo: "🟢", connected: true },
-    { name: "Upstox", logo: "🟠", connected: true },
-    { name: "Angel One", logo: "🔵", connected: true },
-    { name: "ICICI Direct", logo: "🟡", connected: true },
-    { name: "HDFC Securities", logo: "🔴", connected: true },
-    { name: "Kotak Securities", logo: "🟣", connected: true },
-    { name: "Groww", logo: "🟢", connected: true },
-    { name: "5paisa", logo: "🔵", connected: true },
+  const brokers: Broker[] = [
+    { name: "Zerodha", logo: zerodha, connected: true },
+    { name: "Upstox", logo: upstocks, connected: true },
+    { name: "Angel One", logo: angelone, connected: true },
+    { name: "ICICI Direct", logo: icicidirect, connected: true },
+    { name: "HDFC Securities", logo: hdfc, connected: true },
+    { name: "Kotak Securities", logo: kotak, connected: true },
+    { name: "Groww", logo: groww, connected: true },
   ];
 
   const benefits = [
@@ -462,9 +473,14 @@ export const LandingPage: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   className="min-w-[160px] bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group hover:-translate-y-2 flex-shrink-0"
                 >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">
-                    {broker.logo}
+                  <div className="mb-3 group-hover:scale-110 transition-transform">
+                    <img
+                      src={broker.logo}
+                      alt={broker.name}
+                      className="mx-auto w-16 h-16 object-contain rounded-full"
+                    />
                   </div>
+
                   <div className="font-semibold text-gray-900 text-sm mb-2">
                     {broker.name}
                   </div>
