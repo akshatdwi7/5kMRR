@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ButtonRotatingBackgroundGradient from "../components/ui/Button";
 import {
   TrendingUp,
   BarChart3,
@@ -219,40 +220,39 @@ export const LandingPage: React.FC = () => {
 
       <section className="relative min-h-screen flex flex-col overflow-hidden">
         {/* Gradient Background */}
-        <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
+        <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
-        {/* Navbar */}
-        <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
+        {/* Navbar (inside hero, on top) */}
+        <nav className="flex items-center justify-between bg-black/80 backdrop-blur-md rounded-full px-6 py-2 mx-auto max-w-3xl shadow-lg sticky top-0 z-50">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src={ss} alt="Logo" className="h-[60px] w-[60px]" />
+            <img src={ss} alt="Logo" className="h-10 w-10" />
+            <span className="text-white text-2xl font-thin">Screeno</span>
           </div>
-
-          {/* Center Menu */}
-          <div className="flex-1 flex justify-center">
-            <div className="flex space-x-8 bg-white/10 backdrop-blur-md rounded-full px-8 py-2 shadow border border-white/20">
-              <a
-                href="#"
-                className="text-white font-medium hover:text-blue-300"
-              >
-                Home
-              </a>
-              <a href="#" className="text-white/80 hover:text-blue-300">
-                About
-              </a>
-              <a href="#" className="text-white/80 hover:text-blue-300">
-                Service
-              </a>
-              <a href="#" className="text-white/80 hover:text-blue-300">
-                Contact
-              </a>
-            </div>
+          {/* Links */}
+          <div className="flex items-center space-x-8">
+            <a
+              href="#features"
+              className="text-white/80 font-thin px-3 py-2 rounded-full transition hover:bg-white/10 hover:text-white"
+            >
+              Features
+            </a>
+            <a
+              href="#pricing"
+              className="text-white/80 font-thin px-3 py-2 rounded-full transition hover:bg-white/10 hover:text-white"
+            >
+              Pricing
+            </a>
+            <ButtonRotatingBackgroundGradient
+              onClick={() => {
+                setIsLoginMode(false);
+                setShowAuthModal(true);
+              }}
+            />
+            <button className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition">
+              Sign in
+            </button>
           </div>
-
-          {/* Connect Wallet Button */}
-          <button className="ml-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-xl font-semibold shadow hover:from-blue-600 hover:to-purple-600 transition">
-            Connect Wallet
-          </button>
         </nav>
 
         {/* Hero Content */}
@@ -269,7 +269,7 @@ export const LandingPage: React.FC = () => {
                   <span>AI-Powered Stock Analysis</span>
                 </div>
 
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-thin text-white-900 mb-6 leading-tight">
                   Ask AI About
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                     {" "}
@@ -287,7 +287,7 @@ export const LandingPage: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xl"
+                    className="bg-gradient-to-r from-blue-600 to-light-blue-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl"
                     onClick={() => {
                       setIsLoginMode(false);
                       setShowAuthModal(true);
