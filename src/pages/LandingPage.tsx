@@ -32,6 +32,7 @@ import groww from "../assets/logos/groww.png";
 import icicidirect from "../assets/logos/icicidirect.png";
 import hdfc from "../assets/logos/hdfc.png";
 import kotak from "../assets/logos/kotak.png";
+import ss from "../assets/logos/ss.png";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -211,204 +212,183 @@ export const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-transparent">
       {/* Navigation */}
-      <nav className="relative z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 px-6 py-4 sticky top-0">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-              <TrendingUp className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Screeno
-            </span>
-          </div>
-
-          <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#features"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-            >
-              Features
-            </a>
-            <a
-              href="#brokers"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-            >
-              Brokers
-            </a>
-            <a
-              href="#benefits"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-            >
-              Benefits
-            </a>
-            <a
-              href="#pricing"
-              className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-            >
-              Pricing
-            </a>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              onClick={() => {
-                setIsLoginMode(true);
-                setShowAuthModal(true);
-              }}
-              className="text-gray-600 hover:text-blue-600"
-            >
-              Sign In
-            </Button>
-            <Button
-              onClick={() => {
-                setIsLoginMode(false);
-                setShowAuthModal(true);
-              }}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg"
-            >
-              Get Started Free
-            </Button>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
-        <div className="max-w-7xl mx-auto relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Sparkles className="h-4 w-4" />
-                <span>AI-Powered Stock Analysis</span>
-              </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Ask AI About
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  {" "}
-                  Any Stock{" "}
-                </span>
-                Get Instant Answers
-              </h1>
+      <section className="relative min-h-screen flex flex-col overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                The only platform where you can chat with AI about any Indian
-                stock and get intelligent, data-driven insights instantly.
-                Connect your favorite broker and start investing smarter.
-              </p>
+        {/* Navbar */}
+        <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img src={ss} alt="Logo" className="h-[60px] w-[60px]" />
+          </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xl"
-                  onClick={() => {
-                    setIsLoginMode(false);
-                    setShowAuthModal(true);
-                  }}
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  Watch Demo
-                </Button>
-              </div>
+          {/* Center Menu */}
+          <div className="flex-1 flex justify-center">
+            <div className="flex space-x-8 bg-white/10 backdrop-blur-md rounded-full px-8 py-2 shadow border border-white/20">
+              <a
+                href="#"
+                className="text-white font-medium hover:text-blue-300"
+              >
+                Home
+              </a>
+              <a href="#" className="text-white/80 hover:text-blue-300">
+                About
+              </a>
+              <a href="#" className="text-white/80 hover:text-blue-300">
+                Service
+              </a>
+              <a href="#" className="text-white/80 hover:text-blue-300">
+                Contact
+              </a>
+            </div>
+          </div>
 
-              <div className="flex items-center space-x-6 text-sm text-gray-500">
-                <div className="flex items-center space-x-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>14-day free trial</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>No credit card required</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span>Cancel anytime</span>
-                </div>
-              </div>
-            </motion.div>
+          {/* Connect Wallet Button */}
+          <button className="ml-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-xl font-semibold shadow hover:from-blue-600 hover:to-purple-600 transition">
+            Connect Wallet
+          </button>
+        </nav>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-200/50">
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-10"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl opacity-10"></div>
-
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-gray-900">
-                    AI Stock Chat
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-green-600 font-medium">
-                      Live
-                    </span>
-                  </div>
+        {/* Hero Content */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="max-w-7xl mx-auto relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  <Sparkles className="h-4 w-4" />
+                  <span>AI-Powered Stock Analysis</span>
                 </div>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-end">
-                    <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
-                      <p className="text-sm">
-                        Should I buy Reliance Industries?
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
-                      <p className="text-sm">
-                        Based on current fundamentals, RIL shows strong revenue
-                        growth of 12% YoY. P/E ratio of 24.8 is reasonable.
-                        Consider buying on dips below ₹2800.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
-                      <p className="text-sm">What about TCS vs Infosys?</p>
-                    </div>
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
-                      <p className="text-sm">
-                        TCS has better margins (25.1% vs 21.4%) and stronger
-                        client additions. Both are quality picks, but TCS edges
-                        out for long-term growth.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <MessageCircle className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-500 flex-1">
-                    Ask about any stock...
+                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                  Ask AI About
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    {" "}
+                    Any Stock{" "}
                   </span>
-                  <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                    <ArrowRight className="h-4 w-4" />
+                  Get Instant Answers
+                </h1>
+
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  The only platform where you can chat with AI about any Indian
+                  stock and get intelligent, data-driven insights instantly.
+                  Connect your favorite broker and start investing smarter.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xl"
+                    onClick={() => {
+                      setIsLoginMode(false);
+                      setShowAuthModal(true);
+                    }}
+                  >
+                    Start Free Trial
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                  >
+                    <Play className="mr-2 h-5 w-5" />
+                    Watch Demo
                   </Button>
                 </div>
-              </div>
-            </motion.div>
+
+                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4 text-green-500" />
+                    <span>14-day free trial</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4 text-green-500" />
+                    <span>No credit card required</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4 text-green-500" />
+                    <span>Cancel anytime</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-200/50">
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-10"></div>
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl opacity-10"></div>
+
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      AI Stock Chat
+                    </h3>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-sm text-green-600 font-medium">
+                        Live
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-end">
+                      <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
+                        <p className="text-sm">
+                          Should I buy Reliance Industries?
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
+                        <p className="text-sm">
+                          Based on current fundamentals, RIL shows strong
+                          revenue growth of 12% YoY. P/E ratio of 24.8 is
+                          reasonable. Consider buying on dips below ₹2800.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
+                        <p className="text-sm">What about TCS vs Infosys?</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
+                        <p className="text-sm">
+                          TCS has better margins (25.1% vs 21.4%) and stronger
+                          client additions. Both are quality picks, but TCS
+                          edges out for long-term growth.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                    <MessageCircle className="h-4 w-4 text-gray-400" />
+                    <span className="text-sm text-gray-500 flex-1">
+                      Ask about any stock...
+                    </span>
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -483,12 +463,6 @@ export const LandingPage: React.FC = () => {
 
                   <div className="font-semibold text-gray-900 text-sm mb-2">
                     {broker.name}
-                  </div>
-                  <div className="flex items-center justify-center space-x-1">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-green-600 font-medium">
-                      Connected
-                    </span>
                   </div>
                 </motion.div>
               ))}
