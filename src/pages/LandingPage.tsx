@@ -215,183 +215,100 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent">
-      {/* Navigation */}
-
-      {/* Hero Section */}
-
-      <section className="relative min-h-screen flex flex-col overflow-hidden">
+      <section className="relative min-h-screen flex flex-col">
         {/* Gradient Background */}
         <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
-        {/* Navbar (inside hero, on top) */}
+        {/* Navbar (inside hero section, not sticky) */}
         <nav className="flex items-center justify-between bg-black/80 backdrop-blur-md rounded-full px-6 py-2 mx-auto max-w-3xl shadow-lg sticky top-0 z-50">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 cursor-pointer">
             <img src={ss} alt="Logo" className="h-10 w-10" />
-            <span className="text-white text-2xl font-thin">Screeno</span>
           </div>
           {/* Links */}
           <div className="flex items-center space-x-8">
             <a
               href="#features"
-              className="text-white/80 font-thin px-3 py-2 rounded-full transition hover:bg-white/10 hover:text-white"
+              className="text-white/80 font-thin px-3 py-2 rounded-full transition-colors duration-200 hover:text-blue-400 cursor-pointer"
             >
               Features
             </a>
             <a
               href="#pricing"
-              className="text-white/80 font-thin px-3 py-2 rounded-full transition hover:bg-white/10 hover:text-white"
+              className="text-white/80 font-thin px-3 py-2 rounded-full transition-colors duration-200 hover:text-blue-400 cursor-pointer"
             >
               Pricing
             </a>
             <ButtonRotatingBackgroundGradient>
               Get started
             </ButtonRotatingBackgroundGradient>
-            <button className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition">
+            <button className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition cursor-pointer">
               Sign in
             </button>
           </div>
         </nav>
 
-        {/* Hero Content */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="max-w-7xl mx-auto relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                  <Sparkles className="h-4 w-4" />
-                  <span>AI-Powered Stock Analysis</span>
-                </div>
+        {/* Centered Hero Content */}
+        <div className="flex-1 flex flex-col items-center justify-center text-center">
+          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Sparkles className="h-4 w-4" />
+            <span>AI-Powered Stock Analysis</span>
+          </div>
 
-                <h1 className="text-5xl lg:text-6xl font-thin text-white-900 mb-6 leading-tight">
-                  Ask AI About
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    {" "}
-                    Any Stock{" "}
-                  </span>
-                  Get Instant Answers
-                </h1>
+          <h1 className="text-5xl lg:text-6xl font-regular text-white-900 mb-6 leading-tight">
+            Ask AI About
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              {" "}
+              Any Stock{" "}
+            </span>
+            Get Instant Answers
+          </h1>
 
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  The only platform where you can chat with AI about any Indian
-                  stock and get intelligent, data-driven insights instantly.
-                  Connect your favorite broker and start investing smarter.
-                </p>
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+            The only platform where you can chat with AI about any Indian stock
+            and get intelligent, data-driven insights instantly. Connect your
+            favorite broker and start investing smarter.
+          </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-light-blue-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl"
-                    onClick={() => {
-                      setIsLoginMode(false);
-                      setShowAuthModal(true);
-                    }}
-                  >
-                    Start Free Trial
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                  >
-                    <Play className="mr-2 h-5 w-5" />
-                    Watch Demo
-                  </Button>
-                </div>
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-light-blue-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl"
+              onClick={() => {
+                setIsLoginMode(false);
+                setShowAuthModal(true);
+              }}
+            >
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              <Play className="mr-2 h-5 w-5" />
+              Watch Demo
+            </Button>
+          </div>
 
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
-                  <div className="flex items-center space-x-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>14-day free trial</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>No credit card required</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Check className="h-4 w-4 text-green-500" />
-                    <span>Cancel anytime</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative"
-              >
-                <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-200/50">
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-10"></div>
-                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl opacity-10"></div>
-
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-900">
-                      AI Stock Chat
-                    </h3>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-sm text-green-600 font-medium">
-                        Live
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-end">
-                      <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
-                        <p className="text-sm">
-                          Should I buy Reliance Industries?
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
-                        <p className="text-sm">
-                          Based on current fundamentals, RIL shows strong
-                          revenue growth of 12% YoY. P/E ratio of 24.8 is
-                          reasonable. Consider buying on dips below ₹2800.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex justify-end">
-                      <div className="bg-blue-600 text-white p-3 rounded-lg max-w-xs">
-                        <p className="text-sm">What about TCS vs Infosys?</p>
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-xs">
-                        <p className="text-sm">
-                          TCS has better margins (25.1% vs 21.4%) and stronger
-                          client additions. Both are quality picks, but TCS
-                          edges out for long-term growth.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                    <MessageCircle className="h-4 w-4 text-gray-400" />
-                    <span className="text-sm text-gray-500 flex-1">
-                      Ask about any stock...
-                    </span>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
+          <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
+            <div className="flex items-center space-x-2 mb-2 sm:mb-0">
+              <Check className="h-4 w-4 text-green-500" />
+              <span>14-day free trial</span>
+            </div>
+            <div className="flex items-center space-x-2 mb-2 sm:mb-0">
+              <Check className="h-4 w-4 text-green-500" />
+              <span>No credit card required</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Check className="h-4 w-4 text-green-500" />
+              <span>Cancel anytime</span>
             </div>
           </div>
-          <StarsBackground />
-
-          <ShootingStars />
         </div>
+        <StarsBackground />
+        <ShootingStars />
       </section>
 
       {/* Stats Section */}
@@ -1066,45 +983,87 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="px-6 py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Transform Your Trading?
+      {/* Pricing Section */}
+      <section
+        id="pricing"
+        className="px-6 py-24 bg-gradient-to-b from-transparent to-[#18192a]"
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-white mb-4">
+              Free, forever.
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of successful traders who trust Screeno for their
-              investment decisions. Start your free trial today.
+            <p className="text-xl text-gray-300">
+              Optional upgrade for additional features
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100 shadow-xl"
-                onClick={() => {
-                  setIsLoginMode(false);
-                  setShowAuthModal(true);
-                }}
-              >
-                Start Your Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-600"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </Button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Free Plan */}
+            <div className="rounded-3xl bg-blue-200/80 p-10 flex flex-col items-start shadow-2xl min-h-[520px] relative">
+              <h3 className="text-2xl font-bold text-white mb-1">Free</h3>
+              <span className="text-gray-100 mb-6">Free, forever</span>
+              <div className="text-5xl font-extrabold text-white mb-8">$0</div>
+              <ul className="text-white/90 space-y-4 text-lg mb-10">
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-white" /> Unlimited members
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-white" /> Connect WhatsApp,
+                  Discord & Slack
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-white" /> Accept payments
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-white" /> 0% Platform Fees
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-white" /> Analytics
+                </li>
+              </ul>
+              <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
+                Get Started
+              </button>
             </div>
-            <p className="text-blue-100 mt-6 text-sm">
-              No credit card required • 14-day free trial • Cancel anytime
-            </p>
-          </motion.div>
+            {/* Pro Plan */}
+            <div className="rounded-3xl bg-white p-10 flex flex-col items-start shadow-2xl min-h-[520px] relative">
+              <div className="absolute top-8 right-8">
+                <span className="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+                  Most popular
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">Pro</h3>
+              <span className="text-gray-500 mb-6">
+                A plan for growing communities
+              </span>
+              <div className="text-5xl font-extrabold text-gray-900 mb-8">
+                $29
+              </div>
+              <ul className="text-gray-800 space-y-4 text-lg mb-10">
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-[#7b61ff]" /> Everything in
+                  free +
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-[#7b61ff]" /> Application forms
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-[#7b61ff]" /> CSV export users
+                  & forms
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-[#7b61ff]" /> Priority support
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-[#7b61ff]" /> Zapier
+                  integration
+                </li>
+              </ul>
+              <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
+                Get Started
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
