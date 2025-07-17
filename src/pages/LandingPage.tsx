@@ -292,9 +292,13 @@ export const LandingPage: React.FC = () => {
             >
               Start your free trial
             </ButtonShadowGradient>
-            <ButtonRotatingBackgroundGradient>
-              {" "}
-              Get Started
+            <ButtonRotatingBackgroundGradient
+              onClick={() => {
+                setIsLoginMode(false);
+                setShowAuthModal(true);
+              }}
+            >
+              Getstarted
             </ButtonRotatingBackgroundGradient>
           </div>
 
@@ -1006,17 +1010,18 @@ export const LandingPage: React.FC = () => {
             <div className="rounded-3xl bg-blue-200/80 p-10 flex flex-col items-start shadow-2xl min-h-[520px] relative">
               <h3 className="text-2xl font-bold text-white mb-1">Free</h3>
               <span className="text-gray-100 mb-6">Free, forever</span>
-              <div className="text-5xl font-extrabold text-white mb-8">$0</div>
+              <div className="text-5xl font-extrabold text-white mb-8">₹0</div>
               <ul className="text-white/90 space-y-4 text-lg mb-10">
                 <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Unlimited members
+                  <Check className="h-5 w-5 text-white" /> Unlimited searches
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Connect WhatsApp,
+                  <Check className="h-5 w-5 text-white" /> Connect any broker,
                   Discord & Slack
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Accept payments
+                  <Check className="h-5 w-5 text-white" /> 5 AI searches in a
+                  day
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="h-5 w-5 text-white" /> 0% Platform Fees
@@ -1026,7 +1031,7 @@ export const LandingPage: React.FC = () => {
                 </li>
               </ul>
               <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
-                Get Started
+                less go
               </button>
             </div>
             {/* Pro Plan */}
@@ -1041,7 +1046,7 @@ export const LandingPage: React.FC = () => {
                 A plan for growing communities
               </span>
               <div className="text-5xl font-extrabold text-gray-900 mb-8">
-                $29
+                ₹499
               </div>
               <ul className="text-gray-800 space-y-4 text-lg mb-10">
                 <li className="flex items-center gap-2">
@@ -1064,7 +1069,7 @@ export const LandingPage: React.FC = () => {
                 </li>
               </ul>
               <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
-                Get Started
+                lesss goooo
               </button>
             </div>
           </div>
