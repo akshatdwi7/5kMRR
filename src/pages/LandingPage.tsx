@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ButtonRotatingBackgroundGradient from "../components/ui/Button";
+import { SparklesCore } from "../components/ui/sparkles";
+import { Fixedbluebutton } from "../components/ui/Button";
+import { ButtonShadowGradient } from "../components/ui/Button";
+import { Keyboardgenbutton } from "../components/ui/Button";
 import {
   TrendingUp,
   BarChart3,
@@ -215,6 +219,8 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent">
+      <StarsBackground />
+      <ShootingStars />
       <section className="relative min-h-screen flex flex-col">
         {/* Gradient Background */}
         <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
@@ -239,10 +245,21 @@ export const LandingPage: React.FC = () => {
             >
               Pricing
             </a>
-            <ButtonRotatingBackgroundGradient>
+            <ButtonRotatingBackgroundGradient
+              onClick={() => {
+                setIsLoginMode(false);
+                setShowAuthModal(true);
+              }}
+            >
               Get started
             </ButtonRotatingBackgroundGradient>
-            <button className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition cursor-pointer">
+            <button
+              className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition cursor-pointer"
+              onClick={() => {
+                setIsLoginMode(true);
+                setShowAuthModal(true);
+              }}
+            >
               Sign in
             </button>
           </div>
@@ -250,18 +267,17 @@ export const LandingPage: React.FC = () => {
 
         {/* Centered Hero Content */}
         <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold mb-6">
             <Sparkles className="h-4 w-4" />
             <span>AI-Powered Stock Analysis</span>
           </div>
 
           <h1 className="text-5xl lg:text-6xl font-regular text-white-900 mb-6 leading-tight">
-            Ask AI About
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            Invest With Data,
+            <span className=" bg-gradient-to-r  from-purple-700 to-indigo-500 text-5xl lg:text-6xl  bg-clip-text text-transparent font-serif  mb-6 leading-tight ">
               {" "}
-              Any Stock{" "}
+              Not Emotion{" "}
             </span>
-            Get Instant Answers
           </h1>
 
           <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -271,25 +287,15 @@ export const LandingPage: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-light-blue-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl"
-              onClick={() => {
-                setIsLoginMode(false);
-                setShowAuthModal(true);
-              }}
+            <ButtonShadowGradient
+              onClick={() => window.open("https://screeno.in/", "_blank")}
             >
-              Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-gray-300 text-gray-700 hover:bg-gray-50"
-            >
-              <Play className="mr-2 h-5 w-5" />
-              Watch Demo
-            </Button>
+              Start your free trial
+            </ButtonShadowGradient>
+            <ButtonRotatingBackgroundGradient>
+              {" "}
+              Get Started
+            </ButtonRotatingBackgroundGradient>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
@@ -307,8 +313,6 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <StarsBackground />
-        <ShootingStars />
       </section>
 
       {/* Stats Section */}
