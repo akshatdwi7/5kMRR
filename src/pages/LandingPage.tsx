@@ -5,6 +5,10 @@ import { SparklesCore } from "../components/ui/sparkles";
 import { Fixedbluebutton } from "../components/ui/Button";
 import { ButtonShadowGradient } from "../components/ui/Button";
 import { Keyboardgenbutton } from "../components/ui/Button";
+
+import Hovermebutton from "../components/ui/buttonnew";
+import { Whitebutton } from "../components/ui/buttonnew";
+import Pricing from "./pricing";
 import {
   TrendingUp,
   BarChart3,
@@ -288,18 +292,13 @@ export const LandingPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
             <ButtonShadowGradient
-              onClick={() => window.open("https://screeno.in/", "_blank")}
-            >
-              Start your free trial
-            </ButtonShadowGradient>
-            <ButtonRotatingBackgroundGradient
               onClick={() => {
                 setIsLoginMode(false);
                 setShowAuthModal(true);
               }}
             >
-              Getstarted
-            </ButtonRotatingBackgroundGradient>
+              Start your free trial
+            </ButtonShadowGradient>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
@@ -318,7 +317,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="px-6 py-16 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -343,7 +341,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Broker Integration Section */}
       <section
         id="brokers"
@@ -437,7 +434,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Benefits Section */}
       <section id="benefits" className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -599,7 +595,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section
         id="features"
@@ -651,7 +646,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* How It Works Section */}
       <section className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -990,92 +984,84 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Pricing Section */}
-      <section
-        id="pricing"
-        className="px-6 py-24 bg-gradient-to-b from-transparent to-[#18192a]"
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mb-4">
-              Free, forever.
-            </h2>
-            <p className="text-xl text-gray-300">
-              Optional upgrade for additional features
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Free Plan */}
-            <div className="rounded-3xl bg-blue-200/80 p-10 flex flex-col items-start shadow-2xl min-h-[520px] relative">
-              <h3 className="text-2xl font-bold text-white mb-1">Free</h3>
-              <span className="text-gray-100 mb-6">Free, forever</span>
-              <div className="text-5xl font-extrabold text-white mb-8">₹0</div>
-              <ul className="text-white/90 space-y-4 text-lg mb-10">
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Unlimited searches
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Connect any broker,
-                  Discord & Slack
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> 5 AI searches in a
-                  day
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> 0% Platform Fees
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-white" /> Analytics
-                </li>
-              </ul>
-              <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
-                less go
-              </button>
+      {/* Custom Dark Pricing Section */}
+      <section className="py-20 bg-black">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-white text-center mb-4">
+            Give your support team superpowers.
+          </h2>
+          <p className="text-center text-gray-400 mb-12">
+            Choose the plan that fits your team and scale with confidence.
+          </p>
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+            {/* Launch Card */}
+            <div className="relative h-auto w-full max-w-xs">
+              <div className="absolute top-0 flex w-full justify-center">
+                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-white to-[rgba(17,17,17,0)] transition-all duration-1000" />
+              </div>
+              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  Launch
+                </h3>
+                <div className="text-3xl font-bold text-white mb-2">$39</div>
+                <div className="text-xs text-gray-400 mb-4">/user/month</div>
+                <ul className="text-gray-300 text-sm mb-6 space-y-2">
+                  <li>Slack, email, and chat</li>
+                  <li>Linear and Jira integration</li>
+                  <li>Customer cards</li>
+                  <li>AI Workflow features</li>
+                </ul>
+                <button className="w-full bg-gray-700 text-white py-2 rounded-md font-medium hover:bg-gray-600 transition">
+                  Book a demo
+                </button>
+              </div>
             </div>
-            {/* Pro Plan */}
-            <div className="rounded-3xl bg-white p-10 flex flex-col items-start shadow-2xl min-h-[520px] relative">
-              <div className="absolute top-8 right-8">
-                <span className="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
-                  Most popular
-                </span>
+            {/* Grow Card (Highlighted) */}
+            <div className="relative h-auto w-full max-w-xs scale-105 border-2 border-green-500">
+              <div className="absolute top-0 flex w-full justify-center">
+                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-green-400 to-[rgba(17,17,17,0)] transition-all duration-1000" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">Pro</h3>
-              <span className="text-gray-500 mb-6">
-                A plan for growing communities
-              </span>
-              <div className="text-5xl font-extrabold text-gray-900 mb-8">
-                ₹499
+              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
+                <h3 className="text-xl font-semibold text-white mb-2">Grow</h3>
+                <div className="text-3xl font-bold text-white mb-2">$89</div>
+                <div className="text-xs text-gray-400 mb-4">/user/month</div>
+                <ul className="text-gray-300 text-sm mb-6 space-y-2">
+                  <li>Everything in Launch plus</li>
+                  <li>Discord</li>
+                  <li>Headless support portal</li>
+                  <li>Workflow rules</li>
+                  <li>SLAs and business hours</li>
+                  <li>Slack discussions</li>
+                </ul>
+                <button className="w-full bg-green-500 text-black py-2 rounded-md font-semibold hover:bg-green-400 transition">
+                  Book a demo
+                </button>
               </div>
-              <ul className="text-gray-800 space-y-4 text-lg mb-10">
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-[#7b61ff]" /> Everything in
-                  free +
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-[#7b61ff]" /> Application forms
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-[#7b61ff]" /> CSV export users
-                  & forms
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-[#7b61ff]" /> Priority support
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-5 w-5 text-[#7b61ff]" /> Zapier
-                  integration
-                </li>
-              </ul>
-              <button className="w-full bg-[#7b61ff] text-white py-3 rounded-full font-semibold text-lg shadow-md hover:bg-[#6a4eea] transition">
-                lesss goooo
-              </button>
+            </div>
+            {/* Scale Card */}
+            <div className="relative h-auto w-full max-w-xs">
+              <div className="absolute top-0 flex w-full justify-center">
+                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-white to-[rgba(17,17,17,0)] transition-all duration-1000" />
+              </div>
+              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
+                <h3 className="text-xl font-semibold text-white mb-2">Scale</h3>
+                <div className="text-3xl font-bold text-white mb-2">Custom</div>
+                <div className="text-xs text-gray-400 mb-4">Contact us</div>
+                <ul className="text-gray-300 text-sm mb-6 space-y-2">
+                  <li>Everything in Grow plus</li>
+                  <li>MS Teams, custom channels</li>
+                  <li>AI-Powered suggested responses</li>
+                  <li>Product insights</li>
+                  <li>Concierge onboarding</li>
+                </ul>
+                <button className="w-full bg-gray-700 text-white py-2 rounded-md font-medium hover:bg-gray-600 transition">
+                  Book a demo
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-white px-6 py-12">
         <div className="max-w-7xl mx-auto">
@@ -1128,7 +1114,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </footer>
-
       {/* Auth Modal */}
       <AnimatePresence>
         {showAuthModal && (
