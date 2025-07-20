@@ -25,7 +25,6 @@ import {
   Clock,
   DollarSign,
   Activity,
-  Crown,
 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
@@ -982,92 +981,84 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* Interactive Pricing Section */}
-      {/* Aesthetic Blue Pricing Section */}
-      <section
-        id="pricing"
-        className="py-20 bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50"
-      >
+      {/* Clean Modern Pricing Section */}
+      <section id="pricing" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-sky-100 to-blue-100 text-sky-700 px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-sm"
-            >
-              <DollarSign className="h-4 w-4" />
-              <span>Choose Your Plan</span>
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-5xl font-bold bg-gradient-to-r from-sky-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6"
+              className="text-4xl font-bold text-gray-900 mb-4"
             >
-              Plans for every stage of your company
+              Pricing Plans That Scale With Your Business
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-xl text-slate-600 max-w-3xl mx-auto"
+              className="text-lg text-gray-600 max-w-2xl mx-auto mb-8"
             >
-              Choose the perfect plan for your investment journey. Start free
-              and scale as you grow.
+              Find the perfect plan tailored to your needs. Start small, scale
+              big—our pricing grows with you.
             </motion.p>
+
+            {/* Customer Reviews */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="flex items-center justify-center space-x-3"
+            >
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white"></div>
+                <div className="w-8 h-8 bg-green-500 rounded-full border-2 border-white"></div>
+                <div className="w-8 h-8 bg-purple-500 rounded-full border-2 border-white"></div>
+                <div className="w-8 h-8 bg-orange-500 rounded-full border-2 border-white"></div>
+                <div className="w-8 h-8 bg-pink-500 rounded-full border-2 border-white"></div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="flex text-yellow-400">
+                  <Star className="h-4 w-4 fill-current" />
+                  <Star className="h-4 w-4 fill-current" />
+                  <Star className="h-4 w-4 fill-current" />
+                  <Star className="h-4 w-4 fill-current" />
+                  <Star className="h-4 w-4 fill-current" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">4.8</span>
+                <span className="text-sm text-gray-500">From 500+ reviews</span>
+              </div>
+            </motion.div>
           </div>
 
           {/* Billing Toggle */}
           <motion.div
-            className="flex justify-center mb-16"
+            className="flex justify-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-sky-200">
-              <div className="flex items-center space-x-6">
-                <span
-                  className={`font-medium px-4 transition-colors duration-300 ${
-                    !isYearlyBilling ? "text-slate-900" : "text-slate-600"
-                  }`}
-                >
-                  Monthly
-                </span>
-                <div className="relative">
-                  <input
-                    type="checkbox"
-                    id="billing-toggle"
-                    className="sr-only"
-                    checked={isYearlyBilling}
-                    onChange={(e) => setIsYearlyBilling(e.target.checked)}
-                  />
-                  <label
-                    htmlFor="billing-toggle"
-                    className={`flex items-center cursor-pointer w-16 h-8 rounded-full transition-all duration-300 shadow-inner ${
-                      isYearlyBilling
-                        ? "bg-gradient-to-r from-sky-500 to-blue-600"
-                        : "bg-slate-200"
-                    }`}
-                  >
-                    <div
-                      className={`w-6 h-6 bg-white rounded-full shadow-lg transform transition-all duration-300 ${
-                        isYearlyBilling ? "translate-x-8" : "translate-x-1"
-                      }`}
-                    ></div>
-                  </label>
-                </div>
-                <span
-                  className={`font-medium px-4 transition-colors duration-300 ${
-                    isYearlyBilling ? "text-slate-900" : "text-slate-600"
-                  }`}
-                >
-                  Yearly
-                </span>
-                <span className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-200">
-                  Save 20%
-                </span>
-              </div>
+            <div className="bg-gray-100 rounded-lg p-1 inline-flex">
+              <button
+                onClick={() => setIsYearlyBilling(false)}
+                className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  !isYearlyBilling
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsYearlyBilling(true)}
+                className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  isYearlyBilling
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Annually
+              </button>
             </div>
           </motion.div>
 
@@ -1077,29 +1068,25 @@ export const LandingPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
               className="group relative h-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-500 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-sky-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+              <div className="relative bg-white rounded-xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-sky-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Star className="h-8 w-8 text-sky-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
                     Standard
                   </h3>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-gray-600 mb-6">
                     Perfect for individual investors and small teams getting
                     started.
                   </p>
                   <div className="mb-6">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="text-4xl font-bold text-gray-900">
                       {isYearlyBilling ? "₹399" : "₹499"}
                     </span>
-                    <span className="text-slate-500">/month</span>
+                    <span className="text-gray-500">/month</span>
                     {isYearlyBilling && (
-                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                      <div className="text-sm text-blue-600 font-medium mt-1">
                         Billed annually (₹4,788/year)
                       </div>
                     )}
@@ -1108,54 +1095,40 @@ export const LandingPage: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.2 }}
-                    className="w-full bg-gradient-to-r from-sky-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    className="w-full bg-white text-gray-900 py-3 px-6 rounded-lg font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200"
                   >
-                    Start free trial
+                    Get Started
                   </motion.button>
                 </div>
 
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">
                       AI-Powered Stock Analysis
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">
                       Advanced Stock Screener
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
-                      Real-time Market Data
-                    </span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Real-time Market Data</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Portfolio Tracking</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Portfolio Tracking</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Basic Alerts</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Basic Alerts</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Email Support</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Email Support</span>
                   </div>
                 </div>
               </div>
@@ -1165,34 +1138,30 @@ export const LandingPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
               className="group relative h-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-all duration-500"></div>
-              <div className="relative bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50 rounded-3xl p-8 shadow-2xl border-2 border-blue-200 hover:shadow-3xl transition-all duration-300 hover:-translate-y-3 h-full flex flex-col">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+              <div className="relative bg-white rounded-xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
                     Most Popular
                   </span>
                 </div>
 
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Award className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
                     Premium
                   </h3>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-gray-600 mb-6">
                     For professional traders and growing investment teams.
                   </p>
                   <div className="mb-6">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <span className="text-4xl font-bold text-gray-900">
                       {isYearlyBilling ? "₹639" : "₹799"}
                     </span>
-                    <span className="text-slate-500">/month</span>
+                    <span className="text-gray-500">/month</span>
                     {isYearlyBilling && (
-                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                      <div className="text-sm text-blue-600 font-medium mt-1">
                         Billed annually (₹7,668/year)
                       </div>
                     )}
@@ -1201,52 +1170,40 @@ export const LandingPage: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.2 }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl"
+                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-all duration-200"
                   >
-                    Get started
+                    Get Started
                   </motion.button>
                 </div>
 
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">
                       Everything in Standard
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Advanced AI Insights</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Advanced AI Insights</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">
                       Custom Alerts & Notifications
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Priority Support</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Priority Support</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Advanced Analytics</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Advanced Analytics</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">API Access</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">API Access</span>
                   </div>
                 </div>
               </div>
@@ -1256,28 +1213,24 @@ export const LandingPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
               className="group relative h-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-indigo-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+              <div className="relative bg-white rounded-xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Crown className="h-8 w-8 text-indigo-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
                     Enterprise
                   </h3>
-                  <p className="text-slate-600 mb-6">
+                  <p className="text-gray-600 mb-6">
                     For large organizations requiring advanced features and
                     dedicated support.
                   </p>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    <span className="text-4xl font-bold text-gray-900">
                       {isYearlyBilling ? "Custom pricing" : "Let's chat"}
                     </span>
                     {isYearlyBilling && (
-                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                      <div className="text-sm text-blue-600 font-medium mt-1">
                         Contact us for yearly enterprise plans
                       </div>
                     )}
@@ -1286,54 +1239,38 @@ export const LandingPage: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.2 }}
-                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    className="w-full bg-white text-gray-900 py-3 px-6 rounded-lg font-medium border border-gray-200 hover:bg-gray-50 transition-all duration-200"
                   >
-                    Book a demo
+                    Get Started
                   </motion.button>
                 </div>
 
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
-                      Everything in Premium
-                    </span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Everything in Premium</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">
                       Dedicated Account Manager
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Custom Integrations</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Custom Integrations</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">
-                      24/7 Priority Support
-                    </span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">24/7 Priority Support</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">Advanced Security</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Advanced Security</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-slate-700">SLA Guarantee</span>
+                    <Check className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">SLA Guarantee</span>
                   </div>
                 </div>
               </div>
@@ -1345,14 +1282,14 @@ export const LandingPage: React.FC = () => {
             className="text-center mt-16"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
           >
-            <p className="text-slate-600 mb-6 text-lg">
+            <p className="text-gray-600 mb-6 text-lg">
               All plans include a 14-day free trial. No credit card required.
             </p>
-            <div className="flex justify-center space-x-12 text-sm text-slate-500">
+            <div className="flex justify-center space-x-12 text-sm text-gray-500">
               <div className="flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-sky-600" />
+                <Shield className="h-5 w-5 text-blue-600" />
                 <span>Bank-grade security</span>
               </div>
               <div className="flex items-center space-x-2">
@@ -1360,7 +1297,7 @@ export const LandingPage: React.FC = () => {
                 <span>99.9% uptime SLA</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Users className="h-5 w-5 text-indigo-600" />
+                <Users className="h-5 w-5 text-blue-600" />
                 <span>24/7 support</span>
               </div>
             </div>
