@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ButtonRotatingBackgroundGradient from "../components/ui/Button";
-import { SparklesCore } from "../components/ui/sparkles";
-import { Fixedbluebutton } from "../components/ui/Button";
 import { ButtonShadowGradient } from "../components/ui/Button";
-import { Keyboardgenbutton } from "../components/ui/Button";
 
-import Hovermebutton from "../components/ui/buttonnew";
-import { Whitebutton } from "../components/ui/buttonnew";
-import Pricing from "./pricing";
 import {
   TrendingUp,
   BarChart3,
@@ -31,15 +25,18 @@ import {
   Clock,
   DollarSign,
   Activity,
+  Crown,
 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import zerodha from "../assets/logos/zerodha.png";
 import upstocks from "../assets/logos/upstocks.png";
 import angelone from "../assets/logos/angelone.png";
+import insurance from "../assets/logos/insurance.png";
 import groww from "../assets/logos/groww.png";
 import icicidirect from "../assets/logos/icicidirect.png";
 import hdfc from "../assets/logos/hdfc.png";
+import tap from "../assets/logos/tap.png";
 import kotak from "../assets/logos/kotak.png";
 import ss from "../assets/logos/ss.png";
 import { ShootingStars } from "../components/ui/shooting-stars";
@@ -56,6 +53,7 @@ export const LandingPage: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [isYearlyBilling, setIsYearlyBilling] = useState(true);
   const { login, signup, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,7 +80,7 @@ export const LandingPage: React.FC = () => {
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
-    setAuthError(null);
+    setAuthError("");
 
     try {
       await loginWithGoogle();
@@ -396,7 +394,7 @@ export const LandingPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Link className="h-8 w-8 text-blue-600" />
+                  <img src={tap} alt="your logo" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   One-Click Integration
@@ -407,8 +405,8 @@ export const LandingPage: React.FC = () => {
                 </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Shield className="h-8 w-8 text-green-600" />
+                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <img src={insurance} alt="your logo" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Bank-Grade Security
@@ -984,82 +982,389 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* Custom Dark Pricing Section */}
-      <section className="py-20 bg-black">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-white text-center mb-4">
-            Give your support team superpowers.
-          </h2>
-          <p className="text-center text-gray-400 mb-12">
-            Choose the plan that fits your team and scale with confidence.
-          </p>
-          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-            {/* Launch Card */}
-            <div className="relative h-auto w-full max-w-xs">
-              <div className="absolute top-0 flex w-full justify-center">
-                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-white to-[rgba(17,17,17,0)] transition-all duration-1000" />
-              </div>
-              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  Launch
-                </h3>
-                <div className="text-3xl font-bold text-white mb-2">$39</div>
-                <div className="text-xs text-gray-400 mb-4">/user/month</div>
-                <ul className="text-gray-300 text-sm mb-6 space-y-2">
-                  <li>Slack, email, and chat</li>
-                  <li>Linear and Jira integration</li>
-                  <li>Customer cards</li>
-                  <li>AI Workflow features</li>
-                </ul>
-                <button className="w-full bg-gray-700 text-white py-2 rounded-md font-medium hover:bg-gray-600 transition">
-                  Book a demo
-                </button>
-              </div>
-            </div>
-            {/* Grow Card (Highlighted) */}
-            <div className="relative h-auto w-full max-w-xs scale-105 border-2 border-green-500">
-              <div className="absolute top-0 flex w-full justify-center">
-                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-green-400 to-[rgba(17,17,17,0)] transition-all duration-1000" />
-              </div>
-              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
-                <h3 className="text-xl font-semibold text-white mb-2">Grow</h3>
-                <div className="text-3xl font-bold text-white mb-2">$89</div>
-                <div className="text-xs text-gray-400 mb-4">/user/month</div>
-                <ul className="text-gray-300 text-sm mb-6 space-y-2">
-                  <li>Everything in Launch plus</li>
-                  <li>Discord</li>
-                  <li>Headless support portal</li>
-                  <li>Workflow rules</li>
-                  <li>SLAs and business hours</li>
-                  <li>Slack discussions</li>
-                </ul>
-                <button className="w-full bg-green-500 text-black py-2 rounded-md font-semibold hover:bg-green-400 transition">
-                  Book a demo
-                </button>
-              </div>
-            </div>
-            {/* Scale Card */}
-            <div className="relative h-auto w-full max-w-xs">
-              <div className="absolute top-0 flex w-full justify-center">
-                <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-white to-[rgba(17,17,17,0)] transition-all duration-1000" />
-              </div>
-              <div className="flex flex-col h-full items-center justify-center rounded-md border border-gray-800 bg-gradient-to-b from-gray-950 to-black px-6 py-8">
-                <h3 className="text-xl font-semibold text-white mb-2">Scale</h3>
-                <div className="text-3xl font-bold text-white mb-2">Custom</div>
-                <div className="text-xs text-gray-400 mb-4">Contact us</div>
-                <ul className="text-gray-300 text-sm mb-6 space-y-2">
-                  <li>Everything in Grow plus</li>
-                  <li>MS Teams, custom channels</li>
-                  <li>AI-Powered suggested responses</li>
-                  <li>Product insights</li>
-                  <li>Concierge onboarding</li>
-                </ul>
-                <button className="w-full bg-gray-700 text-white py-2 rounded-md font-medium hover:bg-gray-600 transition">
-                  Book a demo
-                </button>
-              </div>
-            </div>
+      {/* Interactive Pricing Section */}
+      {/* Aesthetic Blue Pricing Section */}
+      <section
+        id="pricing"
+        className="py-20 bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50"
+      >
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-sky-100 to-blue-100 text-sky-700 px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-sm"
+            >
+              <DollarSign className="h-4 w-4" />
+              <span>Choose Your Plan</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="text-5xl font-bold bg-gradient-to-r from-sky-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6"
+            >
+              Plans for every stage of your company
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-xl text-slate-600 max-w-3xl mx-auto"
+            >
+              Choose the perfect plan for your investment journey. Start free
+              and scale as you grow.
+            </motion.p>
           </div>
+
+          {/* Billing Toggle */}
+          <motion.div
+            className="flex justify-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-xl border border-sky-200">
+              <div className="flex items-center space-x-6">
+                <span
+                  className={`font-medium px-4 transition-colors duration-300 ${
+                    !isYearlyBilling ? "text-slate-900" : "text-slate-600"
+                  }`}
+                >
+                  Monthly
+                </span>
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    id="billing-toggle"
+                    className="sr-only"
+                    checked={isYearlyBilling}
+                    onChange={(e) => setIsYearlyBilling(e.target.checked)}
+                  />
+                  <label
+                    htmlFor="billing-toggle"
+                    className={`flex items-center cursor-pointer w-16 h-8 rounded-full transition-all duration-300 shadow-inner ${
+                      isYearlyBilling
+                        ? "bg-gradient-to-r from-sky-500 to-blue-600"
+                        : "bg-slate-200"
+                    }`}
+                  >
+                    <div
+                      className={`w-6 h-6 bg-white rounded-full shadow-lg transform transition-all duration-300 ${
+                        isYearlyBilling ? "translate-x-8" : "translate-x-1"
+                      }`}
+                    ></div>
+                  </label>
+                </div>
+                <span
+                  className={`font-medium px-4 transition-colors duration-300 ${
+                    isYearlyBilling ? "text-slate-900" : "text-slate-600"
+                  }`}
+                >
+                  Yearly
+                </span>
+                <span className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-200">
+                  Save 20%
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Standard Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="group relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-500 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-sky-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-sky-100 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Star className="h-8 w-8 text-sky-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Standard
+                  </h3>
+                  <p className="text-slate-600 mb-6">
+                    Perfect for individual investors and small teams getting
+                    started.
+                  </p>
+                  <div className="mb-6">
+                    <span className="text-5xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+                      {isYearlyBilling ? "₹399" : "₹499"}
+                    </span>
+                    <span className="text-slate-500">/month</span>
+                    {isYearlyBilling && (
+                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                        Billed annually (₹4,788/year)
+                      </div>
+                    )}
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                    className="w-full bg-gradient-to-r from-sky-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Start free trial
+                  </motion.button>
+                </div>
+
+                <div className="space-y-4 flex-1">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      AI-Powered Stock Analysis
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Advanced Stock Screener
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Real-time Market Data
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Portfolio Tracking</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Basic Alerts</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Email Support</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Premium Plan - Highlighted */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="group relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50 rounded-3xl p-8 shadow-2xl border-2 border-blue-200 hover:shadow-3xl transition-all duration-300 hover:-translate-y-3 h-full flex flex-col">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    Most Popular
+                  </span>
+                </div>
+
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Award className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Premium
+                  </h3>
+                  <p className="text-slate-600 mb-6">
+                    For professional traders and growing investment teams.
+                  </p>
+                  <div className="mb-6">
+                    <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                      {isYearlyBilling ? "₹639" : "₹799"}
+                    </span>
+                    <span className="text-slate-500">/month</span>
+                    {isYearlyBilling && (
+                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                        Billed annually (₹7,668/year)
+                      </div>
+                    )}
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl"
+                  >
+                    Get started
+                  </motion.button>
+                </div>
+
+                <div className="space-y-4 flex-1">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Everything in Standard
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Advanced AI Insights</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Custom Alerts & Notifications
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Priority Support</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Advanced Analytics</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">API Access</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Enterprise Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="group relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-indigo-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Crown className="h-8 w-8 text-indigo-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Enterprise
+                  </h3>
+                  <p className="text-slate-600 mb-6">
+                    For large organizations requiring advanced features and
+                    dedicated support.
+                  </p>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      {isYearlyBilling ? "Custom pricing" : "Let's chat"}
+                    </span>
+                    {isYearlyBilling && (
+                      <div className="text-sm text-emerald-600 font-medium mt-1">
+                        Contact us for yearly enterprise plans
+                      </div>
+                    )}
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Book a demo
+                  </motion.button>
+                </div>
+
+                <div className="space-y-4 flex-1">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Everything in Premium
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      Dedicated Account Manager
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Custom Integrations</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">
+                      24/7 Priority Support
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">Advanced Security</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <span className="text-slate-700">SLA Guarantee</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Additional Info */}
+          <motion.div
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+          >
+            <p className="text-slate-600 mb-6 text-lg">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
+            <div className="flex justify-center space-x-12 text-sm text-slate-500">
+              <div className="flex items-center space-x-2">
+                <Shield className="h-5 w-5 text-sky-600" />
+                <span>Bank-grade security</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Zap className="h-5 w-5 text-blue-600" />
+                <span>99.9% uptime SLA</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Users className="h-5 w-5 text-indigo-600" />
+                <span>24/7 support</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
       {/* Footer */}
