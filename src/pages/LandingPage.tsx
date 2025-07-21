@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ButtonRotatingBackgroundGradient from "../components/ui/Button";
 import { ButtonShadowGradient } from "../components/ui/Button";
+import filter from "../assets/logos/filter.png";
+import search from "../assets/logos/search.png";
+import markets from "../assets/logos/markets.png";
+import ai from "../assets/logos/ai.png";
+import MovingGradientPill from "../components/ui/pill";
 
 import {
   TrendingUp,
@@ -31,7 +36,7 @@ import { Input } from "../components/ui/Input";
 import zerodha from "../assets/logos/zerodha.png";
 import upstocks from "../assets/logos/upstocks.png";
 import angelone from "../assets/logos/angelone.png";
-import insurance from "../assets/logos/insurance.png";
+import graph from "../assets/logos/graph.png";
 import groww from "../assets/logos/groww.png";
 import icicidirect from "../assets/logos/icicidirect.png";
 import hdfc from "../assets/logos/hdfc.png";
@@ -41,6 +46,7 @@ import ss from "../assets/logos/ss.png";
 import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
+import shield from "../assets/logos/shield.png";
 
 export const LandingPage: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -185,10 +191,10 @@ export const LandingPage: React.FC = () => {
   ];
 
   const stats = [
-    { number: "5,000+", label: "Indian Stocks", icon: Globe },
-    { number: "50+", label: "Screening Filters", icon: Target },
-    { number: "99.9%", label: "Uptime SLA", icon: Shield },
-    { number: "25K+", label: "Active Traders", icon: Users },
+    { number: "5,000+", label: "Indian Stocks", icon: filter },
+    { number: "50+", label: "Screening Filters", icon: search },
+    { number: "99.9%", label: "Uptime SLA", icon: markets },
+    { number: "25K+", label: "Active Traders", icon: ai },
   ];
 
   const testimonials = [
@@ -267,11 +273,14 @@ export const LandingPage: React.FC = () => {
         </nav>
 
         {/* Centered Hero Content */}
-        <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold mb-6">
-            <Sparkles className="h-4 w-4" />
-            <span>AI-Powered Stock Analysis</span>
-          </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="flex-1 flex flex-col items-center justify-center text-center"
+        >
+          <MovingGradientPill></MovingGradientPill>
 
           <h1 className="text-5xl lg:text-6xl font-regular text-white-900 mb-6 leading-tight">
             Invest With Data,
@@ -312,8 +321,9 @@ export const LandingPage: React.FC = () => {
               <span>Cancel anytime</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
+
       {/* Stats Section */}
       <section className="px-6 py-16 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -326,8 +336,8 @@ export const LandingPage: React.FC = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center group"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <stat.icon className="h-8 w-8 text-blue-600" />
+                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <img src={stat.icon} alt={stat.label} className="h-12 w-12" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">
                   {stat.number}
@@ -339,10 +349,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/* Broker Integration Section */}
-      <section
-        id="brokers"
-        className="px-6 py-20 bg-gradient-to-br from-gray-50 to-blue-50"
-      >
+      <section id="brokers" className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -371,7 +378,7 @@ export const LandingPage: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="min-w-[160px] bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group hover:-translate-y-2 flex-shrink-0"
+                  className="min-w-[160px] bg-white rounded-2xl p-6 hover: transition-all duration-300 text-center group hover:-translate-y-2 flex-shrink-0"
                 >
                   <div className="mb-3 group-hover:scale-110 transition-transform">
                     <img
@@ -392,8 +399,8 @@ export const LandingPage: React.FC = () => {
           <div className="bg-white rounded-2xl p-8 shadow-lg">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <img src={tap} alt="your logo" />
+                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <img src={tap} alt="your logo" className="w-10 h-10" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   One-Click Integration
@@ -405,7 +412,7 @@ export const LandingPage: React.FC = () => {
               </div>
               <div className="text-center">
                 <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <img src={insurance} alt="your logo" />
+                  <img src={shield} alt="your logo" className="w-10 h-10" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Bank-Grade Security
@@ -416,8 +423,8 @@ export const LandingPage: React.FC = () => {
                 </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Zap className="h-8 w-8 text-purple-600" />
+                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <img src={graph} alt="your logo" className="w-10 h-10" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Instant Execution
