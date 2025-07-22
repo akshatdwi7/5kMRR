@@ -278,36 +278,32 @@ export const LandingPage: React.FC = () => {
           initial={{ opacity: 0, y: 40, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex-1 flex flex-col items-center justify-center text-center"
+          className="flex-1 flex flex-col items-center justify-center text-center pt-12 pb-20"
         >
-          <MovingGradientPill></MovingGradientPill>
-
-          <h1 className="text-5xl lg:text-6xl font-regular text-white-900 mb-6 leading-tight">
-            Invest With Data,
-            <span className=" bg-gradient-to-r  from-purple-700 to-indigo-500 text-5xl lg:text-6xl  bg-clip-text text-transparent font-serif  mb-6 leading-tight ">
-              {" "}
-              Not Emotion{" "}
-            </span>
+          <MovingGradientPill />
+          <h1 className="mt-10 text-5xl sm:text-6xl lg:text-7xl font-arimo font-medium text-white leading-[1.08] mb-8">
+            Invest With Data, <br className="hidden sm:block" />
+            Not Emotion.
           </h1>
 
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly. Connect your
             favorite broker and start investing smarter.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
-            <ButtonShadowGradient
-              onClick={() => {
-                setIsLoginMode(false);
-                setShowAuthModal(true);
-              }}
-            >
-              Start your free trial
-            </ButtonShadowGradient>
+          <ButtonShadowGradient
+            onClick={() => {
+              setIsLoginMode(false);
+              setShowAuthModal(true);
+            }}
+          >
+            Start your free trial
+          </ButtonShadowGradient>
+          <div className="text-gray-400 text-base mt-2">
+            subbb.me /{" "}
+            <span className="text-blue-300 underline">dinnergals</span>
           </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
+          <div className=" mt-14 flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
             <div className="flex items-center space-x-2 mb-2 sm:mb-0">
               <Check className="h-4 w-4 text-green-500" />
               <span>14-day free trial</span>
