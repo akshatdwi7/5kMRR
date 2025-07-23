@@ -7,7 +7,7 @@ import search from "../assets/logos/search.png";
 import markets from "../assets/logos/markets.png";
 import ai from "../assets/logos/ai.png";
 import MovingGradientPill from "../components/ui/pill";
-
+import { TextRoll } from "../components/ui/textroll";
 import {
   TrendingUp,
   BarChart3,
@@ -47,6 +47,7 @@ import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import shield from "../assets/logos/shield.png";
+import { SparklesCore } from "../components/ui/sparkles";
 
 export const LandingPage: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -227,9 +228,12 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent">
       <StarsBackground />
+
       <ShootingStars />
+
       <section className="relative min-h-screen flex flex-col">
         {/* Gradient Background */}
+
         <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
         {/* Navbar (inside hero section, not sticky) */}
@@ -281,11 +285,21 @@ export const LandingPage: React.FC = () => {
           className="flex-1 flex flex-col items-center justify-center text-center pt-12 pb-20"
         >
           <MovingGradientPill />
+          <TextRoll> hey</TextRoll>
           <h1 className="mt-10 text-5xl sm:text-6xl lg:text-7xl font-arimo font-medium text-white leading-[1.08] mb-8">
-            Invest With Data, <br className="hidden sm:block" />
-            Not Emotion.
+            Invest With
+            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
+              {" "}
+              Data
+            </span>
+            , <br className="hidden sm:block" />
+            Not
+            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
+              {" "}
+              Emotion
+            </span>
+            .
           </h1>
-
           <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly. Connect your
@@ -299,6 +313,7 @@ export const LandingPage: React.FC = () => {
           >
             Start your free trial
           </ButtonShadowGradient>
+
           <div className="text-gray-400 text-base mt-2">
             subbb.me /{" "}
             <span className="text-blue-300 underline">dinnergals</span>
