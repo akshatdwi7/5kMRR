@@ -285,16 +285,16 @@ export const LandingPage: React.FC = () => {
           className="flex-1 flex flex-col items-center justify-center text-center pt-12 pb-20"
         >
           <MovingGradientPill />
-          <TextRoll> hey</TextRoll>
+          <TextRoll> </TextRoll>
           <h1 className="mt-10 text-5xl sm:text-6xl lg:text-7xl font-arimo font-medium text-white leading-[1.08] mb-8">
             Invest With
-            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent font-instrument italic">
               {" "}
               Data
             </span>
             , <br className="hidden sm:block" />
             Not
-            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent font-instrument italic">
               {" "}
               Emotion
             </span>

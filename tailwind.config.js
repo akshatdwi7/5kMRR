@@ -1,3 +1,5 @@
+import { ins } from "framer-motion/client";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -54,6 +56,7 @@ export default {
       },
       fontFamily: {
         arimo: ["Arimo", "sans-serif"],
+        instrument: ["Instrument Serif", "serif"],
       },
     },
   },
