@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/layout/Layout';
-import { LandingPage } from './pages/LandingPage';
-import { Dashboard } from './pages/Dashboard';
-import { Screener } from './pages/Screener';
-import { StockDetail } from './pages/StockDetail';
-import { Premium } from './pages/Premium';
-import { Chat } from './pages/Chat';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Layout } from "./components/layout/Layout";
+import { LandingPage } from "./pages/LandingPage";
+import { Dashboard } from "./pages/Dashboard";
+import { Screener } from "./pages/Screener";
+import { StockDetail } from "./pages/StockDetail";
+import { Premium } from "./pages/Premium";
+import { Chat } from "./pages/Chat";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
