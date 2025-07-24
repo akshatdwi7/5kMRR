@@ -47,8 +47,8 @@ import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import shield from "../assets/logos/shield.png";
-import { SparklesCore } from "../components/ui/sparkles";
-
+import Hovermebutton from "../components/ui/buttonnew";
+import { Blackbutton } from "../components/ui/buttonnew";
 export const LandingPage: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -264,15 +264,15 @@ export const LandingPage: React.FC = () => {
             >
               Get started
             </ButtonRotatingBackgroundGradient>
-            <button
-              className="ml-2 border border-white/30 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/10 active:bg-white/20 transition cursor-pointer"
+
+            <Blackbutton
               onClick={() => {
                 setIsLoginMode(true);
                 setShowAuthModal(true);
               }}
             >
-              Sign in
-            </button>
+              Sign In
+            </Blackbutton>
           </div>
         </nav>
 
@@ -315,8 +315,8 @@ export const LandingPage: React.FC = () => {
           </ButtonShadowGradient>
 
           <div className="text-gray-400 text-base mt-2">
-            subbb.me /{" "}
-            <span className="text-blue-300 underline">dinnergals</span>
+            Know thy creater /{" "}
+            <span className="text-blue-300 underline">about</span>
           </div>
           <div className=" mt-14 flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
             <div className="flex items-center space-x-2 mb-2 sm:mb-0">
