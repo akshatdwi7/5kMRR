@@ -320,7 +320,7 @@ export const LandingPage: React.FC = () => {
             Know thy creater /{" "}
             <Link
               to="/about"
-              className="font-arimo italic text-blue-400 cursor-pointer underline"
+              className="font-arimo italic text-blue-300 cursor-pointer underline"
             >
               about
             </Link>
