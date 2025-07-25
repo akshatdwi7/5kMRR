@@ -9,26 +9,82 @@ import { Premium } from "./pages/Premium";
 import { Chat } from "./pages/Chat";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { Aboutit } from "./pages/About";
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) {
-    return <LandingPage />;
-  }
-
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/screener" element={<Screener />} />
-        <Route path="/stock/:symbol" element={<StockDetail />} />
-        <Route path="/premium" element={<Premium />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/watchlist" element={<Dashboard />} />
-        <Route path="/settings" element={<Dashboard />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      {/* Public routes */}
+      <Route path="/about" element={<Aboutit />} />
+      <Route
+        path="/"
+        element={
+          isAuthenticated ? (
+            <Layout>
+              <Dashboard />
+            </Layout>
+          ) : (
+            <LandingPage />
+          )
+        }
+      />
+      {/* Authenticated routes */}
+      {isAuthenticated && (
+        <>
+          <Route
+            path="/screener"
+            element={
+              <Layout>
+                <Screener />
+              </Layout>
+            }
+          />
+          <Route
+            path="/stock/:symbol"
+            element={
+              <Layout>
+                <StockDetail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/premium"
+            element={
+              <Layout>
+                <Premium />
+              </Layout>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <Layout>
+                <Chat />
+              </Layout>
+            }
+          />
+          <Route
+            path="/watchlist"
+            element={
+              <Layout>
+                <Dashboard />
+              </Layout>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <Layout>
+                <Dashboard />
+              </Layout>
+            }
+          />
+        </>
+      )}
+      {/* Optionally, add a 404 route */}
+    </Routes>
   );
 }
 

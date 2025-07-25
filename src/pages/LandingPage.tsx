@@ -26,7 +26,6 @@ import {
   Target,
   Globe,
   Award,
-  Link,
   Brain,
   Clock,
   DollarSign,
@@ -50,6 +49,8 @@ import { StarsBackground } from "../components/ui/stars-background";
 import shield from "../assets/logos/shield.png";
 import Hovermebutton from "../components/ui/buttonnew";
 import { Blackbutton } from "../components/ui/buttonnew";
+import { Link } from "react-router-dom";
+
 export const LandingPage: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -315,9 +316,14 @@ export const LandingPage: React.FC = () => {
             Start your free trial
           </ButtonShadowGradient>
 
-          <div className="text-gray-400 text-base mt-2">
+          <div className="text-gray-400 text-base mt-2  font-thin">
             Know thy creater /{" "}
-            <span className="text-blue-300 underline">about</span>
+            <Link
+              to="/about"
+              className="font-arimo italic text-blue-400 cursor-pointer underline"
+            >
+              about
+            </Link>
           </div>
           <div className=" mt-14 flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-6 text-sm text-gray-500">
             <div className="flex items-center space-x-2 mb-2 sm:mb-0">
@@ -662,8 +668,8 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* How It Works Section */}
-      <section className="px-6 py-20 bg-white">
+      {/*  how to works section*/}
+      <section className="px-6 py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -702,7 +708,7 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 {/* Application Interface */}
-                <div className="flex">
+                <div className="flex ">
                   {/* Sidebar */}
                   <div className="w-80 bg-gray-50 border-r border-gray-200 p-6">
                     <div className="space-y-4">
@@ -1378,25 +1384,19 @@ export const LandingPage: React.FC = () => {
       {/* Auth Modal */}
       <AnimatePresence>
         {showAuthModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+          <div
             className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
             onClick={() => setShowAuthModal(false)}
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+            <div
               className="bg-white rounded-2xl p-8 w-full max-w-md shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {isLoginMode ? "Welcome Back" : "Create Account"}
+                <h2 className="text-2xl font-instrument italic text-gray-900">
+                  {isLoginMode
+                    ? "Welcome Back -  We missed you ⛵︎"
+                    : "Create Account - Happy to have  you on board ☂︎"}
                 </h2>
                 <Button
                   variant="ghost"
@@ -1512,8 +1512,8 @@ export const LandingPage: React.FC = () => {
                     : "Already have an account? Sign in"}
                 </button>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>
