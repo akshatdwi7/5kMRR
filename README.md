@@ -1,20 +1,20 @@
 Screeno: AI-Powered Stock Analyst
 
 
-Screeno is an AI-powered stock analysis web application built with React.js (frontend) and Supabase (backend/database/Auth). It enables users to screen, analyze, and visualize stocks—leveraging OpenAI-powered analytics—through a responsive and modern interface.
+Screeno is an AI-powered stock analysis web application. It enables users to screen, analyze, and visualize stocks—leveraging OpenAI-powered analytics—through a responsive and modern interface.
 
 Features
 
 	•	User authentication (sign up, login, logout)
 	•	Custom stock screeners and watchlists
 	•	AI-driven stock analysis and insights
-	•	Real-time data fetching and visualization
+	•	Real-time data fetching and visualization(used upstocks api )
 	•	Responsive design using Tailwind CSS
 	•	Secure data storage with PostgreSQL (via Supabase)
-	•	(Optional) Premium features and pricing page
+	•	Premium features and pricing page full model
 Tech Stack
 
-	•	Frontend: React.js (with TypeScript), Tailwind CSS
+	•	Frontend: React.js (with TypeScript), Tailwind CSS + customs hooks and components
 	•	Backend: Supabase (PostgreSQL, Auth, Edge Functions)
 	•	AI Integration: OpenAI API (configurable)
 	•	Deployment: Vercel/Netlify for frontend, Supabase for backend
@@ -30,7 +30,9 @@ Development Roadmap
 	•	Customizable screeners and watchlists
 	•	Auth and secure backend
 	•	Alerts and notifications
-	•	Mobile-first improvements
+	•	Mobile-first 
+ Broker Integraton
+ 
 Query Language
 
 All database interactions use PostgreSQL SQL (handled via Supabase JS SDK or the SQL Editor).
