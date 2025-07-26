@@ -22,9 +22,7 @@ import {
   Play,
   Check,
   X,
-  Sparkles,
   Target,
-  Globe,
   Award,
   Brain,
   Clock,
@@ -47,7 +45,7 @@ import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import shield from "../assets/logos/shield.png";
-import Hovermebutton from "../components/ui/buttonnew";
+
 import { Blackbutton } from "../components/ui/buttonnew";
 import { Link } from "react-router-dom";
 

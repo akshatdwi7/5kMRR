@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const creators = [
   {
@@ -23,43 +24,96 @@ const creators = [
   },
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  }),
+};
+
 export function Aboutit() {
   return (
-    <section className="min-h-screen flex flex-col bg-gray-50 px-6 py-12 items-center">
-      <div className="max-w-3xl text-center mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-gray-900">
-          Meet the Creators of <span className="text-blue-600">Screeno.in</span>
+    <section className="relative min-h-screen flex flex-col bg-gradient-to-br from-[#f8fafc] via-[#e0e7ff] to-[#f0fdfa] px-4 py-16 items-center overflow-hidden">
+      {/* Decorative blurred background shapes */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.4, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.2 }}
+        className="absolute -top-32 -left-32 w-[400px] h-[400px] bg-blue-300 rounded-full blur-3xl z-0"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.3, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.4 }}
+        className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-200 rounded-full blur-2xl z-0"
+      />
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="max-w-3xl text-center mx-auto z-10"
+      >
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-gray-900 leading-tight">
+          Meet the{" "}
+          <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Founders
+          </span>
         </h1>
-        <p className="text-lg text-gray-600 mb-10">
+        <motion.p
+          variants={fadeInUp}
+          custom={2}
+          className="text-xl text-gray-700 mb-10 font-medium"
+        >
           We’re two friends on a mission to help you capture, share, and
-          collaborate on your screen like never before. Screeno.in is built for
-          everyone who loves simplicity and productivity.
-        </p>
-      </div>
-      <div className="flex flex-col md:flex-row gap-10 mt-4">
-        {creators.map((creator) => (
-          <div
+          collaborate on your screen like never before.{" "}
+          <span className="font-semibold text-blue-600">Screeno.in</span> is
+          built for everyone who loves simplicity and productivity.
+        </motion.p>
+      </motion.div>
+
+      <div className="flex flex-col md:flex-row gap-12 mt-8 z-10">
+        {creators.map((creator, idx) => (
+          <motion.div
             key={creator.name}
-            className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm flex flex-col items-center"
+            custom={idx + 2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUp}
+            whileHover={{
+              scale: 1.04,
+              boxShadow: "0 8px 32px 0 rgba(80,80,180,0.15)",
+            }}
+            className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-xl p-10 w-full max-w-sm flex flex-col items-center border border-blue-100 transition-all duration-300"
           >
-            <img
+            <motion.img
               src={creator.image}
               alt={creator.name}
-              className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-blue-200"
+              className="w-32 h-32 rounded-full object-cover mb-5 border-4 border-blue-300 shadow-lg"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 + idx * 0.2 }}
             />
-            <h2 className="text-2xl font-semibold text-gray-900">
+            <h2 className="text-2xl font-bold text-gray-900 mb-1">
               {creator.name}
             </h2>
-            <p className="text-blue-600 mb-2">{creator.role}</p>
+            <p className="text-blue-600 mb-2 font-medium">{creator.role}</p>
             <p className="text-gray-600 mb-4 text-center">{creator.bio}</p>
-            <div className="flex gap-5">
+            <div className="flex gap-6 mt-2">
               <a
                 href={creator.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Twitter"
               >
                 <svg
-                  className="w-6 h-6 text-gray-500 hover:text-blue-500"
+                  className="w-6 h-6 text-gray-400 hover:text-blue-500 transition"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -70,9 +124,10 @@ export function Aboutit() {
                 href={creator.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
               >
                 <svg
-                  className="w-6 h-6 text-gray-500 hover:text-blue-700"
+                  className="w-6 h-6 text-gray-400 hover:text-blue-700 transition"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -80,19 +135,29 @@ export function Aboutit() {
                 </svg>
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-      <div className="mt-12 text-center max-w-2xl mx-auto">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">
-          Why Screeno.in?
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        custom={4}
+        className="mt-16 text-center max-w-2xl mx-auto z-10"
+      >
+        <h3 className="text-2xl font-bold text-gray-800 mb-3 tracking-tight">
+          Why <span className="text-blue-600">Screeno.in</span>?
         </h3>
-        <p className="text-gray-600">
+        <p className="text-lg text-gray-700 font-medium">
           We built Screeno.in to empower everyone—students, creators, remote
           teams, and more—to visualize, organize, and share their ideas with
-          ease. Join our growing community and make the most of your screen!
+          ease.{" "}
+          <span className="text-blue-600 font-semibold">
+            Join our growing community and make the most of your screen!
+          </span>
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }
