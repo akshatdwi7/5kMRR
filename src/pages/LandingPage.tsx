@@ -9,6 +9,8 @@ import ai from "../assets/logos/ai.png";
 import MovingGradientPill from "../components/ui/pill";
 import { Keyboardgenbutton } from "../components/ui/Button";
 import { TextRoll } from "../components/ui/textroll";
+import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
+import { ChartLineInteractive } from "../components/ui/charts-line";
 import {
   TrendingUp,
   BarChart3,
@@ -300,6 +302,7 @@ export const LandingPage: React.FC = () => {
             </span>
             .
           </h1>
+
           <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly. Connect your
@@ -341,7 +344,8 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="px-6 py-16 bg-white">
+
+      <section className="px-6 py-16 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -365,7 +369,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/* Broker Integration Section */}
-      <section id="brokers" className="px-6 py-20 bg-white">
+      <section id="brokers" className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -412,7 +416,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
+          <div className="bg-amber-50 rounded-2xl p-8 shadow-lg">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -454,6 +458,13 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <div className="  bg-amber-50 px-10 py-16 flex items-center justify-center  ">
+        <TextLoopCustomVariantsTransition />
+      </div>
+      <div className="   bg-amber-50 px-5 py-11  justify-center  ">
+        <ChartLineInteractive />
+      </div>
       {/* Benefits Section */}
       <section id="benefits" className="px-6 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
