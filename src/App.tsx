@@ -10,7 +10,6 @@ import { Chat } from "./pages/Chat";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Aboutit } from "./pages/About";
-import { ThemeToggle } from "./components/ui/ThemeToggle";
 
 function AppContent() {
   const { isAuthenticated } = useAuth();

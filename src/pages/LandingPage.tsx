@@ -12,6 +12,8 @@ import { TextRoll } from "../components/ui/textroll";
 import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
 import { ChartLineInteractive } from "../components/ui/charts-line";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
+import Example from "../components/ui/feature1";
+import Example2 from "../components/ui/feature2";
 import {
   TrendingUp,
   BarChart3,
@@ -346,6 +348,11 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Stats Section */}
+      <div className="bg-amber-50">
+        {" "}
+        <Example />
+        <Example2 />
+      </div>
 
       <section className="px-6 py-16 bg-amber-50">
         <div className="max-w-7xl mx-auto">
