@@ -10,7 +10,7 @@
     <script>
       // Prevent flash of unstyled content (FOUC)
       (function() {
-        const theme = localStorage.getItem('vite-ui-theme'); // This line is corrected
+        const theme = localStorage.getItem('theme');
         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         const resolvedTheme = theme === 'system' || !theme ? systemTheme : theme;
         
