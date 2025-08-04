@@ -1,17 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search, MessageCircle, TrendingUp, ArrowUpRight, ArrowDownRight, Sparkles, DollarSign, Target, Activity, Plus, Star } from 'lucide-react';
-import { Input } from '../components/ui/Input';
-import { Button } from '../components/ui/Button';
-import { AIQueryInterface } from '../components/ai/AIQueryInterface';
-import { Stock } from '../types';
-import { stockApi } from '../services/stockApi';
-import { supabaseService } from '../services/supabaseService';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Search,
+  MessageCircle,
+  TrendingUp,
+  ArrowUpRight,
+  ArrowDownRight,
+  Sparkles,
+  DollarSign,
+  Target,
+  Activity,
+  Plus,
+  Star,
+} from "lucide-react";
+import { Input } from "../components/ui/Input";
+import { Button } from "../components/ui/Button";
+import { AIQueryInterface } from "../components/ai/AIQueryInterface";
+import { Stock } from "../types";
+import { stockApi } from "../services/stockApi";
+import { supabaseService } from "../services/supabaseService";
+import { useAuth } from "../contexts/AuthContext";
+import Examplechart from "../components/ui/chartcom";
 
 export const Dashboard: React.FC = () => {
   const { profile } = useAuth();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Stock[]>([]);
   const [topMovers, setTopMovers] = useState<Stock[]>([]);
   const [portfolioSummary, setPortfolioSummary] = useState({
@@ -29,12 +42,12 @@ export const Dashboard: React.FC = () => {
       try {
         const [movers, summary] = await Promise.all([
           stockApi.getTopMovers(),
-          supabaseService.getPortfolioSummary().catch(() => portfolioSummary) // Fallback to mock data
+          supabaseService.getPortfolioSummary().catch(() => portfolioSummary), // Fallback to mock data
         ]);
         setTopMovers(movers);
         setPortfolioSummary(summary);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -51,7 +64,7 @@ export const Dashboard: React.FC = () => {
           const results = await stockApi.searchStocks(searchQuery);
           setSearchResults(results);
         } catch (error) {
-          console.error('Error searching stocks:', error);
+          console.error("Error searching stocks:", error);
         } finally {
           setIsSearching(false);
         }
@@ -74,7 +87,7 @@ export const Dashboard: React.FC = () => {
       await supabaseService.addToWatchlist(stock.symbol, stock.name);
       // Show success message
     } catch (error) {
-      console.error('Error adding to watchlist:', error);
+      console.error("Error adding to watchlist:", error);
     }
   };
 
@@ -93,8 +106,12 @@ export const Dashboard: React.FC = () => {
         <h1 className="text-4xl font-bold text-gray-900 mb-2">
           Ask AI About Any Stock
         </h1>
-        <p className="text-gray-600 text-lg">Get instant, intelligent answers about Indian stocks</p>
+        <p className="text-gray-600 text-lg">
+          Get instant, intelligent answers about Indian stocks
+        </p>
       </div>
+
+      <Examplechart />
 
       {/* Portfolio Summary - Simplified */}
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-200">
@@ -113,19 +130,33 @@ export const Dashboard: React.FC = () => {
           </div>
           <div className="text-center">
             <div className="text-sm text-gray-600 mb-1">Total Gain</div>
-            <div className={`text-2xl font-bold ${portfolioSummary.totalGainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {portfolioSummary.totalGainLoss >= 0 ? '+' : ''}₹{(Math.abs(portfolioSummary.totalGainLoss) / 1000).toFixed(1)}K
+            <div
+              className={`text-2xl font-bold ${
+                portfolioSummary.totalGainLoss >= 0
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {portfolioSummary.totalGainLoss >= 0 ? "+" : ""}₹
+              {(Math.abs(portfolioSummary.totalGainLoss) / 1000).toFixed(1)}K
             </div>
           </div>
           <div className="text-center">
             <div className="text-sm text-gray-600 mb-1">Returns</div>
-            <div className={`text-2xl font-bold flex items-center justify-center ${portfolioSummary.totalGainLossPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            <div
+              className={`text-2xl font-bold flex items-center justify-center ${
+                portfolioSummary.totalGainLossPercent >= 0
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
               {portfolioSummary.totalGainLossPercent >= 0 ? (
                 <ArrowUpRight className="h-5 w-5 mr-1" />
               ) : (
                 <ArrowDownRight className="h-5 w-5 mr-1" />
               )}
-              {portfolioSummary.totalGainLossPercent >= 0 ? '+' : ''}{portfolioSummary.totalGainLossPercent.toFixed(1)}%
+              {portfolioSummary.totalGainLossPercent >= 0 ? "+" : ""}
+              {portfolioSummary.totalGainLossPercent.toFixed(1)}%
             </div>
           </div>
         </div>
@@ -138,11 +169,15 @@ export const Dashboard: React.FC = () => {
             <div className="p-3 bg-blue-100 rounded-xl">
               <MessageCircle className="h-6 w-6 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Stock Query Assistant</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Stock Query Assistant
+            </h2>
           </div>
-          <p className="text-gray-600">Search any Indian stock and ask AI anything about it</p>
+          <p className="text-gray-600">
+            Search any Indian stock and ask AI anything about it
+          </p>
         </div>
-        
+
         <div className="max-w-2xl mx-auto">
           <div className="relative mb-6">
             <Input
@@ -152,7 +187,7 @@ export const Dashboard: React.FC = () => {
               icon={<Search className="h-5 w-5 text-gray-400" />}
               className="text-lg py-4 bg-gray-50 border-gray-200 focus:border-blue-500 focus:bg-white"
             />
-            
+
             {isSearching && (
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
@@ -173,13 +208,24 @@ export const Dashboard: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex items-center space-x-4">
                       <div>
-                        <h4 className="font-bold text-gray-900">{stock.symbol}</h4>
-                        <p className="text-sm text-gray-600 truncate max-w-xs">{stock.name}</p>
+                        <h4 className="font-bold text-gray-900">
+                          {stock.symbol}
+                        </h4>
+                        <p className="text-sm text-gray-600 truncate max-w-xs">
+                          {stock.name}
+                        </p>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-bold text-gray-900">₹{stock.price.toFixed(2)}</div>
-                        <div className={`text-sm font-medium ${stock.change > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%
+                        <div className="text-lg font-bold text-gray-900">
+                          ₹{stock.price.toFixed(2)}
+                        </div>
+                        <div
+                          className={`text-sm font-medium ${
+                            stock.change > 0 ? "text-green-600" : "text-red-600"
+                          }`}
+                        >
+                          {stock.change > 0 ? "+" : ""}
+                          {stock.changePercent.toFixed(2)}%
                         </div>
                       </div>
                     </div>
@@ -194,7 +240,7 @@ export const Dashboard: React.FC = () => {
                       <Star className="h-3 w-3 mr-1" />
                       Watch
                     </Button>
-                    <Button 
+                    <Button
                       className="bg-blue-600 hover:bg-blue-700"
                       onClick={() => handleStockSelect(stock)}
                     >
@@ -216,11 +262,15 @@ export const Dashboard: React.FC = () => {
                   "Should I buy RELIANCE?",
                   "TCS vs Infosys comparison",
                   "HDFC Bank analysis",
-                  "Best IT stocks today"
+                  "Best IT stocks today",
                 ].map((example, index) => (
                   <button
                     key={index}
-                    onClick={() => setSearchQuery(example.split(' ')[2] || example.split(' ')[0])}
+                    onClick={() =>
+                      setSearchQuery(
+                        example.split(" ")[2] || example.split(" ")[0]
+                      )
+                    }
                     className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm hover:bg-blue-100 transition-colors"
                   >
                     "{example}"
@@ -239,16 +289,16 @@ export const Dashboard: React.FC = () => {
           stockName={selectedStock.name}
           onUpgrade={() => {
             // Navigate to premium page
-            window.location.href = '/premium';
+            window.location.href = "/premium";
           }}
         />
       )}
 
       {/* General AI Query Interface (when no stock selected) */}
-      {!selectedStock && searchQuery === '' && (
+      {!selectedStock && searchQuery === "" && (
         <AIQueryInterface
           onUpgrade={() => {
-            window.location.href = '/premium';
+            window.location.href = "/premium";
           }}
         />
       )}
@@ -265,7 +315,7 @@ export const Dashboard: React.FC = () => {
             <span className="text-sm text-green-600 font-medium">Live</span>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {topMovers.slice(0, 6).map((stock, index) => (
             <motion.div
@@ -281,15 +331,25 @@ export const Dashboard: React.FC = () => {
                   <h4 className="font-bold text-gray-900">{stock.symbol}</h4>
                   <p className="text-xs text-gray-600">{stock.sector}</p>
                 </div>
-                <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  stock.change > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                }`}>
-                  {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(1)}%
+                <div
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    stock.change > 0
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {stock.change > 0 ? "+" : ""}
+                  {stock.changePercent.toFixed(1)}%
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-lg font-bold text-gray-900">₹{stock.price.toFixed(2)}</span>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-xs">
+                <span className="text-lg font-bold text-gray-900">
+                  ₹{stock.price.toFixed(2)}
+                </span>
+                <Button
+                  size="sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-xs"
+                >
                   <MessageCircle className="h-3 w-3 mr-1" />
                   Ask AI
                 </Button>
@@ -300,18 +360,25 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Usage Stats for Free Users */}
-      {profile?.subscription_tier === 'free' && (
+      {profile?.subscription_tier === "free" && (
         <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 border border-yellow-200">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Daily Usage</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Daily Usage
+              </h3>
               <p className="text-gray-600">
-                You've used {profile.ai_queries_used} of {profile.ai_queries_limit} free AI queries today
+                You've used {profile.ai_queries_used} of{" "}
+                {profile.ai_queries_limit} free AI queries today
               </p>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                <div 
+                <div
                   className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(profile.ai_queries_used / profile.ai_queries_limit) * 100}%` }}
+                  style={{
+                    width: `${
+                      (profile.ai_queries_used / profile.ai_queries_limit) * 100
+                    }%`,
+                  }}
                 ></div>
               </div>
             </div>

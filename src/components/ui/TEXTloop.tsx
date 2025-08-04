@@ -2,7 +2,7 @@ import { TextLoop } from "../motion-primitives/text-loop";
 
 export function TextLoopCustomVariantsTransition() {
   return (
-    <p className="inline-flex whitespace-pre-wrap text-7xl font-thin text-zinc-700">
+    <p className="inline-flex whitespace-pre-wrap text-7xl font-thin text-zinc-600">
       Screeno is for{" "}
       <TextLoop
         className="overflow-y-clip"

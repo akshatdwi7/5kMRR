@@ -14,6 +14,9 @@ import { ChartLineInteractive } from "../components/ui/charts-line";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 import Example from "../components/ui/feature1";
 import Example2 from "../components/ui/feature2";
+import Example3 from "../components/ui/feature3";
+import Example4 from "../components/ui/feature4";
+import Example5 from "../components/ui/feature5";
 import {
   TrendingUp,
   BarChart3,
@@ -352,6 +355,9 @@ export const LandingPage: React.FC = () => {
         {" "}
         <Example />
         <Example2 />
+        <Example3 />
+        <Example4 />
+        <Example5 />
       </div>
 
       <section className="px-6 py-16 bg-amber-50">
