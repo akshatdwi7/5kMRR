@@ -11,6 +11,7 @@ import { Keyboardgenbutton } from "../components/ui/Button";
 import { TextRoll } from "../components/ui/textroll";
 import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
 import { ChartLineInteractive } from "../components/ui/charts-line";
+import { ThemeToggle } from "../components/ui/ThemeToggle";
 import {
   TrendingUp,
   BarChart3,
@@ -241,6 +242,7 @@ export const LandingPage: React.FC = () => {
         {/* Navbar (inside hero section, not sticky) */}
         <nav className="flex items-center justify-between bg-black/80 backdrop-blur-md rounded-full px-6 py-2 mx-auto max-w-3xl shadow-lg sticky top-0 z-50">
           {/* Logo */}
+          <ThemeToggle />
           <div className="flex items-center space-x-2 cursor-pointer">
             <img src={ss} alt="Logo" className="h-10 w-10" />
           </div>
