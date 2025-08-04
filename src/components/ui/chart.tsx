@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 
-import { cn } from "/Users/nachosz/Developer/5kMRRfinal/src/lib/utils.ts";
+import { cn } from "../../lib/util.ts";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;

@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "/Users/nachosz/Developer/5kMRRfinal/src/lib/util.ts"; // Adjust the import path as necessary
+import { cn } from "../../lib/util.ts"; // Adjust the import path as necessary
 import {
   motion,
   AnimatePresence,
