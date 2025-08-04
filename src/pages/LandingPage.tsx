@@ -466,7 +466,7 @@ export const LandingPage: React.FC = () => {
         <ChartLineInteractive />
       </div>
       {/* Benefits Section */}
-      <section id="benefits" className="px-6 py-20 bg-white">
+      <section id="benefits" className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -627,10 +627,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/* Features Section */}
-      <section
-        id="features"
-        className="px-6 py-20 bg-gradient-to-br from-gray-50 to-blue-50"
-      >
+      <section id="features" className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -678,7 +675,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/*  how to works section*/}
-      <section className="px-6 py-20 bg-slate-100">
+      <section className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
@@ -974,7 +971,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/* Testimonials */}
-      <section className="px-6 py-20 bg-white">
+      <section className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
@@ -1016,7 +1013,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
       {/* Clean Modern Pricing Section */}
-      <section id="pricing" className="py-20 bg-white">
+      <section id="pricing" className="py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
