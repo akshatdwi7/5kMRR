@@ -17,6 +17,7 @@ import Example2 from "../components/ui/feature2";
 import Example3 from "../components/ui/feature3";
 import Example4 from "../components/ui/feature4";
 import Example5 from "../components/ui/feature5";
+import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
 import {
   TrendingUp,
   BarChart3,
@@ -358,6 +359,7 @@ export const LandingPage: React.FC = () => {
         <Example3 />
         <Example4 />
         <Example5 />
+        <InfiniteSliderHoverSpeed />
       </div>
 
       <section className="px-6 py-16 bg-amber-50">
