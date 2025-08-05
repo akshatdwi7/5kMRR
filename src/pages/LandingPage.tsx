@@ -200,12 +200,7 @@ export const LandingPage: React.FC = () => {
     },
   ];
 
-  const stats = [
-    { number: "5,000+", label: "Indian Stocks", icon: filter },
-    { number: "50+", label: "Screening Filters", icon: search },
-    { number: "99.9%", label: "Uptime SLA", icon: markets },
-    { number: "25K+", label: "Active Traders", icon: ai },
-  ];
+  const stats = [];
 
   const testimonials = [
     {
@@ -356,10 +351,8 @@ export const LandingPage: React.FC = () => {
         {" "}
         <Example />
         <Example2 />
-        <Example3 />
         <Example4 />
         <Example5 />
-        <InfiniteSliderHoverSpeed />
       </div>
 
       <section className="px-6 py-16 bg-amber-50">
@@ -406,75 +399,12 @@ export const LandingPage: React.FC = () => {
               recommendations.
             </p>
           </div>
-
-          <div className="overflow-hidden mb-12">
-            <div className="flex animate-marquee space-x-6 w-max">
-              {[...brokers, ...brokers].map((broker, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="min-w-[160px] bg-white rounded-2xl p-6 hover: transition-all duration-300 text-center group hover:-translate-y-2 flex-shrink-0"
-                >
-                  <div className="mb-3 group-hover:scale-110 transition-transform">
-                    <img
-                      src={broker.logo}
-                      alt={broker.name}
-                      className="mx-auto w-16 h-16 object-contain rounded-full"
-                    />
-                  </div>
-
-                  <div className="font-semibold text-gray-900 text-sm mb-2">
-                    {broker.name}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-amber-50 rounded-2xl p-8 shadow-lg">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <img src={tap} alt="your logo" className="w-10 h-10" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  One-Click Integration
-                </h3>
-                <p className="text-gray-600">
-                  Connect your broker account in seconds with our secure OAuth
-                  integration.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <img src={shield} alt="your logo" className="w-10 h-10" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  Bank-Grade Security
-                </h3>
-                <p className="text-gray-600">
-                  Your credentials are encrypted and never stored on our
-                  servers.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16  rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <img src={graph} alt="your logo" className="w-10 h-10" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  Instant Execution
-                </h3>
-                <p className="text-gray-600">
-                  Execute trades directly from our platform with real-time order
-                  updates.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+      <div className="flex flex-wrap justify-center gap-6 px-6 py-8 bg-amber-50">
+        {" "}
+        <InfiniteSliderHoverSpeed />
+      </div>
 
       <div className="  bg-amber-50 px-10 py-16 flex items-center justify-center  ">
         <TextLoopCustomVariantsTransition />
@@ -482,6 +412,7 @@ export const LandingPage: React.FC = () => {
       <div className="   bg-amber-50 px-5 py-11  justify-center  ">
         <ChartLineInteractive />
       </div>
+
       {/* Benefits Section */}
       <section id="benefits" className="px-6 py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto">
@@ -1029,6 +960,10 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
+      <div className="bg-amber-50">
+        {" "}
+        <Example3 />
+      </div>
       {/* Clean Modern Pricing Section */}
       <section id="pricing" className="py-20 bg-amber-50">
         <div className="max-w-7xl mx-auto px-4">
