@@ -9,6 +9,8 @@ import MovingGradientPill from "../components/ui/pill";
 import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
+import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
+import { TabsExample } from "../components/ui/tabssolid";
 import {
   TrendingUp,
   BarChart3,
@@ -28,6 +30,7 @@ import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import { Blackbutton } from "../components/ui/buttonnew";
+
 import { Link } from "react-router-dom";
 
 // Lazy load heavy components
@@ -36,6 +39,8 @@ const Example2 = React.lazy(() => import("../components/ui/feature2"));
 const Example3 = React.lazy(() => import("../components/ui/feature3"));
 const Example4 = React.lazy(() => import("../components/ui/feature4"));
 const Example5 = React.lazy(() => import("../components/ui/feature5"));
+const Revenue = React.lazy(() => import("../components/ui/revenue"));
+
 const ChartLineInteractive = React.lazy(() =>
   import("../components/ui/charts-line").then((module) => ({
     default: module.ChartLineInteractive,
@@ -201,10 +206,25 @@ export const LandingPage: React.FC = () => {
       >
         <div className="bg-amber-50">
           <Example />
+          <Example3 />
           <Example2 />
           <Example4 />
           <Example5 />
-          <Example3 />
+        </div>
+      </Suspense>
+      <div className=" h-52 bg-amber-50 ">
+        <TabsExample />
+      </div>
+
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center w-full h-96 bg-amber-50 text-gray-500">
+            Loading Interactive Components...
+          </div>
+        }
+      >
+        <div className="bg-amber-50">
+          <Revenue />
         </div>
       </Suspense>
 
@@ -512,6 +532,30 @@ export const LandingPage: React.FC = () => {
               </div>
             </motion.div>
           </div>
+          <motion.div
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            <p className="text-gray-600 mb-6 text-lg">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
+            <div className="flex justify-center space-x-12 text-sm text-gray-500">
+              <div className="flex items-center space-x-2">
+                <Shield className="h-5 w-5 text-blue-600" />
+                <span>Bank-grade security</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Zap className="h-5 w-5 text-blue-600" />
+                <span>99.9% uptime SLA</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Users className="h-5 w-5 text-blue-600" />
+                <span>24/7 support</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
