@@ -42,7 +42,7 @@ const ChartLineInteractive = React.lazy(() =>
   }))
 );
 
-// Memoize heavy components
+// Memoize heavy, non-interactive components to prevent re-renders
 const MemoizedStarsBackground = memo(StarsBackground);
 const MemoizedShootingStars = memo(ShootingStars);
 
@@ -96,39 +96,46 @@ export const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent overflow-x-hidden">
       <MemoizedStarsBackground />
       <MemoizedShootingStars />
 
       {/* Hero Section */}
       <section className="relative flex flex-col min-h-screen">
         <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-        <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-2 mx-auto bg-black/80 shadow-lg backdrop-blur-md rounded-full max-w-3xl">
+
+        {/* RESPONSIVE NAVBAR */}
+        <nav className="sticky top-2 sm:top-4 z-50 flex items-center justify-between w-[95%] max-w-3xl px-3 sm:px-6 py-2 mx-auto bg-black/80 shadow-lg backdrop-blur-md rounded-full">
           <ThemeToggle />
           <div className="flex items-center space-x-2 cursor-pointer">
-            <img src={ss} alt="Logo" className="w-10 h-10" />
+            <img src={ss} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
-          <div className="flex items-center space-x-8">
+          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <a
               href="#features"
-              className="px-3 py-2 font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
+              className="px-3 py-2 text-sm font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Features
             </a>
             <a
               href="#pricing"
-              className="px-3 py-2 font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
+              className="px-3 py-2 text-sm font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Pricing
             </a>
-            <ButtonRotatingBackgroundGradient
-              onClick={() => {
-                setIsLoginMode(false);
-                setShowAuthModal(true);
-              }}
-            >
-              Get started
-            </ButtonRotatingBackgroundGradient>
+            <div className="hidden lg:block">
+              <ButtonRotatingBackgroundGradient
+                onClick={() => {
+                  setIsLoginMode(false);
+                  setShowAuthModal(true);
+                }}
+              >
+                Get started
+              </ButtonRotatingBackgroundGradient>
+            </div>
+            <Blackbutton onClick={handleUpstoxLogin}>Sign In</Blackbutton>
+          </div>
+          <div className="sm:hidden">
             <Blackbutton
               onClick={() => {
                 setIsLoginMode(true);
@@ -139,14 +146,15 @@ export const LandingPage: React.FC = () => {
             </Blackbutton>
           </div>
         </nav>
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center"
+          className="flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4"
         >
           <MovingGradientPill />
-          <h1 className="mt-10 mb-8 text-5xl font-medium leading-[1.08] text-white sm:text-6xl lg:text-7xl font-arimo">
+          <h1 className="mt-10 mb-8 text-4xl leading-tight sm:text-6xl lg:text-7xl font-arimo font-medium text-white sm:leading-[1.08]">
             Invest With
             <span className="font-instrument italic bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
               {" "}
@@ -160,7 +168,7 @@ export const LandingPage: React.FC = () => {
             </span>
             .
           </h1>
-          <p className="max-w-2xl mx-auto mb-8 text-lg leading-relaxed text-gray-600">
+          <p className="max-w-2xl mx-auto mb-8 text-base sm:text-lg leading-relaxed text-gray-500">
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly.
           </p>
@@ -172,7 +180,7 @@ export const LandingPage: React.FC = () => {
           >
             Start your free trial
           </ButtonShadowGradient>
-          <div className="mt-2 text-base font-thin text-gray-400">
+          <div className="mt-2 text-sm font-thin text-gray-400">
             Know thy creater /{" "}
             <Link
               to="/about"
@@ -184,7 +192,6 @@ export const LandingPage: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Heavy Components Section */}
       <Suspense
         fallback={
           <div className="flex items-center justify-center w-full h-96 bg-amber-50 text-gray-500">
@@ -201,8 +208,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </Suspense>
 
-      {/* Broker Integration & Chart Section */}
-      <section id="brokers" className="px-6 pt-20 bg-amber-50">
+      <section id="brokers" className="px-4 sm:px-6 pt-20 bg-amber-50">
         <motion.div
           variants={fadeInUp}
           initial="hidden"
@@ -210,25 +216,24 @@ export const LandingPage: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-6 text-4xl font-bold text-gray-900">
+          <h2 className="mb-6 text-3xl sm:text-4xl font-bold text-gray-900">
             Connect Your Favorite Broker
           </h2>
-          <p className="max-w-3xl mx-auto text-xl text-gray-600">
+          <p className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-600">
             Seamlessly integrate with all major Indian brokers and execute
             trades directly from our platform.
           </p>
         </motion.div>
-        <div className="px-6 py-8 bg-amber-50">
+        <div className="py-8 bg-amber-50">
           <InfiniteSliderHoverSpeed />
         </div>
       </section>
 
-      {/* CHART SECTION */}
-      <section className="pb-20 bg-amber-50">
-        <div className="flex items-center justify-center px-10">
+      <section className="pb-20 bg-amber-50 overflow-hidden">
+        <div className="flex items-center justify-center px-4 sm:px-10">
           <TextLoopCustomVariantsTransition />
         </div>
-        <div className="justify-center px-5 pt-4 ">
+        <div className="justify-center px-2 sm:px-5 pt-4 ">
           <Suspense fallback={<div>Loading Chart...</div>}>
             <ChartLineInteractive />
           </Suspense>
@@ -236,8 +241,8 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* PRICING SECTION */}
-      <section id="pricing" className="py-20 bg-amber-50">
-        <div className="max-w-7xl mx-auto px-4">
+      <section id="pricing" className="py-20 bg-amber-50 px-4">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -245,7 +250,7 @@ export const LandingPage: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Pricing Plans That Scale With You
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
@@ -283,7 +288,7 @@ export const LandingPage: React.FC = () => {
             <div className="bg-gray-100 rounded-lg p-1 inline-flex">
               <button
                 onClick={() => setIsYearlyBilling(false)}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   !isYearlyBilling
                     ? "bg-white text-gray-900 shadow-sm"
                     : "text-gray-600 hover:text-gray-900"
@@ -293,7 +298,7 @@ export const LandingPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setIsYearlyBilling(true)}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   isYearlyBilling
                     ? "bg-white text-gray-900 shadow-sm"
                     : "text-gray-600 hover:text-gray-900"
@@ -303,8 +308,7 @@ export const LandingPage: React.FC = () => {
               </button>
             </div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Standard Plan */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <motion.div
               variants={fadeInUp}
               initial="hidden"
@@ -372,7 +376,6 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            {/* Premium Plan */}
             <motion.div
               variants={fadeInUp}
               initial="hidden"
@@ -445,7 +448,6 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            {/* Enterprise Plan */}
             <motion.div
               variants={fadeInUp}
               initial="hidden"
@@ -510,38 +512,13 @@ export const LandingPage: React.FC = () => {
               </div>
             </motion.div>
           </div>
-          {/* Additional Info */}
-          <motion.div
-            className="text-center mt-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            <p className="text-gray-600 mb-6 text-lg">
-              All plans include a 14-day free trial. No credit card required.
-            </p>
-            <div className="flex justify-center space-x-12 text-sm text-gray-500">
-              <div className="flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-blue-600" />
-                <span>Bank-grade security</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Zap className="h-5 w-5 text-blue-600" />
-                <span>99.9% uptime SLA</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Users className="h-5 w-5 text-blue-600" />
-                <span>24/7 support</span>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-12 text-white bg-gray-900">
+      <footer className="px-4 sm:px-6 py-12 text-white bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4 space-x-3">
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
@@ -598,7 +575,7 @@ export const LandingPage: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl"
+              className="w-full max-w-md p-6 sm:p-8 bg-white shadow-2xl rounded-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
@@ -670,4 +647,3 @@ export const LandingPage: React.FC = () => {
     </div>
   );
 };
-1;
