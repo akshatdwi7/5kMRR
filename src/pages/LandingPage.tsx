@@ -113,13 +113,13 @@ export const LandingPage: React.FC = () => {
           <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <a
               href="#features"
-              className="px-3 py-2 text-sm font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
+              className="px-3 py-2 text-lg font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Features
             </a>
             <a
               href="#pricing"
-              className="px-3 py-2 text-sm font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
+              className="px-3 py-2 text-lg font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Pricing
             </a>
