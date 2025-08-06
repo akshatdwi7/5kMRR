@@ -13,42 +13,42 @@ export function InfiniteSliderHoverSpeed() {
         <img
           src={hdfc1}
           alt="HDFC"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
       <div className="flex flex-col items-center">
         <img
           src={angel1}
           alt="Angle One"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
       <div className="flex flex-col items-center">
         <img
           src={icici1}
           alt="ICICI"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
       <div className="flex flex-col items-center">
         <img
           src={zerodha1}
           alt="Zerodha"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
       <div className="flex flex-col items-center">
         <img
           src={upstocks1}
           alt="Upstox"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
       <div className="flex flex-col items-center">
         <img
           src={kotak811}
           alt="Kotak"
-          className="aspect-square w-[80px] rounded-[4px]"
+          className="aspect-square w-[40px] rounded-[4px]"
         />
       </div>
     </InfiniteSlider>

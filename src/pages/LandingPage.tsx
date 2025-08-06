@@ -152,12 +152,7 @@ export const LandingPage: React.FC = () => {
           </div>
         </nav>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4"
-        >
+        <div className="flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4">
           <MovingGradientPill />
           <h1 className="mt-10 mb-8 text-4xl leading-tight sm:text-6xl lg:text-7xl font-arimo font-medium text-white sm:leading-[1.08]">
             Invest With
@@ -194,7 +189,7 @@ export const LandingPage: React.FC = () => {
               about
             </Link>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       <Suspense
@@ -224,35 +219,14 @@ export const LandingPage: React.FC = () => {
         }
       >
         <div className="bg-amber-50">
+          <div className="bg-amber-50 flex items-center justify-center px-4 sm:px-10">
+            <TextLoopCustomVariantsTransition />
+          </div>
           <Revenue />
         </div>
       </Suspense>
 
-      <section id="brokers" className="px-4 sm:px-6 pt-20 bg-amber-50">
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="mb-6 text-3xl sm:text-4xl font-bold text-gray-900">
-            Connect Your Favorite Broker
-          </h2>
-          <p className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-600">
-            Seamlessly integrate with all major Indian brokers and execute
-            trades directly from our platform.
-          </p>
-        </motion.div>
-        <div className="py-8 bg-amber-50">
-          <InfiniteSliderHoverSpeed />
-        </div>
-      </section>
-
       <section className="pb-20 bg-amber-50 overflow-hidden">
-        <div className="flex items-center justify-center px-4 sm:px-10">
-          <TextLoopCustomVariantsTransition />
-        </div>
         <div className="justify-center px-2 sm:px-5 pt-4 ">
           <Suspense fallback={<div>Loading Chart...</div>}>
             <ChartLineInteractive />
