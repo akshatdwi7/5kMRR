@@ -219,7 +219,7 @@ export const LandingPage: React.FC = () => {
         }
       >
         <div className="bg-amber-50">
-          <div className="bg-amber-50 flex items-center justify-center px-4 sm:px-10">
+          <div className="bg-amber-50 flex  items-center justify-center px-4 sm:px-10">
             <TextLoopCustomVariantsTransition />
           </div>
           <Revenue />

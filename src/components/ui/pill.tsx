@@ -59,12 +59,12 @@ export default function GlowingPill() {
           animation: "text-glow-animate 1.75s linear infinite",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
-          fontWeight: 200,
+          fontWeight: 400,
           letterSpacing: 0.1,
           transition: "background 0.2s",
         }}
       >
-        See how <span style={{ fontWeight: 200 }}>Screeno Works :)</span>
+        See how <span style={{ fontWeight: 400 }}>Screeno Works :)</span>
       </span>
       <svg
         className="ml-2 w-3.5 h-3.5"
