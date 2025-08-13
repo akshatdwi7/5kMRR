@@ -113,6 +113,7 @@ export const LandingPage: React.FC = () => {
 
         {/* RESPONSIVE NAVBAR */}
         <nav className="sticky top-2 sm:top-4 z-50 flex items-center justify-between w-[95%] max-w-3xl px-3 sm:px-6 py-2 mx-auto bg-black/80 shadow-lg backdrop-blur-md rounded-full">
+          <ThemeToggle />
           <div className="flex items-center space-x-2 cursor-pointer">
             <img src={ss} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
