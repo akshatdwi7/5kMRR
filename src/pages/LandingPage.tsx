@@ -201,7 +201,7 @@ export const LandingPage: React.FC = () => {
           </div>
         }
       >
-        <div className="bg-amber-50">
+        <div className="bg-amber-50 dark:bg-black">
           <Example />
           <Example3 />
           <Example2 />
@@ -209,10 +209,10 @@ export const LandingPage: React.FC = () => {
           <Example5 />
         </div>
       </Suspense>
-      <div className=" h-52 bg-amber-50 ">
+      <div className=" h-52 bg-amber-50 dark:bg-black">
         <TabsExample />
       </div>
-      <div className=" flex items-center justify-center bg-amber-50">
+      <div className=" flex items-center justify-center bg-amber-50 dark:bg-black">
         {" "}
         <CardAnimatedBorderGradient />
       </div>
@@ -224,18 +224,18 @@ export const LandingPage: React.FC = () => {
           </div>
         }
       >
-        <div className="bg-amber-50">
-          <div className="bg-amber-50 flex  items-center justify-center px-4 sm:px-10">
+        <div className="bg-amber-50 dark:bg-black ">
+          <div className="bg-amber-50 dark:bg-black flex  items-center justify-center px-4 sm:px-10">
             <TextLoopCustomVariantsTransition />
           </div>
           <Revenue />
         </div>
       </Suspense>
-      <div className=" bg-amber-50">
+      <div className=" bg-amber-50 dark:bg-black ">
         <InfiniteSliderHoverSpeed />
       </div>
 
-      <section className="pb-20 bg-amber-50 overflow-hidden">
+      <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
         <div className="justify-center px-2 sm:px-5 pt-4 ">
           <Suspense fallback={<div>Loading Chart...</div>}>
             <ChartLineInteractive />
@@ -244,7 +244,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* PRICING SECTION */}
-      <section id="pricing" className="py-20 bg-amber-50 px-4">
+      <section id="pricing" className="py-20 bg-amber-50 dark:bg-black px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeInUp}
@@ -253,7 +253,7 @@ export const LandingPage: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Pricing Plans That Scale With You
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
