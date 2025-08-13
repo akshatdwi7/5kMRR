@@ -72,5 +72,13 @@
     @apply bg-background text-foreground;
   }
 }
-
-
+@layer utilities {
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-100% - var(--gap)));
+    }
+  }
+  .animate-scroll {
+    animation: scroll var(--duration) linear infinite;
+  }
+}

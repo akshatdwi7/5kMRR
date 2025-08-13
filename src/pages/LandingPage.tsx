@@ -11,6 +11,8 @@ import { ThemeToggle } from "../components/ui/ThemeToggle";
 import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
 import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
 import { TabsExample } from "../components/ui/tabssolid";
+import CardAnimatedBorderGradient from "../components/ui/boxgradient";
+import BorderTrailTextarea from "../components/ui/border";
 import {
   TrendingUp,
   BarChart3,
@@ -111,7 +113,6 @@ export const LandingPage: React.FC = () => {
 
         {/* RESPONSIVE NAVBAR */}
         <nav className="sticky top-2 sm:top-4 z-50 flex items-center justify-between w-[95%] max-w-3xl px-3 sm:px-6 py-2 mx-auto bg-black/80 shadow-lg backdrop-blur-md rounded-full">
-          <ThemeToggle />
           <div className="flex items-center space-x-2 cursor-pointer">
             <img src={ss} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
@@ -210,6 +211,10 @@ export const LandingPage: React.FC = () => {
       <div className=" h-52 bg-amber-50 ">
         <TabsExample />
       </div>
+      <div className=" flex items-center justify-center bg-amber-50">
+        {" "}
+        <CardAnimatedBorderGradient />
+      </div>
 
       <Suspense
         fallback={
@@ -225,6 +230,9 @@ export const LandingPage: React.FC = () => {
           <Revenue />
         </div>
       </Suspense>
+      <div className=" bg-amber-50">
+        <InfiniteSliderHoverSpeed />
+      </div>
 
       <section className="pb-20 bg-amber-50 overflow-hidden">
         <div className="justify-center px-2 sm:px-5 pt-4 ">
