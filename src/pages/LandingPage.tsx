@@ -12,7 +12,8 @@ import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
 import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
 import { TabsExample } from "../components/ui/tabssolid";
 import CardAnimatedBorderGradient from "../components/ui/boxgradient";
-import MacbookScrollDemo from "../components/ui/mac";
+import ThreeDMarqueeDemo from "../components/ui/threeDmac";
+import LampDemo from "../components/ui/lamp";
 import BorderTrailTextarea from "../components/ui/border";
 import Accordion from "../components/ui/FAQ";
 import {
@@ -44,6 +45,7 @@ const Example3 = React.lazy(() => import("../components/ui/feature3"));
 const Example4 = React.lazy(() => import("../components/ui/feature4"));
 const Example5 = React.lazy(() => import("../components/ui/feature5"));
 const Revenue = React.lazy(() => import("../components/ui/revenue"));
+const MacbookScrollDemo = React.lazy(() => import("../components/ui/mac"));
 
 const ChartLineInteractive = React.lazy(() =>
   import("../components/ui/charts-line").then((module) => ({
@@ -207,9 +209,12 @@ export const LandingPage: React.FC = () => {
           <Example />
           <div className="  bg-amber-50 dark:bg-black "></div>
           <Example3 />
+          <LampDemo />
           <Example2 />
           <Example4 />
-
+          <Suspense fallback={<div>Loading...</div>}>
+            <MacbookScrollDemo />
+          </Suspense>
           <Example5 />
         </div>
         <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
@@ -241,6 +246,7 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </Suspense>
+      <ThreeDMarqueeDemo />
 
       {/* PRICING SECTION */}
       <section id="pricing" className="py-20 bg-amber-50 dark:bg-black px-4">

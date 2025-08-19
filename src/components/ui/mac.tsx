@@ -1,7 +1,9 @@
 import React from "react";
 import { MacbookScroll } from "./macbook-scroll";
+import macss from "../../assets/macss.png";
+import { m } from "framer-motion";
 
-export function MacbookScrollDemo() {
+export default function MacbookScrollDemo() {
   return (
     <div className="w-full overflow-hidden bg-white dark:bg-[#0B0B0F]">
       <MacbookScroll
@@ -15,7 +17,7 @@ export function MacbookScrollDemo() {
             <Badge className="h-10 w-10 -rotate-12 transform" />
           </a>
         }
-        src={`/linear.webp`}
+        src={macss}
         showGradient={false}
       />
     </div>
