@@ -13,6 +13,7 @@ import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
 import { TabsExample } from "../components/ui/tabssolid";
 import CardAnimatedBorderGradient from "../components/ui/boxgradient";
 import BorderTrailTextarea from "../components/ui/border";
+import Accordion from "../components/ui/FAQ";
 import {
   TrendingUp,
   BarChart3,
@@ -203,6 +204,7 @@ export const LandingPage: React.FC = () => {
       >
         <div className="bg-amber-50 dark:bg-black">
           <Example />
+          <div className="  bg-amber-50 dark:bg-black "></div>
           <Example3 />
           <Example2 />
           <Example4 />
@@ -237,9 +239,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </Suspense>
-      <div className=" bg-amber-50 dark:bg-black ">
-        <InfiniteSliderHoverSpeed />
-      </div>
 
       {/* PRICING SECTION */}
       <section id="pricing" className="py-20 bg-amber-50 dark:bg-black px-4">
@@ -540,6 +539,12 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* FAQ sec  */}
+      <section>
+        <div>
+          <Accordion />
+        </div>
+      </section>
       {/* Footer */}
       <footer className="px-4 sm:px-6 py-12 text-white bg-gray-900">
         <div className="max-w-7xl mx-auto">
