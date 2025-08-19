@@ -208,13 +208,16 @@ export const LandingPage: React.FC = () => {
           <Example4 />
           <Example5 />
         </div>
+        <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
+          <div className="justify-center px-2 sm:px-5 pt-4 ">
+            <Suspense fallback={<div>Loading Chart...</div>}>
+              <ChartLineInteractive />
+            </Suspense>
+          </div>
+        </section>
       </Suspense>
       <div className=" h-52 bg-amber-50 dark:bg-black">
         <TabsExample />
-      </div>
-      <div className=" flex items-center justify-center bg-amber-50 dark:bg-black">
-        {" "}
-        <CardAnimatedBorderGradient />
       </div>
 
       <Suspense
@@ -228,20 +231,15 @@ export const LandingPage: React.FC = () => {
           <div className="bg-amber-50 dark:bg-black flex  items-center justify-center px-4 sm:px-10">
             <TextLoopCustomVariantsTransition />
           </div>
-          <Revenue />
+          <div className="pt-20 pb-14 px-4 sm:px-10">
+            {" "}
+            <Revenue />
+          </div>
         </div>
       </Suspense>
       <div className=" bg-amber-50 dark:bg-black ">
         <InfiniteSliderHoverSpeed />
       </div>
-
-      <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
-        <div className="justify-center px-2 sm:px-5 pt-4 ">
-          <Suspense fallback={<div>Loading Chart...</div>}>
-            <ChartLineInteractive />
-          </Suspense>
-        </div>
-      </section>
 
       {/* PRICING SECTION */}
       <section id="pricing" className="py-20 bg-amber-50 dark:bg-black px-4">
