@@ -12,6 +12,7 @@ import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
 import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
 import { TabsExample } from "../components/ui/tabssolid";
 import CardAnimatedBorderGradient from "../components/ui/boxgradient";
+import MacbookScrollDemo from "../components/ui/mac";
 import BorderTrailTextarea from "../components/ui/border";
 import Accordion from "../components/ui/FAQ";
 import {
@@ -208,6 +209,7 @@ export const LandingPage: React.FC = () => {
           <Example3 />
           <Example2 />
           <Example4 />
+
           <Example5 />
         </div>
         <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
