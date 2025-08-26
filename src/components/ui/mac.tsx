@@ -5,7 +5,7 @@ import { m } from "framer-motion";
 
 export default function MacbookScrollDemo() {
   return (
-    <div className="w-full overflow-hidden bg-white dark:bg-[#0B0B0F]">
+    <div className="w-full overflow-hidden bg-white dark:bg-black">
       <MacbookScroll
         title={
           <span>

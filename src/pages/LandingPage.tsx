@@ -193,6 +193,7 @@ export const LandingPage: React.FC = () => {
   );
 
   const handleModalOpen = useCallback((mode: boolean) => {
+    console.log("Opening modal with mode:", mode);
     setIsLoginMode(mode);
     setShowAuthModal(true);
   }, []);
@@ -210,6 +211,24 @@ export const LandingPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }, []);
 
+  // Scroll to section handlers
+  const scrollToSection = useCallback((sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  const scrollToFeatures = useCallback(() => {
+    console.log("Scrolling to features section");
+    scrollToSection("features");
+  }, [scrollToSection]);
+
+  const scrollToPricing = useCallback(() => {
+    console.log("Scrolling to pricing section");
+    scrollToSection("pricing");
+  }, [scrollToSection]);
+
   return (
     <div className="min-h-screen bg-transparent overflow-x-hidden">
       {/* Optimize background animations - only render one at a time */}
@@ -226,18 +245,18 @@ export const LandingPage: React.FC = () => {
             <img src={ss} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
           <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
-            <a
-              href="#features"
+            <button
+              onClick={scrollToFeatures}
               className="px-3 py-2 text-lg font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Features
-            </a>
-            <a
-              href="#pricing"
+            </button>
+            <button
+              onClick={scrollToPricing}
               className="px-3 py-2 text-lg font-thin transition-colors duration-200 cursor-pointer text-white/80 rounded-full hover:text-blue-400"
             >
               Pricing
-            </a>
+            </button>
             <div className="hidden lg:block">
               <ButtonRotatingBackgroundGradient
                 onClick={() => handleModalOpen(false)}
@@ -254,8 +273,13 @@ export const LandingPage: React.FC = () => {
           </div>
         </nav>
 
-        <div className="flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4">
-          <MovingGradientPill />
+        <div className="relative z-10 flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4">
+          <MovingGradientPill
+            onClick={() => {
+              console.log("Hero pill button clicked!");
+              handleModalOpen(false);
+            }}
+          />
           <h1 className="mt-10 mb-8 text-4xl leading-tight sm:text-6xl lg:text-7xl font-arimo font-medium text-white sm:leading-[1.08]">
             Invest With
             <span className="font-instrument italic bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
@@ -290,7 +314,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Optimized component loading with better chunking */}
-      <div className="bg-amber-50 dark:bg-black">
+      <div id="features" className="bg-amber-50 dark:bg-black">
         <Suspense
           fallback={
             <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
@@ -441,17 +465,16 @@ export const LandingPage: React.FC = () => {
           >
             <div className="revenue">
               <MemoizedRevenue />
+              <MemoizedThreeDMarqueeDemo />
             </div>
           </Suspense>
         </div>
       </div>
 
-      <div className="threeDmac">
-        <MemoizedThreeDMarqueeDemo />
-      </div>
+      <div className="threeDmac"></div>
 
       {/* Features */}
-      <section className="overflow-hidden bg-white dark:bg-gray-900">
+      <section id="pricing" className="overflow-hidden bg-white dark:bg-black">
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           {/* Title */}
           <div className="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
@@ -466,7 +489,7 @@ export const LandingPage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               <div>
                 {/* Card */}
-                <div className="p-4 relative z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl md:p-10">
+                <div className="p-4 relative z-10 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-xl md:p-10">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white">
                     Professional
                   </h3>
@@ -656,7 +679,7 @@ export const LandingPage: React.FC = () => {
 
               <div>
                 {/* Card */}
-                <div className="shadow-xl shadow-gray-200 dark:shadow-gray-800 p-5 relative z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl md:p-10">
+                <div className="shadow-xl shadow-gray-200 dark:shadow-gray-800 p-5 relative z-10 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-xl md:p-10">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white">
                     Teams
                   </h3>
@@ -909,7 +932,7 @@ export const LandingPage: React.FC = () => {
       {/* End Features */}
 
       {/* Comparison Table */}
-      <section className="relative bg-white dark:bg-gray-900">
+      <section className="relative bg-white dark:bg-black">
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 md:py-14 lg:py-20 mx-auto">
           <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
             <h2 className="text-2xl font-bold md:text-3xl md:leading-tight text-gray-800 dark:text-white">
@@ -918,7 +941,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Header */}
-          <div className="hidden lg:block sticky top-0 start-0 py-2 bg-white/60 dark:bg-gray-900/60 backdrop-blur-md">
+          <div className="hidden lg:block sticky top-0 start-0 py-2 bg-white/60 dark:bg-black/60 backdrop-blur-md">
             {/* Grid */}
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-2">
@@ -1357,7 +1380,7 @@ export const LandingPage: React.FC = () => {
 
               <div className="col-span-1">
                 <a
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-black dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
                   href="#"
                 >
                   Get started
@@ -1377,7 +1400,7 @@ export const LandingPage: React.FC = () => {
 
               <div className="col-span-1">
                 <a
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-black dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
                   href="#"
                 >
                   Get started
@@ -1387,7 +1410,7 @@ export const LandingPage: React.FC = () => {
 
               <div className="col-span-1">
                 <a
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-black dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
                   href="#"
                 >
                   Get started
@@ -1407,7 +1430,7 @@ export const LandingPage: React.FC = () => {
 
             <button
               type="button"
-              className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+              className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50 dark:bg-black dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
             >
               Contact us
             </button>
@@ -1427,7 +1450,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-4 sm:px-6 py-12 text-white bg-gray-900">
+      <footer className="px-4 sm:px-6 py-12 text-white bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
@@ -1580,8 +1603,8 @@ const PricingCard = ({
         <div
           className={`relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 ${
             active
-              ? "border-blue-500 dark:border-blue-400 bg-white dark:bg-gray-800"
-              : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+              ? "border-blue-500 dark:border-blue-400 bg-white dark:bg-black"
+              : "border-gray-200 dark:border-gray-700 bg-white dark:bg-black"
           } px-8 py-10 shadow-lg dark:shadow-gray-900/20 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]`}
         >
           {active && (

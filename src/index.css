@@ -104,9 +104,17 @@
 .lamp,
 .accordion,
 .textloop,
-.pill,
 .button {
   /* Preserve interactivity for these components */
+  pointer-events: auto !important;
+  user-select: auto !important;
+  touch-action: auto !important;
+}
+
+/* Specific styling for the pill button to ensure it's clickable */
+.pill,
+button[type="button"] {
+  cursor: pointer !important;
   pointer-events: auto !important;
   user-select: auto !important;
   touch-action: auto !important;
