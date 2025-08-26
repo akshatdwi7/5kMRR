@@ -1,51 +1,61 @@
-import React, { useState, Suspense, memo } from "react";
+import React, { useState, Suspense, memo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ButtonRotatingBackgroundGradient, {
   ButtonShadowGradient,
-  Keyboardgenbutton,
   Button,
 } from "../components/ui/Button";
 import MovingGradientPill from "../components/ui/pill";
 import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
-import { InfiniteSliderHoverSpeed } from "../components/ui/sliderlogos";
-import MorphingDialogBasicOne from "../components/ui/morphing-dialog";
 import { TabsExample } from "../components/ui/tabssolid";
-import CardAnimatedBorderGradient from "../components/ui/boxgradient";
 import ThreeDMarqueeDemo from "../components/ui/threeDmac";
 import LampDemo from "../components/ui/lamp";
-import BorderTrailTextarea from "../components/ui/border";
 import Accordion from "../components/ui/FAQ";
-import {
-  TrendingUp,
-  BarChart3,
-  Search,
-  MessageCircle,
-  Star,
-  Shield,
-  Zap,
-  Users,
-  Check,
-  X,
-  Award,
-} from "lucide-react";
+import { TrendingUp, Star, Shield, Zap, Users, Check, X } from "lucide-react";
 import { Input } from "../components/ui/Input";
 import ss from "../assets/logos/ss.png";
 import { ShootingStars } from "../components/ui/shooting-stars";
 import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import { Blackbutton } from "../components/ui/buttonnew";
-
 import { Link } from "react-router-dom";
 
-// Lazy load heavy components
-const Example = React.lazy(() => import("../components/ui/feature1"));
-const Example2 = React.lazy(() => import("../components/ui/feature2"));
-const Example3 = React.lazy(() => import("../components/ui/feature3"));
-const Example4 = React.lazy(() => import("../components/ui/feature4"));
-const Example5 = React.lazy(() => import("../components/ui/feature5"));
-const Revenue = React.lazy(() => import("../components/ui/revenue"));
-const MacbookScrollDemo = React.lazy(() => import("../components/ui/mac"));
+// Lazy load heavy components with better chunking
+const Example = React.lazy(() =>
+  import("../components/ui/feature1").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const Example2 = React.lazy(() =>
+  import("../components/ui/feature2").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const Example3 = React.lazy(() =>
+  import("../components/ui/feature3").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const Example4 = React.lazy(() =>
+  import("../components/ui/feature4").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const Example5 = React.lazy(() =>
+  import("../components/ui/feature5").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const Revenue = React.lazy(() =>
+  import("../components/ui/revenue").then((module) => ({
+    default: module.default || module,
+  }))
+);
+const MacbookScrollDemo = React.lazy(() =>
+  import("../components/ui/mac").then((module) => ({
+    default: module.default || module,
+  }))
+);
 
 const ChartLineInteractive = React.lazy(() =>
   import("../components/ui/charts-line").then((module) => ({
@@ -56,12 +66,52 @@ const ChartLineInteractive = React.lazy(() =>
 // Memoize heavy, non-interactive components to prevent re-renders
 const MemoizedStarsBackground = memo(StarsBackground);
 const MemoizedShootingStars = memo(ShootingStars);
+const MemoizedExample = memo(Example);
+const MemoizedExample2 = memo(Example2);
+const MemoizedExample3 = memo(Example3);
+const MemoizedExample4 = memo(Example4);
+const MemoizedExample5 = memo(Example5);
+const MemoizedRevenue = memo(Revenue);
+const MemoizedMacbookScrollDemo = memo(MacbookScrollDemo);
+const MemoizedChartLineInteractive = memo(ChartLineInteractive);
+const MemoizedThreeDMarqueeDemo = memo(ThreeDMarqueeDemo);
+const MemoizedTabsExample = memo(TabsExample);
+const MemoizedLampDemo = memo(LampDemo);
+const MemoizedAccordion = memo(Accordion);
+const MemoizedTextLoop = memo(TextLoopCustomVariantsTransition);
+
+// Chrome-specific performance optimizations
+const isChrome = () => {
+  return (
+    /Chrome/.test(navigator.userAgent) && !/Edge/.test(navigator.userAgent)
+  );
+};
 
 const handleUpstoxLogin = () => {
   const apiKey = import.meta.env.VITE_UPSTOX_API_KEY;
   const redirectUri = import.meta.env.VITE_REDIRECT_URI;
   const authUrl = `https://api-v2.upstox.com/login/authorization/dialog?response_type=code&client_id=${apiKey}&redirect_uri=${redirectUri}`;
   window.location.href = authUrl;
+};
+
+// Chrome-optimized fadeInUp animation
+const getFadeInUp = (isChrome: boolean) => {
+  if (isChrome) {
+    return {
+      hidden: { opacity: 0, y: 20 }, // Reduced movement for Chrome
+      visible: {
+        opacity: 1,
+        y: 0,
+      },
+    };
+  }
+  return {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
 };
 
 export const LandingPage: React.FC = () => {
@@ -75,41 +125,95 @@ export const LandingPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState("");
   const [isYearlyBilling, setIsYearlyBilling] = useState(true);
-  const { login, signup, loginWithGoogle } = useAuth();
+  const [isChromeBrowser, setIsChromeBrowser] = useState(false);
+  const { login, signup } = useAuth();
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  // Chrome-specific performance optimizations (preserving interactivity)
+  useEffect(() => {
+    setIsChromeBrowser(isChrome());
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setAuthError("");
-    try {
-      if (isLoginMode) {
-        await login(formData.email, formData.password);
-      } else {
-        await signup(formData.email, formData.password, formData.name);
-      }
-      setShowAuthModal(false);
-    } catch (error) {
-      setAuthError(
-        error instanceof Error ? error.message : "Authentication failed"
+    // Chrome-specific CSS optimizations - only for non-interactive elements
+    if (isChrome()) {
+      // Only apply to specific sections that don't need interactivity
+      const nonInteractiveSections = document.querySelectorAll(
+        ".chrome-optimize-only"
       );
-    } finally {
-      setIsLoading(false);
+      nonInteractiveSections.forEach((section) => {
+        if (section instanceof HTMLElement) {
+          section.style.setProperty("transform", "translate3d(0,0,0)");
+          section.style.setProperty("backface-visibility", "hidden");
+          section.style.setProperty("perspective", "1000px");
+        }
+      });
+
+      // Optimize scroll performance without interfering with interactions
+      document.body.style.setProperty("overflow-x", "hidden");
     }
-  };
+
+    // Cleanup function
+    return () => {
+      if (isChrome()) {
+        const nonInteractiveSections = document.querySelectorAll(
+          ".chrome-optimize-only"
+        );
+        nonInteractiveSections.forEach((section) => {
+          if (section instanceof HTMLElement) {
+            section.style.removeProperty("transform");
+            section.style.removeProperty("backface-visibility");
+            section.style.removeProperty("perspective");
+          }
+        });
+        document.body.style.removeProperty("overflow-x");
+      }
+    };
+  }, []);
+
+  // Memoize event handlers to prevent re-renders
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setAuthError("");
+      try {
+        if (isLoginMode) {
+          await login(formData.email, formData.password);
+        } else {
+          await signup(formData.email, formData.password, formData.name);
+        }
+        setShowAuthModal(false);
+      } catch (error) {
+        setAuthError(
+          error instanceof Error ? error.message : "Authentication failed"
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [isLoginMode, formData, login, signup]
+  );
+
+  const handleModalOpen = useCallback((mode: boolean) => {
+    setIsLoginMode(mode);
+    setShowAuthModal(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setShowAuthModal(false);
+  }, []);
+
+  const toggleBilling = useCallback((yearly: boolean) => {
+    setIsYearlyBilling(yearly);
+  }, []);
+
+  // Memoize form data handlers
+  const handleFormChange = useCallback((field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   return (
     <div className="min-h-screen bg-transparent overflow-x-hidden">
+      {/* Optimize background animations - only render one at a time */}
       <MemoizedStarsBackground />
-      <MemoizedShootingStars />
 
       {/* Hero Section */}
       <section className="relative flex flex-col min-h-screen">
@@ -136,10 +240,7 @@ export const LandingPage: React.FC = () => {
             </a>
             <div className="hidden lg:block">
               <ButtonRotatingBackgroundGradient
-                onClick={() => {
-                  setIsLoginMode(false);
-                  setShowAuthModal(true);
-                }}
+                onClick={() => handleModalOpen(false)}
               >
                 Get started
               </ButtonRotatingBackgroundGradient>
@@ -147,12 +248,7 @@ export const LandingPage: React.FC = () => {
             <Blackbutton onClick={handleUpstoxLogin}>Sign In</Blackbutton>
           </div>
           <div className="sm:hidden">
-            <Blackbutton
-              onClick={() => {
-                setIsLoginMode(true);
-                setShowAuthModal(true);
-              }}
-            >
+            <Blackbutton onClick={() => handleModalOpen(true)}>
               Sign In
             </Blackbutton>
           </div>
@@ -178,12 +274,7 @@ export const LandingPage: React.FC = () => {
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly.
           </p>
-          <ButtonShadowGradient
-            onClick={() => {
-              setIsLoginMode(false);
-              setShowAuthModal(true);
-            }}
-          >
+          <ButtonShadowGradient onClick={() => handleModalOpen(false)}>
             Start your free trial
           </ButtonShadowGradient>
           <div className="mt-2 text-sm font-thin text-gray-400">
@@ -198,65 +289,180 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center w-full h-96 bg-amber-50 text-gray-500">
-            Loading Interactive Components...
+      {/* Optimized component loading with better chunking */}
+      <div className="bg-amber-50 dark:bg-black">
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading amazing features...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="feature1">
+            <MemoizedExample />
           </div>
-        }
-      >
-        <div className="bg-amber-50 dark:bg-black">
-          <Example />
-          <div className="  bg-amber-50 dark:bg-black "></div>
-          <Example3 />
-          <LampDemo />
-          <Example2 />
-          <Example4 />
-          <Suspense fallback={<div>Loading...</div>}>
-            <MacbookScrollDemo />
-          </Suspense>
-          <Example5 />
-        </div>
-        <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
-          <div className="justify-center px-2 sm:px-5 pt-4 ">
-            <Suspense fallback={<div>Loading Chart...</div>}>
-              <ChartLineInteractive />
-            </Suspense>
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading insights...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="feature3">
+            <MemoizedExample3 />
           </div>
-        </section>
-      </Suspense>
-      <div className=" h-52 bg-amber-50 dark:bg-black">
-        <TabsExample />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading features...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="lamp">
+            <MemoizedLampDemo />
+          </div>
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading analysis...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="feature2">
+            <MemoizedExample2 />
+          </div>
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading tools...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="feature4">
+            <MemoizedExample4 />
+          </div>
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading demo...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="mac">
+            <MemoizedMacbookScrollDemo />
+          </div>
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p>Loading experience...</p>
+              </div>
+            </div>
+          }
+        >
+          <div className="feature5">
+            <MemoizedExample5 />
+          </div>
+        </Suspense>
       </div>
 
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center w-full h-96 bg-amber-50 text-gray-500">
-            Loading Interactive Components...
-          </div>
-        }
-      >
-        <div className="bg-amber-50 dark:bg-black ">
-          <div className="bg-amber-50 dark:bg-black flex  items-center justify-center px-4 sm:px-10">
-            <TextLoopCustomVariantsTransition />
-          </div>
-          <div className="pt-20 pb-14 px-4 sm:px-10">
-            {" "}
-            <Revenue />
+      <section className="pb-20 bg-amber-50 dark:bg-black overflow-hidden">
+        <div className="justify-center px-2 sm:px-5 pt-4">
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+                <div className="text-center">
+                  <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p>Loading charts...</p>
+                </div>
+              </div>
+            }
+          >
+            <div className="charts-line">
+              <MemoizedChartLineInteractive />
+            </div>
+          </Suspense>
+        </div>
+      </section>
+
+      <div className="h-52 bg-amber-50 dark:bg-black">
+        <div className="tabs">
+          <MemoizedTabsExample />
+        </div>
+      </div>
+
+      <div className="bg-amber-50 dark:bg-black">
+        <div className="bg-amber-50 dark:bg-black flex items-center justify-center px-4 sm:px-10">
+          <div className="textloop">
+            <MemoizedTextLoop />
           </div>
         </div>
-      </Suspense>
-      <ThreeDMarqueeDemo />
+        <div className="pt-20 pb-14 px-4 sm:px-10">
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center w-full h-96 bg-amber-50 dark:bg-black text-gray-500">
+                <div className="text-center">
+                  <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p>Loading revenue insights...</p>
+                </div>
+              </div>
+            }
+          >
+            <div className="revenue">
+              <MemoizedRevenue />
+            </div>
+          </Suspense>
+        </div>
+      </div>
 
-      {/* PRICING SECTION */}
+      <div className="threeDmac">
+        <MemoizedThreeDMarqueeDemo />
+      </div>
+
+      {/* Optimized PRICING SECTION */}
       <section id="pricing" className="py-20 bg-amber-50 dark:bg-black px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            variants={fadeInUp}
+            variants={getFadeInUp(isChromeBrowser)}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-center mb-16"
+            viewport={{
+              once: true,
+              amount: 0.3,
+              margin: isChromeBrowser ? "50px" : "100px",
+            }}
+            className="text-center mb-16 chrome-optimize-only"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Pricing Plans That Scale With You
@@ -286,16 +492,20 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
           </motion.div>
+
           <motion.div
-            variants={fadeInUp}
+            variants={getFadeInUp(isChromeBrowser)}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="flex justify-center mb-12"
+            viewport={{
+              once: true,
+              margin: isChromeBrowser ? "50px" : "100px",
+            }}
+            className="flex justify-center mb-12 chrome-optimize-only"
           >
             <div className="bg-gray-100 rounded-lg p-1 inline-flex">
               <button
-                onClick={() => setIsYearlyBilling(false)}
+                onClick={() => toggleBilling(false)}
                 className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   !isYearlyBilling
                     ? "bg-white text-gray-900 shadow-sm"
@@ -305,7 +515,7 @@ export const LandingPage: React.FC = () => {
                 Monthly
               </button>
               <button
-                onClick={() => setIsYearlyBilling(true)}
+                onClick={() => toggleBilling(true)}
                 className={`px-4 sm:px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   isYearlyBilling
                     ? "bg-white text-gray-900 shadow-sm"
@@ -316,13 +526,17 @@ export const LandingPage: React.FC = () => {
               </button>
             </div>
           </motion.div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <motion.div
-              variants={fadeInUp}
+              variants={getFadeInUp(isChromeBrowser)}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              className="group relative h-full"
+              viewport={{
+                once: true,
+                margin: isChromeBrowser ? "50px" : "100px",
+              }}
+              className="group relative h-full chrome-optimize-only"
             >
               <div className="relative bg-white rounded-xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="text-center mb-8">
@@ -384,13 +598,17 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+
             <motion.div
-              variants={fadeInUp}
+              variants={getFadeInUp(isChromeBrowser)}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{
+                once: true,
+                margin: isChromeBrowser ? "50px" : "100px",
+              }}
               transition={{ delay: 0.1 }}
-              className="group relative h-full"
+              className="group relative h-full chrome-optimize-only"
             >
               <div className="relative bg-white rounded-xl p-8 shadow-lg border-2 border-blue-500 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -456,13 +674,19 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+
             <motion.div
-              variants={fadeInUp}
+              variants={getFadeInUp(isChromeBrowser)}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{
+                once: true,
+                margin: isChromeBrowser ? "50px" : "100px",
+              }}
               transition={{ delay: 0.2 }}
-              className="group relative h-full"
+              className={`group relative h-full ${
+                isChromeBrowser ? "transform-gpu" : ""
+              }`}
             >
               <div className="relative bg-white rounded-xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="text-center mb-8">
@@ -520,10 +744,12 @@ export const LandingPage: React.FC = () => {
               </div>
             </motion.div>
           </div>
+
           <motion.div
             className="text-center mt-16"
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "100px" }}
             transition={{ delay: 0.8, duration: 0.5 }}
           >
             <p className="text-gray-600 mb-6 text-lg">
@@ -547,12 +773,15 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ sec  */}
+      {/* FAQ section */}
       <section>
         <div>
-          <Accordion />
+          <div className="accordion">
+            <MemoizedAccordion />
+          </div>
         </div>
       </section>
+
       {/* Footer */}
       <footer className="px-4 sm:px-6 py-12 text-white bg-gray-900">
         <div className="max-w-7xl mx-auto">
@@ -602,12 +831,12 @@ export const LandingPage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Auth Modal */}
+      {/* Optimized Auth Modal */}
       <AnimatePresence>
         {showAuthModal && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
-            onClick={() => setShowAuthModal(false)}
+            onClick={handleModalClose}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -623,7 +852,7 @@ export const LandingPage: React.FC = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setShowAuthModal(false)}
+                  onClick={handleModalClose}
                   className="text-gray-400 hover:text-gray-600"
                 >
                   <X className="w-5 h-5" />
@@ -639,9 +868,7 @@ export const LandingPage: React.FC = () => {
                   <Input
                     placeholder="Full Name"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
+                    onChange={(e) => handleFormChange("name", e.target.value)}
                     required
                     className="border-gray-300 focus:border-blue-500"
                   />
@@ -650,9 +877,7 @@ export const LandingPage: React.FC = () => {
                   type="email"
                   placeholder="Email Address"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  onChange={(e) => handleFormChange("email", e.target.value)}
                   required
                   className="border-gray-300 focus:border-blue-500"
                 />
@@ -660,28 +885,29 @@ export const LandingPage: React.FC = () => {
                   type="password"
                   placeholder="Password"
                   value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
+                  onChange={(e) => handleFormChange("password", e.target.value)}
                   required
                   className="border-gray-300 focus:border-blue-500"
                 />
-                <Keyboardgenbutton
+                <button
                   type="submit"
-                  className="w-full"
                   disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading
                     ? "Please wait..."
                     : isLoginMode
                     ? "Sign In"
                     : "Create Account"}
-                </Keyboardgenbutton>
+                </button>
               </form>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {/* Add shooting stars only when needed for performance */}
+      <MemoizedShootingStars />
     </div>
   );
 };

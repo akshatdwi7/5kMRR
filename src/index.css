@@ -82,3 +82,50 @@
     animation: scroll var(--duration) linear infinite;
   }
 }
+
+/* Chrome-specific optimizations that preserve interactivity */
+
+/* Only apply Chrome optimizations to specific elements, not interactive ones */
+.chrome-optimize-only {
+  /* Hardware acceleration for non-interactive elements */
+}
+
+/* Ensure interactive components are not affected by Chrome optimizations */
+.charts-line,
+.mac,
+.threeDmac,
+.feature1,
+.feature2,
+.feature3,
+.feature4,
+.feature5,
+.revenue,
+.tabs,
+.lamp,
+.accordion,
+.textloop,
+.pill,
+.button {
+  /* Preserve interactivity for these components */
+  pointer-events: auto !important;
+  user-select: auto !important;
+  touch-action: auto !important;
+}
+
+/* Chrome-specific performance improvements for non-interactive sections */
+@media screen and (-webkit-min-device-pixel-ratio: 1) {
+  .chrome-optimize-only {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+  }
+  
+  /* Ensure smooth scrolling */
+  html, body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+}
+
+/* Preserve all existing styles */
