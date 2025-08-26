@@ -105,7 +105,7 @@ export default function Example2() {
                   <div className="mt-7 text-sm font-semibold text-gray-50">
                     <div>
                       <span className="absolute inset-0" />
-                      Sarah Johnson
+                      Akshat Dwivedi
                     </div>
                   </div>
                   <span className="text-sm text-blue-200">
