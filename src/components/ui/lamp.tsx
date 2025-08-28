@@ -3,7 +3,26 @@ import React from "react";
 import { motion } from "motion/react";
 import { cn } from "../../lib/utils";
 
+// Import logos
+import angel1 from "../../assets/logos/angel1.png";
+import hdfc1 from "../../assets/logos/hdfc1.png";
+import zerodha1 from "../../assets/logos/zerodha1.png";
+import upstocks1 from "../../assets/logos/upstocks1.png";
+import groww from "../../assets/logos/groww.png";
+import kotak from "../../assets/logos/kotak.png";
+import icici1 from "../../assets/logos/icici1.png";
+
 export default function LampDemo() {
+  const logos = [
+    { src: angel1, alt: "Angel One", name: "Angel One" },
+    { src: hdfc1, alt: "HDFC Securities", name: "HDFC Securities" },
+    { src: zerodha1, alt: "Zerodha", name: "Zerodha" },
+    { src: upstocks1, alt: "Upstox", name: "Upstox" },
+    { src: groww, alt: "Groww", name: "Groww" },
+    { src: kotak, alt: "Kotak Securities", name: "Kotak Securities" },
+    { src: icici1, alt: "ICICI Direct", name: "ICICI Direct" },
+  ];
+
   return (
     <LampContainer>
       <motion.h1
@@ -14,10 +33,84 @@ export default function LampDemo() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500  py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className="mt-8 bg-gradient-to-br text-slate-300 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
       >
-        Build lamps <br /> the right way
+        Connect your <br /> favorite brokers
       </motion.h1>
+
+      {/* Company Logos - Smooth Moving Marquee */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          delay: 0.5,
+          duration: 0.6,
+          ease: "easeOut",
+        }}
+        className="mt-16 w-full max-w-6xl overflow-hidden"
+      >
+        <div className="relative">
+          <div
+            className="flex items-center gap-16 animate-scroll"
+            style={{
+              width: "calc(200px * 14)", // 7 logos * 2 sets * ~200px each
+              animation: "scroll 25s linear infinite",
+            }}
+          >
+            {/* First set of logos */}
+            {logos.map((logo, index) => (
+              <div
+                key={`first-${index}`}
+                className="flex items-center justify-center px-8 transition-all duration-300 hover:scale-110 flex-shrink-0"
+                style={{ minWidth: "120px" }}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-8 md:h-10 lg:h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  title={logo.name}
+                />
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {logos.map((logo, index) => (
+              <div
+                key={`second-${index}`}
+                className="flex items-center justify-center px-8 transition-all duration-300 hover:scale-110 flex-shrink-0"
+                style={{ minWidth: "120px" }}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-8 md:h-10 lg:h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  title={logo.name}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CSS Animation Styles */}
+        <style jsx>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+
+          .animate-scroll {
+            animation: scroll 25s linear infinite;
+          }
+
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </motion.div>
     </LampContainer>
   );
 }
