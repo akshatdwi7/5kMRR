@@ -35,7 +35,10 @@ export default function LampDemo() {
         }}
         className="mt-8 bg-gradient-to-br from-slate-200 to-slate-400 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
       >
-        Connect your <br /> favorite brokerssssss
+        <span className="font-arimo">
+          Connect your <br />{" "}
+        </span>
+        <span className="text-cyan-500 font-instrument ">favorite brokers</span>
       </motion.h1>
 
       {/* Company Logos - Smooth Moving Marquee */}

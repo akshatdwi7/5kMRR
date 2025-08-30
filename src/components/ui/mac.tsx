@@ -8,8 +8,9 @@ export default function MacbookScrollDemo() {
     <div className="w-full overflow-hidden bg-white dark:bg-black">
       <MacbookScroll
         title={
-          <span>
-            This Macbook is built with Tailwindcss. <br /> No kidding.
+          <span className="font-arimo text-cyan-500 ">
+            See your progress as you grow. <br />{" "}
+            <span className="font-instrument text-slate-300"> No kidding.</span>
           </span>
         }
         badge={
