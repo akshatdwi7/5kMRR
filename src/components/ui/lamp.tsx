@@ -33,9 +33,9 @@ export default function LampDemo() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br text-slate-300 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className="mt-8 bg-gradient-to-br from-slate-200 to-slate-400 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
       >
-        Connect your <br /> favorite brokers
+        Connect your <br /> favorite brokerssssss
       </motion.h1>
 
       {/* Company Logos - Smooth Moving Marquee */}
