@@ -14,6 +14,8 @@ import { Aboutit } from "./pages/About";
 function AppContent() {
   const { isAuthenticated } = useAuth();
 
+  console.log('AppContent rendering, isAuthenticated:', isAuthenticated);
+
   return (
     <Routes>
       {/* Public routes */}
@@ -89,6 +91,8 @@ function AppContent() {
 }
 
 function App() {
+  console.log('App component loading...');
+  
   return (
     <ThemeProvider>
       <AuthProvider>
