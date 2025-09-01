@@ -2,7 +2,7 @@ import React from "react";
 
 export const SimpleLanding: React.FC = () => {
   console.log("SimpleLanding component rendering...");
-  
+
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center">
       <div className="text-center">
