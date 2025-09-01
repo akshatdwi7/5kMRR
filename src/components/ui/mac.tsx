@@ -1,26 +1,70 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MacbookScroll } from "./macbook-scroll";
 import macss from "../../assets/macss.png";
-import { m } from "framer-motion";
 
 export default function MacbookScrollDemo() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById("macbook-scroll-section");
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isVisible && !imageLoaded) {
+      const img = new Image();
+      img.onload = () => setImageLoaded(true);
+      img.src = macss;
+    }
+  }, [isVisible, imageLoaded]);
+
   return (
-    <div className="w-full overflow-hidden bg-white dark:bg-black">
-      <MacbookScroll
-        title={
-          <span className="font-arimo text-cyan-500 ">
-            See your progress as you grow. <br />{" "}
-            <span className="font-instrument text-slate-300"> No kidding.</span>
-          </span>
-        }
-        badge={
-          <a href="https://peerlist.io/manuarora">
-            <Badge className="h-10 w-10 -rotate-12 transform" />
-          </a>
-        }
-        src={macss}
-        showGradient={false}
-      />
+    <div
+      id="macbook-scroll-section"
+      className="w-full overflow-hidden bg-white dark:bg-black"
+    >
+      {isVisible ? (
+        <MacbookScroll
+          title={
+            <span className="font-arimo text-cyan-500 ">
+              See your progress as you grow. <br />{" "}
+              <span className="font-instrument text-slate-300">
+                {" "}
+                No kidding.
+              </span>
+            </span>
+          }
+          badge={
+            <a href="https://peerlist.io/manuarora">
+              <Badge className="h-10 w-10 -rotate-12 transform" />
+            </a>
+          }
+          src={imageLoaded ? macss : undefined}
+          showGradient={false}
+        />
+      ) : (
+        <div className="w-full h-96 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-500">Loading demo...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

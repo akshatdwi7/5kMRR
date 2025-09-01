@@ -19,6 +19,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { StarsBackground } from "../components/ui/stars-background";
 import { Blackbutton } from "../components/ui/buttonnew";
 import { Link } from "react-router-dom";
+import { WavyBackgroundDemo } from "../components/ui/wave";
 
 // Lazy load heavy components with better chunking
 const Example = React.lazy(() =>
@@ -126,9 +127,10 @@ export const LandingPage: React.FC = () => {
   const [authError, setAuthError] = useState("");
   const [isYearlyBilling, setIsYearlyBilling] = useState(true);
   const [isChromeBrowser, setIsChromeBrowser] = useState(false);
+  const [showShootingStars, setShowShootingStars] = useState(false);
   const { login, signup } = useAuth();
 
-  // Chrome-specific performance optimizations (preserving interactivity)
+  // Performance optimizations and scroll-based loading
   useEffect(() => {
     setIsChromeBrowser(isChrome());
 
@@ -150,8 +152,18 @@ export const LandingPage: React.FC = () => {
       document.body.style.setProperty("overflow-x", "hidden");
     }
 
+    // Add scroll listener for shooting stars
+    const handleScroll = () => {
+      if (window.scrollY > 500 && !showShootingStars) {
+        setShowShootingStars(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     // Cleanup function
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       if (isChrome()) {
         const nonInteractiveSections = document.querySelectorAll(
           ".chrome-optimize-only"
@@ -166,7 +178,7 @@ export const LandingPage: React.FC = () => {
         document.body.style.removeProperty("overflow-x");
       }
     };
-  }, []);
+  }, [showShootingStars]);
 
   // Memoize event handlers to prevent re-renders
   const handleSubmit = useCallback(
@@ -302,7 +314,7 @@ export const LandingPage: React.FC = () => {
             Start your free trial
           </ButtonShadowGradient>
           <div className="mt-2 text-sm font-thin text-gray-400">
-            Know thy creater /{" "}
+            Know thy creator /{" "}
             <Link
               to="/about"
               className="underline cursor-pointer font-arimo italic text-blue-300"
@@ -1573,8 +1585,8 @@ export const LandingPage: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Add shooting stars only when needed for performance */}
-      <MemoizedShootingStars />
+      {/* Add shooting stars only when user scrolls past hero for performance */}
+      {showShootingStars && <MemoizedShootingStars />}
     </div>
   );
 };
