@@ -29,7 +29,7 @@ function AppContent() {
               <Dashboard />
             </Layout>
           ) : (
-            <SimpleLanding />
+            <LandingPage />
           )
         }
       />
