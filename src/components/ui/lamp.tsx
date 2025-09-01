@@ -3,24 +3,30 @@ import React from "react";
 import { motion } from "motion/react";
 import { cn } from "../../lib/utils";
 
-// Import logos
-import angel1 from "../../assets/logos/angel1.png";
-import hdfc1 from "../../assets/logos/hdfc1.png";
-import zerodha1 from "../../assets/logos/zerodha1.png";
-import upstocks1 from "../../assets/logos/upstocks1.png";
-import groww from "../../assets/logos/groww.png";
-import kotak from "../../assets/logos/kotak.png";
-import icici1 from "../../assets/logos/icici1.png";
+// S3 Logo URLs for better performance
+const S3_BASE_URL = "https://5kmrr-images-2025.s3.amazonaws.com/logos";
 
 export default function LampDemo() {
   const logos = [
-    { src: angel1, alt: "Angel One", name: "Angel One" },
-    { src: hdfc1, alt: "HDFC Securities", name: "HDFC Securities" },
-    { src: zerodha1, alt: "Zerodha", name: "Zerodha" },
-    { src: upstocks1, alt: "Upstox", name: "Upstox" },
-    { src: groww, alt: "Groww", name: "Groww" },
-    { src: kotak, alt: "Kotak Securities", name: "Kotak Securities" },
-    { src: icici1, alt: "ICICI Direct", name: "ICICI Direct" },
+    { src: `${S3_BASE_URL}/angel1.png`, alt: "Angel One", name: "Angel One" },
+    {
+      src: `${S3_BASE_URL}/hdfc1.png`,
+      alt: "HDFC Securities",
+      name: "HDFC Securities",
+    },
+    { src: `${S3_BASE_URL}/zerodha1.png`, alt: "Zerodha", name: "Zerodha" },
+    { src: `${S3_BASE_URL}/upstocks1.png`, alt: "Upstox", name: "Upstox" },
+    { src: `${S3_BASE_URL}/grow1.png`, alt: "Groww", name: "Groww" },
+    {
+      src: `${S3_BASE_URL}/kotak811.png`,
+      alt: "Kotak Securities",
+      name: "Kotak Securities",
+    },
+    {
+      src: `${S3_BASE_URL}/icici1.png`,
+      alt: "ICICI Direct",
+      name: "ICICI Direct",
+    },
   ];
 
   return (
@@ -95,7 +101,7 @@ export default function LampDemo() {
         </div>
 
         {/* CSS Animation Styles */}
-        <style jsx>{`
+        <style>{`
           @keyframes scroll {
             0% {
               transform: translateX(0);
