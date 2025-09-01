@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import { LandingPage } from "./pages/LandingPage";
-import { SimpleLanding } from "./pages/SimpleLanding";
+
 import { Dashboard } from "./pages/Dashboard";
 import { Screener } from "./pages/Screener";
 import { StockDetail } from "./pages/StockDetail";
@@ -14,8 +14,6 @@ import { Aboutit } from "./pages/About";
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
-
-  console.log("AppContent rendering, isAuthenticated:", isAuthenticated);
 
   return (
     <Routes>
@@ -92,8 +90,6 @@ function AppContent() {
 }
 
 function App() {
-  console.log("App component loading...");
-
   return (
     <ThemeProvider>
       <AuthProvider>
