@@ -1,5 +1,2 @@
-# Handle client-side routing
+# Handle client-side routing for React Router
 /*    /index.html   200
-
-# Redirect non-www to www
-https://screeno.in/*  https://www.screeno.in/:splat  301!
