@@ -15,8 +15,23 @@ if (!rootElement) {
 
 console.log('Root element found, rendering app...');
 
-createRoot(rootElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+try {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+  console.log('App rendered successfully!');
+} catch (error) {
+  console.error('Failed to render app:', error);
+  // Fallback UI
+  rootElement.innerHTML = `
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui;">
+      <div style="text-align: center;">
+        <h1>Screeno - Loading...</h1>
+        <p>Application is starting up...</p>
+        <p style="color: red;">Error: ${error.message}</p>
+      </div>
+    </div>
+  `;
+}
