@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "../contexts/AuthContext";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import {
@@ -18,11 +17,10 @@ import {
 } from "lucide-react";
 
 export const Settings: React.FC = () => {
-  const { profile } = useAuth();
   const [activeTab, setActiveTab] = useState("profile");
   const [profileData, setProfileData] = useState({
-    name: profile?.full_name || "",
-    email: profile?.email || "",
+    name: "Demo User",
+    email: "demo@screeno.in",
     phone: "",
     timezone: "Asia/Kolkata",
   });

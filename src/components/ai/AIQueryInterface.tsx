@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Send, Sparkles, TrendingUp, AlertCircle, Crown } from 'lucide-react';
-import { Button } from '../ui/Button';
-import { Input } from '../ui/Input';
-import { Card } from '../ui/Card';
-import { useAuth } from '../../contexts/AuthContext';
-import { aiService, AIAnalysisResponse } from '../../services/aiService';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  MessageCircle,
+  Send,
+  Sparkles,
+  TrendingUp,
+  AlertCircle,
+  Crown,
+} from "lucide-react";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
+import { Card } from "../ui/Card";
+import { aiService, AIAnalysisResponse } from "../../services/aiService";
 
 interface AIQueryInterfaceProps {
   stockSymbol?: string;
@@ -16,10 +22,19 @@ interface AIQueryInterfaceProps {
 export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
   stockSymbol,
   stockName,
-  onUpgrade
+  onUpgrade,
 }) => {
-  const { profile, canMakeAIQuery, incrementAIQuery } = useAuth();
-  const [query, setQuery] = useState('');
+  // Demo mode - simulate user profile
+  const profile = {
+    subscription_tier: "free" as const,
+    ai_queries_used: 3,
+    ai_queries_limit: 10,
+  };
+
+  const canMakeAIQuery = () =>
+    profile.ai_queries_used < profile.ai_queries_limit;
+  const incrementAIQuery = () => console.log("Demo: AI query counted");
+  const [query, setQuery] = useState("");
   const [response, setResponse] = useState<AIAnalysisResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +44,9 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
     if (!query.trim() || isLoading) return;
 
     if (!canMakeAIQuery()) {
-      setError('You have reached your daily query limit. Upgrade to Pro for unlimited queries.');
+      setError(
+        "You have reached your daily query limit. Upgrade to Pro for unlimited queries."
+      );
       return;
     }
 
@@ -45,26 +62,28 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
 
       setResponse(result);
       await incrementAIQuery();
-      setQuery('');
+      setQuery("");
     } catch (err) {
-      setError('Failed to get AI analysis. Please try again.');
-      console.error('AI query error:', err);
+      setError("Failed to get AI analysis. Please try again.");
+      console.error("AI query error:", err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const suggestedQueries = stockSymbol ? [
-    `Should I buy ${stockSymbol}?`,
-    `What's the target price for ${stockSymbol}?`,
-    `Technical analysis of ${stockSymbol}`,
-    `Compare ${stockSymbol} with peers`
-  ] : [
-    'Best stocks to buy today',
-    'Market outlook for next month',
-    'Top IT stocks analysis',
-    'Banking sector overview'
-  ];
+  const suggestedQueries = stockSymbol
+    ? [
+        `Should I buy ${stockSymbol}?`,
+        `What's the target price for ${stockSymbol}?`,
+        `Technical analysis of ${stockSymbol}`,
+        `Compare ${stockSymbol} with peers`,
+      ]
+    : [
+        "Best stocks to buy today",
+        "Market outlook for next month",
+        "Top IT stocks analysis",
+        "Banking sector overview",
+      ];
 
   // Show simplified interface if no profile (not authenticated)
   if (!profile) {
@@ -72,8 +91,12 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
       <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
         <div className="text-center py-8">
           <MessageCircle className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Stock Analysis</h3>
-          <p className="text-gray-600 mb-4">Sign in to ask AI about any stock</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            AI Stock Analysis
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Sign in to ask AI about any stock
+          </p>
           <Button className="bg-blue-600 hover:bg-blue-700">
             Sign In to Continue
           </Button>
@@ -93,13 +116,14 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
           <div>
             <h3 className="text-sm sm:text-lg font-semibold text-gray-900">
               AI Stock Analysis
-              {stockSymbol && <span className="text-blue-600"> - {stockSymbol}</span>}
+              {stockSymbol && (
+                <span className="text-blue-600"> - {stockSymbol}</span>
+              )}
             </h3>
             <p className="text-xs text-gray-600">
-              {profile.subscription_tier === 'free' 
+              {profile.subscription_tier === "free"
                 ? `${profile.ai_queries_used}/${profile.ai_queries_limit} queries used today`
-                : 'Unlimited queries'
-              }
+                : "Unlimited queries"}
             </p>
           </div>
         </div>
@@ -107,9 +131,10 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
         <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
             <Input
-              placeholder={stockSymbol 
-                ? `Ask anything about ${stockSymbol}...` 
-                : "Ask about any stock or market trend..."
+              placeholder={
+                stockSymbol
+                  ? `Ask anything about ${stockSymbol}...`
+                  : "Ask about any stock or market trend..."
               }
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -160,7 +185,7 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
               <AlertCircle className="h-4 w-4 text-red-500" />
               <span className="text-red-700 text-xs">{error}</span>
             </div>
-            {error.includes('query limit') && onUpgrade && (
+            {error.includes("query limit") && onUpgrade && (
               <Button
                 size="sm"
                 onClick={onUpgrade}
@@ -188,11 +213,13 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
                   <Sparkles className="h-4 w-4 text-purple-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">AI Analysis</h3>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-900">
+                    AI Analysis
+                  </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 text-xs text-gray-600">
                     <span>Confidence: {response.confidence}%</span>
                     <span className="hidden sm:inline">•</span>
-                    <span>Sources: {response.sources.join(', ')}</span>
+                    <span>Sources: {response.sources.join(", ")}</span>
                   </div>
                 </div>
               </div>
@@ -208,16 +235,22 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
                 <div className="mt-4 sm:mt-6 p-3 bg-gray-50 rounded-lg">
                   <div className="flex items-center space-x-2 mb-2 sm:mb-3">
                     <TrendingUp className="h-4 w-4 text-green-600" />
-                    <span className="text-xs sm:text-base font-semibold text-gray-900">AI Recommendation</span>
+                    <span className="text-xs sm:text-base font-semibold text-gray-900">
+                      AI Recommendation
+                    </span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 text-xs">
                     <div>
                       <span className="text-gray-600">Action:</span>
-                      <div className={`font-semibold ${
-                        response.recommendations.action === 'BUY' ? 'text-green-600' :
-                        response.recommendations.action === 'SELL' ? 'text-red-600' :
-                        'text-blue-600'
-                      }`}>
+                      <div
+                        className={`font-semibold ${
+                          response.recommendations.action === "BUY"
+                            ? "text-green-600"
+                            : response.recommendations.action === "SELL"
+                            ? "text-red-600"
+                            : "text-blue-600"
+                        }`}
+                      >
                         {response.recommendations.action}
                       </div>
                     </div>
@@ -239,7 +272,8 @@ export const AIQueryInterface: React.FC<AIQueryInterfaceProps> = ({
                     )}
                   </div>
                   <div className="mt-2 sm:mt-3 text-xs text-gray-600">
-                    <strong>Reasoning:</strong> {response.recommendations.reasoning}
+                    <strong>Reasoning:</strong>{" "}
+                    {response.recommendations.reasoning}
                   </div>
                 </div>
               )}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
-import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   IconDashboard,
@@ -9,7 +8,6 @@ import {
   IconStar,
   IconCrown,
   IconSettings,
-  IconLogout,
   IconChartBar,
   IconUser,
   IconSun,
@@ -24,26 +22,16 @@ interface SidebarLayoutProps {
 }
 
 export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
-  const { profile, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
-
   const links = [
     {
       label: "Dashboard",
-      href: "/",
+      href: "/dashboard",
       icon: (
         <IconDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -129,7 +117,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
           <div className="space-y-2">
             <SidebarLink
               link={{
-                label: profile?.email || "User",
+                label: "Demo User",
                 href: "#",
                 icon: (
                   <div className="h-7 w-7 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
@@ -137,17 +125,6 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                   </div>
                 ),
               }}
-            />
-
-            {/* Logout Button */}
-            <SidebarLink
-              link={{
-                label: "Logout",
-                href: "#",
-                icon: <IconLogout className="h-5 w-5 shrink-0 text-red-500" />,
-              }}
-              className="cursor-pointer hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg px-2 text-red-600 dark:text-red-400"
-              onClick={handleLogout}
             />
           </div>
         </SidebarBody>
@@ -206,13 +183,11 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
                 </button>
 
-                {/* Premium Badge */}
-                {profile?.subscription_tier === "premium" && (
-                  <div className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    <IconCrown className="h-4 w-4" />
-                    <span>Premium</span>
-                  </div>
-                )}
+                {/* Demo Badge */}
+                <div className="flex items-center space-x-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <IconCrown className="h-4 w-4" />
+                  <span>Demo</span>
+                </div>
               </div>
             </div>
           </div>

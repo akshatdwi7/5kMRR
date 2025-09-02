@@ -60,24 +60,21 @@ export const supabaseService = {
   },
 
   async addToWatchlist(stockSymbol: string, stockName: string): Promise<void> {
-    // Mock for development
-    if (!import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL === 'your_supabase_project_url') {
-      console.log('Mock: Added to watchlist:', stockSymbol, stockName);
-      return;
-    }
+    // Mock for development - always use demo mode for now
+    console.log('Demo mode: Added to watchlist:', stockSymbol, stockName);
+    return;
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error('User not authenticated');
-
-    const { error } = await supabase
-      .from('watchlists')
-      .insert({
-        user_id: user.id,
-        stock_symbol: stockSymbol,
-        stock_name: stockName,
-      });
-
-    if (error) throw error;
+    // Commented out real implementation to prevent auth issues
+    // const { data: { user } } = await supabase.auth.getUser();
+    // if (!user) throw new Error('User not authenticated');
+    // const { error } = await supabase
+    //   .from('watchlists')
+    //   .insert({
+    //     user_id: user.id,
+    //     stock_symbol: stockSymbol,
+    //     stock_name: stockName,
+    //   });
+    // if (error) throw error;
   },
 
   async removeFromWatchlist(stockSymbol: string): Promise<void> {
@@ -101,25 +98,15 @@ export const supabaseService = {
   },
 
   async addToPortfolio(portfolioItem: Omit<PortfolioItem, 'id' | 'updated_at'>): Promise<void> {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error('User not authenticated');
+    // Demo mode - prevent auth calls
+    console.log('Demo mode: Added to portfolio:', portfolioItem.stock_symbol);
+    return;
 
-    const { error } = await supabase
-      .from('portfolios')
-      .upsert({
-        user_id: user.id,
-        stock_symbol: portfolioItem.stock_symbol,
-        stock_name: portfolioItem.stock_name,
-        quantity: portfolioItem.quantity,
-        avg_price: portfolioItem.avg_price,
-        current_price: portfolioItem.current_price,
-        invested_amount: portfolioItem.invested_amount,
-        current_value: portfolioItem.current_value,
-        gain_loss: portfolioItem.gain_loss,
-        gain_loss_percent: portfolioItem.gain_loss_percent,
-      });
-
-    if (error) throw error;
+    // Commented out to prevent auth issues
+    // const { data: { user } } = await supabase.auth.getUser();
+    // if (!user) throw new Error('User not authenticated');
+    // const { error } = await supabase.from('portfolios').upsert({...});
+    // if (error) throw error;
   },
 
   async updatePortfolioItem(stockSymbol: string, updates: Partial<PortfolioItem>): Promise<void> {
@@ -142,19 +129,15 @@ export const supabaseService = {
 
   // AI Query operations
   async saveAIQuery(stockSymbol: string | undefined, query: string, response: string): Promise<void> {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error('User not authenticated');
+    // Demo mode - prevent auth calls
+    console.log('Demo mode: Saved AI query:', { stockSymbol, query: query.substring(0, 50) + '...' });
+    return;
 
-    const { error } = await supabase
-      .from('ai_queries')
-      .insert({
-        user_id: user.id,
-        stock_symbol: stockSymbol,
-        query,
-        response,
-      });
-
-    if (error) throw error;
+    // Commented out to prevent auth issues
+    // const { data: { user } } = await supabase.auth.getUser();
+    // if (!user) throw new Error('User not authenticated');
+    // const { error } = await supabase.from('ai_queries').insert({...});
+    // if (error) throw error;
   },
 
   async getAIQueryHistory(limit: number = 50): Promise<AIQuery[]> {
@@ -170,25 +153,15 @@ export const supabaseService = {
 
   // Subscription operations
   async createSubscription(planId: string, razorpaySubscriptionId: string): Promise<void> {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error('User not authenticated');
+    // Demo mode - prevent auth calls
+    console.log('Demo mode: Created subscription:', { planId, razorpaySubscriptionId });
+    return;
 
-    const now = new Date();
-    const endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + 1); // 1 month subscription
-
-    const { error } = await supabase
-      .from('subscriptions')
-      .insert({
-        user_id: user.id,
-        plan_id: planId,
-        status: 'active',
-        current_period_start: now.toISOString(),
-        current_period_end: endDate.toISOString(),
-        razorpay_subscription_id: razorpaySubscriptionId,
-      });
-
-    if (error) throw error;
+    // Commented out to prevent auth issues
+    // const { data: { user } } = await supabase.auth.getUser();
+    // if (!user) throw new Error('User not authenticated');
+    // const { error } = await supabase.from('subscriptions').insert({...});
+    // if (error) throw error;
   },
 
   async updateSubscriptionStatus(subscriptionId: string, status: 'active' | 'cancelled' | 'expired'): Promise<void> {
