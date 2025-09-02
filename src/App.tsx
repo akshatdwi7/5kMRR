@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
+import { SidebarLayout } from "./components/layout/SidebarLayout";
 import { LandingPage } from "./pages/LandingPage";
 
 import { Dashboard } from "./pages/Dashboard";
@@ -8,6 +9,7 @@ import { Screener } from "./pages/Screener";
 import { StockDetail } from "./pages/StockDetail";
 import { Premium } from "./pages/Premium";
 import { Chat } from "./pages/Chat";
+import { Settings } from "./pages/Settings";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Aboutit } from "./pages/About";
@@ -19,16 +21,13 @@ function AppContent() {
     <Routes>
       {/* Public routes */}
       <Route path="/about" element={<Aboutit />} />
+      <Route path="/" element={<LandingPage />} />
       <Route
-        path="/"
+        path="/dashboard"
         element={
-          isAuthenticated ? (
-            <Layout>
-              <Dashboard />
-            </Layout>
-          ) : (
-            <LandingPage />
-          )
+          <SidebarLayout>
+            <Dashboard />
+          </SidebarLayout>
         }
       />
       {/* Authenticated routes */}
@@ -37,49 +36,49 @@ function AppContent() {
           <Route
             path="/screener"
             element={
-              <Layout>
+              <SidebarLayout>
                 <Screener />
-              </Layout>
+              </SidebarLayout>
             }
           />
           <Route
             path="/stock/:symbol"
             element={
-              <Layout>
+              <SidebarLayout>
                 <StockDetail />
-              </Layout>
+              </SidebarLayout>
             }
           />
           <Route
             path="/premium"
             element={
-              <Layout>
+              <SidebarLayout>
                 <Premium />
-              </Layout>
+              </SidebarLayout>
             }
           />
           <Route
             path="/chat"
             element={
-              <Layout>
+              <SidebarLayout>
                 <Chat />
-              </Layout>
+              </SidebarLayout>
             }
           />
           <Route
             path="/watchlist"
             element={
-              <Layout>
+              <SidebarLayout>
                 <Dashboard />
-              </Layout>
+              </SidebarLayout>
             }
           />
           <Route
             path="/settings"
             element={
-              <Layout>
-                <Dashboard />
-              </Layout>
+              <SidebarLayout>
+                <Settings />
+              </SidebarLayout>
             }
           />
         </>

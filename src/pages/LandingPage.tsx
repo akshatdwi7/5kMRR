@@ -1,8 +1,6 @@
 import React, { useState, Suspense, memo, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ButtonRotatingBackgroundGradient, {
   ButtonShadowGradient,
-  Button,
 } from "../components/ui/Button";
 import MovingGradientPill from "../components/ui/pill";
 import { TextLoopCustomVariantsTransition } from "../components/ui/TEXTloop";
@@ -11,15 +9,14 @@ import { TabsExample } from "../components/ui/tabssolid";
 import ThreeDMarqueeDemo from "../components/ui/threeDmac";
 import LampDemo from "../components/ui/lamp";
 import Accordion from "../components/ui/FAQ";
-import { TrendingUp, Check, X } from "lucide-react";
-import { Input } from "../components/ui/Input";
+import { TrendingUp, Check } from "lucide-react";
 import ss from "../assets/logos/ss.png";
 import { ShootingStars } from "../components/ui/shooting-stars";
-import { useAuth } from "../contexts/AuthContext";
+// Authentication removed - direct dashboard access
 import { StarsBackground } from "../components/ui/stars-background";
 import { Blackbutton } from "../components/ui/buttonnew";
 import { Link } from "react-router-dom";
-import { WavyBackgroundDemo } from "../components/ui/wave";
+import { HeroScrollDemo } from "../components/ui/containerscrol";
 
 // Lazy load heavy components with better chunking
 const Example = React.lazy(() =>
@@ -116,26 +113,15 @@ const getFadeInUp = (isChrome: boolean) => {
 };
 
 export const LandingPage: React.FC = () => {
-  const [isLoginMode, setIsLoginMode] = useState(true);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [isYearlyBilling, setIsYearlyBilling] = useState(true);
-  const [isChromeBrowser, setIsChromeBrowser] = useState(false);
+  // Removed authentication state - direct dashboard access
   const [showShootingStars, setShowShootingStars] = useState(false);
-  const { login, signup } = useAuth();
 
   // Performance optimizations and scroll-based loading
   useEffect(() => {
-    setIsChromeBrowser(isChrome());
+    const isChromeBrowser = isChrome();
 
     // Chrome-specific CSS optimizations - only for non-interactive elements
-    if (isChrome()) {
+    if (isChromeBrowser) {
       // Only apply to specific sections that don't need interactivity
       const nonInteractiveSections = document.querySelectorAll(
         ".chrome-optimize-only"
@@ -164,7 +150,7 @@ export const LandingPage: React.FC = () => {
     // Cleanup function
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (isChrome()) {
+      if (isChromeBrowser) {
         const nonInteractiveSections = document.querySelectorAll(
           ".chrome-optimize-only"
         );
@@ -180,48 +166,7 @@ export const LandingPage: React.FC = () => {
     };
   }, [showShootingStars]);
 
-  // Memoize event handlers to prevent re-renders
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsLoading(true);
-      setAuthError("");
-      try {
-        if (isLoginMode) {
-          await login(formData.email, formData.password);
-        } else {
-          await signup(formData.email, formData.password, formData.name);
-        }
-        setShowAuthModal(false);
-      } catch (error) {
-        setAuthError(
-          error instanceof Error ? error.message : "Authentication failed"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [isLoginMode, formData, login, signup]
-  );
-
-  const handleModalOpen = useCallback((mode: boolean) => {
-    console.log("Opening modal with mode:", mode);
-    setIsLoginMode(mode);
-    setShowAuthModal(true);
-  }, []);
-
-  const handleModalClose = useCallback(() => {
-    setShowAuthModal(false);
-  }, []);
-
-  const toggleBilling = useCallback((yearly: boolean) => {
-    setIsYearlyBilling(yearly);
-  }, []);
-
-  // Memoize form data handlers
-  const handleFormChange = useCallback((field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  }, []);
+  // Removed billing toggle - not needed without auth
 
   // Scroll to section handlers
   const scrollToSection = useCallback((sectionId: string) => {
@@ -270,28 +215,25 @@ export const LandingPage: React.FC = () => {
               Pricing
             </button>
             <div className="hidden lg:block">
-              <ButtonRotatingBackgroundGradient
-                onClick={() => handleModalOpen(false)}
-              >
-                Get started
-              </ButtonRotatingBackgroundGradient>
+              <Link to="/dashboard">
+                <ButtonRotatingBackgroundGradient>
+                  Get started
+                </ButtonRotatingBackgroundGradient>
+              </Link>
             </div>
             <Blackbutton onClick={handleUpstoxLogin}>Sign In</Blackbutton>
           </div>
           <div className="sm:hidden">
-            <Blackbutton onClick={() => handleModalOpen(true)}>
-              Sign In
-            </Blackbutton>
+            <Link to="/dashboard">
+              <Blackbutton>Go to Dashboard</Blackbutton>
+            </Link>
           </div>
         </nav>
 
         <div className="relative z-10 flex flex-col items-center justify-center flex-1 pt-12 pb-20 text-center px-4">
-          <MovingGradientPill
-            onClick={() => {
-              console.log("Hero pill button clicked!");
-              handleModalOpen(false);
-            }}
-          />
+          <Link to="/dashboard">
+            <MovingGradientPill />
+          </Link>
           <h1 className="mt-10 mb-8 text-4xl leading-tight sm:text-6xl lg:text-7xl font-arimo font-medium text-white sm:leading-[1.08]">
             Invest With
             <span className="font-instrument italic bg-gradient-to-br from-blue-700 to-blue-300 bg-clip-text text-transparent">
@@ -310,9 +252,9 @@ export const LandingPage: React.FC = () => {
             The only platform where you can chat with AI about any Indian stock
             and get intelligent, data-driven insights instantly.
           </p>
-          <ButtonShadowGradient onClick={() => handleModalOpen(false)}>
-            Start your free trial
-          </ButtonShadowGradient>
+          <Link to="/dashboard">
+            <ButtonShadowGradient>Start your free trial</ButtonShadowGradient>
+          </Link>
           <div className="mt-2 text-sm font-thin text-gray-400">
             Know thy creator /{" "}
             <Link
@@ -413,7 +355,7 @@ export const LandingPage: React.FC = () => {
           }
         >
           <div className="mac">
-            <MemoizedMacbookScrollDemo />
+            <HeroScrollDemo />
           </div>
         </Suspense>
 
@@ -1510,80 +1452,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Optimized Auth Modal */}
-      <AnimatePresence>
-        {showAuthModal && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
-            onClick={handleModalClose}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md p-6 sm:p-8 bg-white shadow-2xl rounded-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl text-gray-900 font-instrument italic">
-                  {isLoginMode ? "Welcome Back ⛵︎" : "Create Account ☂︎"}
-                </h2>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleModalClose}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-              {authError && (
-                <div className="p-3 mt-4 border border-red-200 rounded-lg bg-red-50">
-                  <p className="text-sm text-red-700">{authError}</p>
-                </div>
-              )}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {!isLoginMode && (
-                  <Input
-                    placeholder="Full Name"
-                    value={formData.name}
-                    onChange={(e) => handleFormChange("name", e.target.value)}
-                    required
-                    className="border-gray-300 focus:border-blue-500"
-                  />
-                )}
-                <Input
-                  type="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={(e) => handleFormChange("email", e.target.value)}
-                  required
-                  className="border-gray-300 focus:border-blue-500"
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={(e) => handleFormChange("password", e.target.value)}
-                  required
-                  className="border-gray-300 focus:border-blue-500"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading
-                    ? "Please wait..."
-                    : isLoginMode
-                    ? "Sign In"
-                    : "Create Account"}
-                </button>
-              </form>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* Authentication removed - direct dashboard access */}
 
       {/* Add shooting stars only when user scrolls past hero for performance */}
       {showShootingStars && <MemoizedShootingStars />}

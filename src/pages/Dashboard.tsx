@@ -2,393 +2,510 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Search,
-  MessageCircle,
-  TrendingUp,
   ArrowUpRight,
   ArrowDownRight,
-  Sparkles,
-  DollarSign,
-  Target,
-  Activity,
-  Plus,
-  Star,
+  TrendingUp,
+  MoreHorizontal,
+  ChevronDown,
 } from "lucide-react";
-import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
-import { AIQueryInterface } from "../components/ai/AIQueryInterface";
-import { Stock } from "../types";
-import { stockApi } from "../services/stockApi";
-import { supabaseService } from "../services/supabaseService";
-import { useAuth } from "../contexts/AuthContext";
-import Examplechart from "../components/ui/chartcom";
 
 export const Dashboard: React.FC = () => {
-  const { profile } = useAuth();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<Stock[]>([]);
-  const [topMovers, setTopMovers] = useState<Stock[]>([]);
-  const [portfolioSummary, setPortfolioSummary] = useState({
-    totalInvested: 500000,
-    totalCurrent: 547500,
-    totalGainLoss: 47500,
-    totalGainLossPercent: 9.5,
-  });
-  const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isSearching, setIsSearching] = useState(false);
+
+  // Mock data for the dashboard
+  const stockCards = [
+    {
+      symbol: "AAPL",
+      company: "Apple, Inc",
+      price: 1232.0,
+      change: 11.01,
+      isPositive: true,
+      logo: "🍎",
+    },
+    {
+      symbol: "PYPL",
+      company: "Paypal, Inc",
+      price: 965.0,
+      change: -9.05,
+      isPositive: false,
+      logo: "💙",
+    },
+    {
+      symbol: "TSLA",
+      company: "Tesla, Inc",
+      price: 1232.0,
+      change: 11.01,
+      isPositive: true,
+      logo: "⚡",
+    },
+    {
+      symbol: "AMZN",
+      company: "Amazon.com, Inc",
+      price: 2567.99,
+      change: 11.01,
+      isPositive: true,
+      logo: "📦",
+    },
+  ];
+
+  const watchlistStocks = [
+    {
+      symbol: "AAPL",
+      company: "Apple, Inc",
+      price: 4008.65,
+      change: 11.01,
+      isPositive: true,
+      logo: "🍎",
+    },
+    {
+      symbol: "SPOT",
+      company: "Spotify.com",
+      price: 11689.0,
+      change: 9.48,
+      isPositive: true,
+      logo: "🎵",
+    },
+    {
+      symbol: "ABNB",
+      company: "Airbnb, Inc",
+      price: 32227.0,
+      change: -0.29,
+      isPositive: false,
+      logo: "🏠",
+    },
+    {
+      symbol: "ENVT",
+      company: "Envato, Inc",
+      price: 13895.0,
+      change: 3.79,
+      isPositive: true,
+      logo: "🌱",
+    },
+    {
+      symbol: "QIWI",
+      company: "qiwi.com, Inc",
+      price: 6008.65,
+      change: 4.52,
+      isPositive: true,
+      logo: "💳",
+    },
+  ];
+
+  const trendingStocks = [
+    {
+      symbol: "TSLA",
+      company: "Tesla, Inc",
+      price: 192.53,
+      change: 1.01,
+      isPositive: true,
+      logo: "⚡",
+    },
+    {
+      symbol: "AAPL",
+      company: "Apple, Inc",
+      price: 192.53,
+      change: 3.59,
+      isPositive: true,
+      logo: "🍎",
+    },
+    {
+      symbol: "SPOT",
+      company: "Spotify.com",
+      price: 192.53,
+      change: 2.48,
+      isPositive: true,
+      logo: "🎵",
+    },
+  ];
+
+  const transactions = [
+    {
+      id: 1,
+      action: "Bought",
+      symbol: "PYPL",
+      date: "Nov 23, 01:00 PM",
+      price: 2567.88,
+      category: "Finance",
+      status: "Success",
+      logo: "💙",
+    },
+    {
+      id: 2,
+      action: "Bought",
+      symbol: "AAPL",
+      date: "Nov 22, 09:00 PM",
+      price: 2567.88,
+      category: "Technology",
+      status: "Pending",
+      logo: "🍎",
+    },
+  ];
+
+  const dividendData = [
+    { month: "Jan", amount: 150 },
+    { month: "Feb", amount: 400 },
+    { month: "Mar", amount: 200 },
+    { month: "Apr", amount: 300 },
+    { month: "May", amount: 180 },
+    { month: "Jun", amount: 200 },
+  ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [movers, summary] = await Promise.all([
-          stockApi.getTopMovers(),
-          supabaseService.getPortfolioSummary().catch(() => portfolioSummary), // Fallback to mock data
-        ]);
-        setTopMovers(movers);
-        setPortfolioSummary(summary);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    // Simulate loading
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }, []);
-
-  useEffect(() => {
-    const searchStocks = async () => {
-      if (searchQuery.trim()) {
-        setIsSearching(true);
-        try {
-          const results = await stockApi.searchStocks(searchQuery);
-          setSearchResults(results);
-        } catch (error) {
-          console.error("Error searching stocks:", error);
-        } finally {
-          setIsSearching(false);
-        }
-      } else {
-        setSearchResults([]);
-        setSelectedStock(null);
-      }
-    };
-
-    const debounceTimer = setTimeout(searchStocks, 300);
-    return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
-
-  const handleStockSelect = (stock: Stock) => {
-    setSelectedStock(stock);
-  };
-
-  const handleAddToWatchlist = async (stock: Stock) => {
-    try {
-      await supabaseService.addToWatchlist(stock.symbol, stock.name);
-      // Show success message
-    } catch (error) {
-      console.error("Error adding to watchlist:", error);
-    }
-  };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
-          Ask AI About Any Stock
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Get instant, intelligent answers about Indian stocks
-        </p>
-      </div>
-
-      <Examplechart />
-
-      {/* Portfolio Summary - Simplified */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-200">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Invested Amount</div>
-            <div className="text-2xl font-bold text-gray-900">
-              ₹{(portfolioSummary.totalInvested / 100000).toFixed(1)}L
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Current Value</div>
-            <div className="text-2xl font-bold text-gray-900">
-              ₹{(portfolioSummary.totalCurrent / 100000).toFixed(1)}L
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Total Gain</div>
-            <div
-              className={`text-2xl font-bold ${
-                portfolioSummary.totalGainLoss >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {portfolioSummary.totalGainLoss >= 0 ? "+" : ""}₹
-              {(Math.abs(portfolioSummary.totalGainLoss) / 1000).toFixed(1)}K
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-sm text-gray-600 mb-1">Returns</div>
-            <div
-              className={`text-2xl font-bold flex items-center justify-center ${
-                portfolioSummary.totalGainLossPercent >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {portfolioSummary.totalGainLossPercent >= 0 ? (
-                <ArrowUpRight className="h-5 w-5 mr-1" />
-              ) : (
-                <ArrowDownRight className="h-5 w-5 mr-1" />
-              )}
-              {portfolioSummary.totalGainLossPercent >= 0 ? "+" : ""}
-              {portfolioSummary.totalGainLossPercent.toFixed(1)}%
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Stock Search - Core Feature */}
-      <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center space-x-3 mb-4">
-            <div className="p-3 bg-blue-100 rounded-xl">
-              <MessageCircle className="h-6 w-6 text-blue-600" />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              Stock Query Assistant
-            </h2>
-          </div>
-          <p className="text-gray-600">
-            Search any Indian stock and ask AI anything about it
-          </p>
-        </div>
-
-        <div className="max-w-2xl mx-auto">
-          <div className="relative mb-6">
-            <Input
-              placeholder="Search stocks (e.g., RELIANCE, TCS, HDFC Bank)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              icon={<Search className="h-5 w-5 text-gray-400" />}
-              className="text-lg py-4 bg-gray-50 border-gray-200 focus:border-blue-500 focus:bg-white"
-            />
-
-            {isSearching && (
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
+    <div className="space-y-6">
+      {/* Stock Cards Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stockCards.map((stock, index) => (
+          <motion.div
+            key={stock.symbol}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700 hover:shadow-lg transition-all duration-200"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center text-lg">
+                  {stock.logo}
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white text-lg">
+                    {stock.symbol}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {stock.company}
+                  </p>
+                </div>
               </div>
-            )}
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                ${stock.price.toFixed(2)}
+              </div>
+              <div
+                className={`flex items-center text-sm font-medium ${
+                  stock.isPositive ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {stock.isPositive ? (
+                  <ArrowUpRight className="h-4 w-4 mr-1" />
+                ) : (
+                  <ArrowDownRight className="h-4 w-4 mr-1" />
+                )}
+                {stock.isPositive ? "+" : ""}
+                {stock.change.toFixed(2)}%
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column - Portfolio Performance */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Portfolio Performance Chart */}
+          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Portfolio Performance
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Here is your performance stats of each month
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-neutral-700 rounded-lg text-gray-600 dark:text-gray-400">
+                  Monthly
+                </button>
+                <button className="px-3 py-1 text-sm bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
+                  Quarterly
+                </button>
+                <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-neutral-700 rounded-lg text-gray-600 dark:text-gray-400">
+                  Annually
+                </button>
+              </div>
+            </div>
+
+            {/* Placeholder for chart - you'll replace this with your chart library */}
+            <div className="h-64 bg-gray-50 dark:bg-neutral-700 rounded-lg flex items-center justify-center">
+              <div className="text-center">
+                <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-gray-500 dark:text-gray-400">
+                  Portfolio Performance Chart
+                </p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">
+                  Chart component will go here
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Search Results */}
-          {searchResults.length > 0 && (
-            <div className="space-y-3 mb-8">
-              {searchResults.slice(0, 4).map((stock) => (
-                <motion.div
+          {/* Trending Stocks */}
+          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Trending Stocks
+              </h2>
+              <div className="flex items-center space-x-2">
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-lg">
+                  <ChevronDown className="h-4 w-4 text-gray-600 dark:text-gray-400 rotate-180" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-lg">
+                  <ChevronDown className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {trendingStocks.map((stock) => (
+                <div
                   key={stock.symbol}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="bg-gray-50 dark:bg-neutral-700 rounded-xl p-4 space-y-4"
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white text-sm">
+                        {stock.logo}
+                      </div>
                       <div>
-                        <h4 className="font-bold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">
                           {stock.symbol}
-                        </h4>
-                        <p className="text-sm text-gray-600 truncate max-w-xs">
-                          {stock.name}
+                        </h3>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                          {stock.company}
                         </p>
                       </div>
-                      <div className="text-right">
-                        <div className="text-lg font-bold text-gray-900">
-                          ₹{stock.price.toFixed(2)}
-                        </div>
-                        <div
-                          className={`text-sm font-medium ${
-                            stock.change > 0 ? "text-green-600" : "text-red-600"
-                          }`}
-                        >
-                          {stock.change > 0 ? "+" : ""}
-                          {stock.changePercent.toFixed(2)}%
-                        </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-semibold text-gray-900 dark:text-white">
+                        ${stock.price}
+                      </div>
+                      <div className="text-xs text-green-600 flex items-center">
+                        <ArrowUpRight className="h-3 w-3 mr-1" />
+                        {stock.change}%
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2 ml-4">
+
+                  <div className="flex items-center space-x-2">
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => handleAddToWatchlist(stock)}
-                      className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                      className="flex-1 text-xs border-gray-300 dark:border-neutral-600"
                     >
-                      <Star className="h-3 w-3 mr-1" />
-                      Watch
+                      Short Stock
                     </Button>
                     <Button
-                      className="bg-blue-600 hover:bg-blue-700"
-                      onClick={() => handleStockSelect(stock)}
+                      size="sm"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs"
                     >
-                      <MessageCircle className="h-4 w-4 mr-2" />
-                      Ask AI
+                      Buy Stock
                     </Button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          )}
+          </div>
 
-          {/* Quick Examples */}
-          {!selectedStock && (
-            <div className="text-center">
-              <p className="text-gray-500 text-sm mb-4">Try asking:</p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  "Should I buy RELIANCE?",
-                  "TCS vs Infosys comparison",
-                  "HDFC Bank analysis",
-                  "Best IT stocks today",
-                ].map((example, index) => (
-                  <button
-                    key={index}
-                    onClick={() =>
-                      setSearchQuery(
-                        example.split(" ")[2] || example.split(" ")[0]
-                      )
-                    }
-                    className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm hover:bg-blue-100 transition-colors"
+          {/* Latest Transactions */}
+          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Latest Transactions
+              </h2>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 rounded-lg text-sm"
+                />
+                <Search className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200 dark:border-neutral-700">
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      Name
+                    </th>
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      Date
+                    </th>
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      Price
+                    </th>
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      Category
+                    </th>
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      Status
+                    </th>
+                    <th className="text-left py-3 text-sm font-medium text-gray-600 dark:text-gray-400"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {transactions.map((transaction) => (
+                    <tr
+                      key={transaction.id}
+                      className="border-b border-gray-100 dark:border-neutral-700 last:border-0"
+                    >
+                      <td className="py-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center">
+                            {transaction.logo}
+                          </div>
+                          <div>
+                            <div className="font-medium text-gray-900 dark:text-white">
+                              {transaction.action} {transaction.symbol}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 text-sm text-gray-600 dark:text-gray-400">
+                        {transaction.date}
+                      </td>
+                      <td className="py-4 text-sm font-medium text-gray-900 dark:text-white">
+                        ${transaction.price}
+                      </td>
+                      <td className="py-4 text-sm text-gray-600 dark:text-gray-400">
+                        {transaction.category}
+                      </td>
+                      <td className="py-4">
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            transaction.status === "Success"
+                              ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400"
+                              : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400"
+                          }`}
+                        >
+                          {transaction.status}
+                        </span>
+                      </td>
+                      <td className="py-4">
+                        <button className="p-1 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded">
+                          <MoreHorizontal className="h-4 w-4 text-gray-400" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column - Sidebar Content */}
+        <div className="space-y-6">
+          {/* Dividend Chart */}
+          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Dividend
+              </h2>
+              <button className="p-1 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded">
+                <MoreHorizontal className="h-4 w-4 text-gray-400" />
+              </button>
+            </div>
+
+            {/* Simple Bar Chart */}
+            <div className="space-y-4">
+              <div className="flex items-end justify-between h-32">
+                {dividendData.map((data) => (
+                  <div
+                    key={data.month}
+                    className="flex flex-col items-center space-y-2"
                   >
-                    "{example}"
-                  </button>
+                    <div
+                      className="bg-blue-500 rounded-t w-6 transition-all duration-300 hover:bg-blue-600"
+                      style={{
+                        height: `${(data.amount / 400) * 100}%`,
+                        minHeight: "8px",
+                      }}
+                    ></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
+                      {data.month}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
-          )}
-        </div>
-      </div>
-
-      {/* AI Query Interface */}
-      {selectedStock && (
-        <AIQueryInterface
-          stockSymbol={selectedStock.symbol}
-          stockName={selectedStock.name}
-          onUpgrade={() => {
-            // Navigate to premium page
-            window.location.href = "/premium";
-          }}
-        />
-      )}
-
-      {/* General AI Query Interface (when no stock selected) */}
-      {!selectedStock && searchQuery === "" && (
-        <AIQueryInterface
-          onUpgrade={() => {
-            window.location.href = "/premium";
-          }}
-        />
-      )}
-
-      {/* Top Movers - Secondary Feature */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-gray-900 flex items-center">
-            <Activity className="h-5 w-5 text-orange-500 mr-2" />
-            Top Movers Today
-          </h3>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-600 font-medium">Live</span>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {topMovers.slice(0, 6).map((stock, index) => (
-            <motion.div
-              key={stock.symbol}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
-              onClick={() => handleStockSelect(stock)}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div>
-                  <h4 className="font-bold text-gray-900">{stock.symbol}</h4>
-                  <p className="text-xs text-gray-600">{stock.sector}</p>
-                </div>
-                <div
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    stock.change > 0
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {stock.change > 0 ? "+" : ""}
-                  {stock.changePercent.toFixed(1)}%
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-lg font-bold text-gray-900">
-                  ₹{stock.price.toFixed(2)}
-                </span>
-                <Button
-                  size="sm"
-                  className="bg-blue-600 hover:bg-blue-700 text-xs"
-                >
-                  <MessageCircle className="h-3 w-3 mr-1" />
-                  Ask AI
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Usage Stats for Free Users */}
-      {profile?.subscription_tier === "free" && (
-        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 border border-yellow-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Daily Usage
-              </h3>
-              <p className="text-gray-600">
-                You've used {profile.ai_queries_used} of{" "}
-                {profile.ai_queries_limit} free AI queries today
-              </p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                <div
-                  className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${
-                      (profile.ai_queries_used / profile.ai_queries_limit) * 100
-                    }%`,
-                  }}
-                ></div>
-              </div>
+          {/* My Watchlist */}
+          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-gray-200 dark:border-neutral-700">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                My Watchlist
+              </h2>
+              <button className="p-1 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded">
+                <MoreHorizontal className="h-4 w-4 text-gray-400" />
+              </button>
             </div>
-            <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white">
-              <Sparkles className="h-4 w-4 mr-2" />
-              Upgrade to Pro
-            </Button>
+
+            <div className="space-y-4">
+              {watchlistStocks.map((stock) => (
+                <div
+                  key={stock.symbol}
+                  className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-neutral-700 rounded-lg transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center text-sm">
+                      {stock.logo}
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-900 dark:text-white text-sm">
+                        {stock.symbol}
+                      </h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        {stock.company}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="font-medium text-gray-900 dark:text-white text-sm">
+                      ${stock.price.toLocaleString()}
+                    </div>
+                    <div
+                      className={`text-xs flex items-center ${
+                        stock.isPositive ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {stock.isPositive ? (
+                        <ArrowUpRight className="h-3 w-3 mr-1" />
+                      ) : (
+                        <ArrowDownRight className="h-3 w-3 mr-1" />
+                      )}
+                      {stock.isPositive ? "+" : ""}
+                      {stock.change}%
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
