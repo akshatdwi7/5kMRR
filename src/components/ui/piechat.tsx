@@ -23,9 +23,9 @@ export const description = "A radial chart";
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "#F8BBD0" },
   { browser: "safari", visitors: 200, fill: "#D81B60" },
-  { browser: "firefox", visitors: 187, fill: "orange" },
+  { browser: "firefox", visitors: 187, fill: "#E91E63" },
   { browser: "edge", visitors: 173, fill: "#C2185B" },
-  { browser: "other", visitors: 300, fill: "red" },
+  { browser: "other", visitors: 90, fill: "red" },
 ];
 
 const chartConfig = {

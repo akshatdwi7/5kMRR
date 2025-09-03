@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  IconDashboard,
   IconSearch,
   IconMessageCircle,
   IconStar,
   IconCrown,
   IconSettings,
-  IconChartBar,
   IconUser,
   IconSun,
   IconMoon,
   IconBell,
+  IconHomeFilled,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
+import ssLogo from "../../assets/logos/ss.png";
 
 interface SidebarLayoutProps {
   children: React.ReactNode;
@@ -33,7 +33,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
       label: "Dashboard",
       href: "/dashboard",
       icon: (
-        <IconDashboard className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconHomeFilled className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
@@ -86,13 +86,13 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
   return (
     <div
       className={cn(
-        "mx-auto flex w-full max-w-full flex-1 flex-col overflow-hidden bg-gray-50 md:flex-row dark:bg-neutral-900",
+        "mx-auto flex w-full max-w-full flex-1 flex-col overflow-hidden bg-gray-50 md:flex-row dark:bg-black",
         "h-screen"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
-          <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
+          <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto ">
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
               {links.map((link, idx) => (
@@ -103,7 +103,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                     href: "#",
                   }}
                   className={cn(
-                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg px-2",
+                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl  px-2",
                     location.pathname === link.href &&
                       "bg-neutral-200 dark:bg-neutral-700"
                   )}
@@ -114,7 +114,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
           </div>
 
           {/* User Profile Section */}
-          <div className="space-y-2">
+          <div className="space-y-2 ">
             <SidebarLink
               link={{
                 label: "Demo User",
@@ -132,12 +132,12 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
 
       {/* Main Content Area */}
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex h-full w-full flex-1 flex-col rounded-tl-2xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900 overflow-y-auto">
+        <div className="flex h-full w-full flex-1 flex-col rounded-tl-2xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-black overflow-y-auto">
           {/* Header Section */}
           <div className="border-b border-neutral-200 dark:border-neutral-700 p-4 md:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                <h1 className="text-2xl  text-neutral-900 dark:text-neutral-100 font-instrument font-thin">
                   {getCurrentPageTitle(location.pathname)}
                 </h1>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
@@ -202,9 +202,9 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
 
 const Logo = () => {
   return (
-    <div className="flex items-center space-x-2 py-1 text-sm font-normal text-black dark:text-white">
-      <div className="h-8 w-8 shrink-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-        <IconChartBar className="h-5 w-5 text-white" />
+    <div className="flex items-center space-x-2 py-1 text-sm font-thin text-black dark:text-white">
+      <div className="h-8 w-8 shrink-0 rounded-lg  flex items-center justify-center">
+        <img src={ssLogo} alt="Screeno Logo" className="h-10 w-10" />
       </div>
       <motion.span
         initial={{ opacity: 0 }}
@@ -220,8 +220,8 @@ const Logo = () => {
 const LogoIcon = () => {
   return (
     <div className="flex items-center space-x-2 py-1 text-sm font-normal text-black dark:text-white">
-      <div className="h-8 w-8 shrink-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-        <IconChartBar className="h-5 w-5 text-white" />
+      <div className="h-8 w-8 shrink-0 rounded-lg flex items-center justify-center">
+        <img src={ssLogo} alt="Screeno Logo" className=" h-10 w-10" />
       </div>
     </div>
   );

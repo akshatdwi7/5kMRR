@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Dashnavcard from "../components/ui/dashnavcard";
 import { ChartAreaInteractive101 } from "../components/ui/dashchart";
 import { ChartRadialSimple } from "../components/ui/piechat";
 export const Dashboard: React.FC = () => {
@@ -15,7 +15,7 @@ export const Dashboard: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
       </div>
     );
   }
@@ -23,6 +23,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div>
       <div>
+        <Dashnavcard />
         <ChartAreaInteractive101 />
         <ChartRadialSimple />
       </div>
