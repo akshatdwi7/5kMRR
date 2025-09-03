@@ -22,10 +22,10 @@ export const description = "A radial chart";
 
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "#F8BBD0" },
-  { browser: "safari", visitors: 200, fill: "#E91E63" },
-  { browser: "firefox", visitors: 187, fill: " #D81B60" },
+  { browser: "safari", visitors: 200, fill: "#D81B60" },
+  { browser: "firefox", visitors: 187, fill: "orange" },
   { browser: "edge", visitors: 173, fill: "#C2185B" },
-  { browser: "other", visitors: 90, fill: "#AD1457" },
+  { browser: "other", visitors: 300, fill: "red" },
 ];
 
 const chartConfig = {
