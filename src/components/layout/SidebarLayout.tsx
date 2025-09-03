@@ -103,7 +103,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                     href: "#",
                   }}
                   className={cn(
-                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl  px-2",
+                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg py-2.5 px-3 ",
                     location.pathname === link.href &&
                       "bg-neutral-200 dark:bg-neutral-700"
                   )}
