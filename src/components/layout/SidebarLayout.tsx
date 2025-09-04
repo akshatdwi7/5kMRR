@@ -103,9 +103,9 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                     href: "#",
                   }}
                   className={cn(
-                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg py-2.5 px-3 ",
+                    "cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-900 rounded-lg py-2.5 px-3 ",
                     location.pathname === link.href &&
-                      "bg-neutral-200 dark:bg-neutral-700"
+                      "bg-neutral-200 dark:bg-neutral-900"
                   )}
                   onClick={() => handleNavigation(link.href)}
                 />
@@ -120,8 +120,8 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                 label: "Demo User",
                 href: "#",
                 icon: (
-                  <div className="h-7 w-7 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                    <IconUser className="h-4 w-4 text-white" />
+                  <div className="h-7 w-7 shrink-0 rounded-full  flex items-center justify-center">
+                    <IconUser className="h-6 w-6 text-white" />
                   </div>
                 ),
               }}
@@ -137,7 +137,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
           <div className="border-b border-neutral-200 dark:border-neutral-700 p-4 md:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl  text-neutral-900 dark:text-neutral-100 font-instrument font-thin">
+                <h1 className="text-2xl  text-neutral-900 dark:text-neutral-100 font-thin ">
                   {getCurrentPageTitle(location.pathname)}
                 </h1>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
@@ -151,15 +151,15 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                 <div className="relative hidden md:block">
                   <input
                     type="text"
-                    placeholder="Search or type command..."
+                    placeholder="Search any company..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-80 pl-10 pr-12 py-2 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-neutral-200"
+                    className="w-80 pl-10 pr-12 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm focus:outline-none  focus:ring-0  dark:focus:ring-pink-900 dark:focus:border-pink-900 focus:border-pink-400 focus:ring-pink-400 dark:text-neutral-200"
                   />
                   <IconSearch className="h-4 w-4 text-neutral-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                    <kbd className="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 rounded border text-neutral-600 dark:text-neutral-400">
-                      ⌘K
+                    <kbd className="px-2 py-1 text-xs bg-neutral-200 dark:bg-black rounded border text-neutral-600 dark:text-neutral-400">
+                      ⌘+K
                     </kbd>
                   </div>
                 </div>
