@@ -167,7 +167,7 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                 {/* Theme Toggle */}
                 <button
                   onClick={toggleTheme}
-                  className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+                  className="p-2 rounded-lg bg-neutral-100 dark:bg-black hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                   title="Toggle theme"
                 >
                   {isDarkMode ? (
@@ -178,16 +178,10 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
                 </button>
 
                 {/* Notifications */}
-                <button className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors relative">
+                <button className="p-2 rounded-lg bg-neutral-100 dark:bg-black hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors relative">
                   <IconBell className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
                 </button>
-
-                {/* Demo Badge */}
-                <div className="flex items-center space-x-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  <IconCrown className="h-4 w-4" />
-                  <span>Demo</span>
-                </div>
               </div>
             </div>
           </div>

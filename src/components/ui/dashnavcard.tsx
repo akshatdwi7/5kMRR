@@ -6,6 +6,52 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+// Indian market indices data for the ticker
+const indianIndices = [
+  {
+    symbol: "NIFTY 50",
+    currentPrice: 23456.78,
+    priceChange: 123.45,
+    percentageChange: 0.53,
+    isPositive: true,
+  },
+  {
+    symbol: "BANK NIFTY",
+    currentPrice: 45678.9,
+    priceChange: -234.56,
+    percentageChange: -0.51,
+    isPositive: false,
+  },
+  {
+    symbol: "NIFTY IT",
+    currentPrice: 34567.89,
+    priceChange: 456.78,
+    percentageChange: 1.34,
+    isPositive: true,
+  },
+  {
+    symbol: "NIFTY AUTO",
+    currentPrice: 12345.67,
+    priceChange: -89.12,
+    percentageChange: -0.72,
+    isPositive: false,
+  },
+  {
+    symbol: "NIFTY FMCG",
+    currentPrice: 56789.01,
+    priceChange: 234.56,
+    percentageChange: 0.41,
+    isPositive: true,
+  },
+  {
+    symbol: "NIFTY PHARMA",
+    currentPrice: 23456.78,
+    priceChange: -123.45,
+    percentageChange: -0.52,
+    isPositive: false,
+  },
+];
+
 const stockData = [
   {
     symbol: "TSLA",
@@ -56,92 +102,62 @@ const generateChartData = (isPositive: boolean) => {
 export default function Dashnavcard() {
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {stockData.map((stock) => (
-          <div
-            key={stock.symbol}
-            className="bg-black border border-neutral-800 rounded-10xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
-          >
-            {/* Header with Logo, Ticker, Company Name, and Update Status */}
-            <div className="flex justify-between items-start mb-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-red-500 rounded-3xl flex items-center justify-center text-white text-2xl font-bold">
-                  {stock.logo}
-                </div>
-                <div>
-                  <div className="text-neutral-400 text-sm font-medium">
-                    {stock.symbol}
-                  </div>
-                  <div className="text-white font-semibold">
-                    {stock.company}
-                  </div>
-                </div>
+      {/* Moving Ticker for Indian Indices */}
+      <div className="bg-black border border-neutral-800 rounded-lg mb-4 -mt-2 overflow-hidden">
+        <div
+          className="flex"
+          style={{
+            animation: "scroll 30s linear infinite",
+            width: "200%",
+          }}
+        >
+          {[...indianIndices, ...indianIndices].map((index, idx) => (
+            <div
+              key={`${index.symbol}-${idx}`}
+              className="flex items-center space-x-4 px-6 py-3 whitespace-nowrap border-r border-neutral-800"
+            >
+              <div className="text-white font-semibold text-sm">
+                {index.symbol}
               </div>
-              <div className="text-right">
-                <div className="text-neutral-400 text-xs">updated</div>
-                <div className="text-white text-sm font-medium">
-                  {stock.updated}
-                </div>
+              <div className="text-white text-sm font-bold">
+                ₹{index.currentPrice.toFixed(2)}
               </div>
-            </div>
-
-            {/* Price and Change Section */}
-            <div className="flex items-end justify-between mb-6">
-              <div className="flex items-baseline space-x-3">
-                <div className="text-white text-3xl font-bold">
-                  £{stock.currentPrice.toFixed(2)}
-                </div>
-                <div className="flex flex-col">
-                  <div
-                    className={classNames(
-                      stock.isPositive ? "text-emerald-400" : "text-red-400",
-                      "text-lg font-semibold"
-                    )}
-                  >
-                    {stock.isPositive ? "+" : ""}£{stock.priceChange.toFixed(2)}
-                  </div>
-                  <div
-                    className={classNames(
-                      stock.isPositive ? "text-emerald-400" : "text-red-400",
-                      "text-sm font-medium flex items-center"
-                    )}
-                  >
-                    {stock.isPositive ? "+" : ""}
-                    {stock.percentageChange.toFixed(2)}%
-                    {stock.isPositive ? (
-                      <TrendingUp className="w-4 h-4 ml-1" />
-                    ) : (
-                      <TrendingDown className="w-4 h-4 ml-1" />
-                    )}
-                  </div>
-                </div>
+              <div
+                className={classNames(
+                  index.isPositive ? "text-emerald-400" : "text-red-400",
+                  "text-sm font-medium flex items-center"
+                )}
+              >
+                {index.isPositive ? "+" : ""}₹{index.priceChange.toFixed(2)}
+                <span className="ml-1">
+                  ({index.isPositive ? "+" : ""}
+                  {index.percentageChange.toFixed(2)}%)
+                </span>
+                {index.isPositive ? (
+                  <TrendingUp className="w-3 h-3 ml-1" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 ml-1" />
+                )}
               </div>
             </div>
-
-            {/* Line Chart */}
-            <div className="relative">
-              <div className="absolute top-1/2 left-0 right-0 h-px bg-neutral-700 border-dashed border-neutral-600"></div>
-              <div className="relative h-16">
-                <svg className="w-full h-full" viewBox="0 0 200 64">
-                  <path
-                    d={generateChartData(stock.isPositive)
-                      .map((point, index) => {
-                        const x = (index / 19) * 200;
-                        const y = 64 - (point.value / 110) * 64;
-                        return `${index === 0 ? "M" : "L"} ${x} ${y}`;
-                      })
-                      .join(" ")}
-                    stroke={stock.isPositive ? "#10B981" : "#EF4444"}
-                    strokeWidth="2"
-                    fill="none"
-                    className="drop-shadow-lg"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+        `,
+        }}
+      />
     </>
   );
 }
