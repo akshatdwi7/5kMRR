@@ -3,6 +3,9 @@ import Dashnavcard from "../components/ui/dashnavcard";
 import { ChartAreaInteractive101 } from "../components/ui/dashchart";
 import { ChartRadialSimple } from "../components/ui/piechat";
 import StockStack from "../components/ui/stockstack";
+import WatchlistSection from "../components/ui/watchlist-section";
+import NewsSection from "../components/ui/news-section";
+import { NiftyChartsDash } from "../components/ui/niftychartsdash";
 export const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
@@ -37,11 +40,18 @@ export const Dashboard: React.FC = () => {
         </div>
         <div className="flex gap-6">
           <div className="w-1/3">
-            {/* Empty space to align with radial chart */}
+            <NiftyChartsDash />
+            <div className="mt-6">
+              {" "}
+              <WatchlistSection />
+            </div>
           </div>
           <div className="flex-1">
             <StockStack />
           </div>
+        </div>
+        <div className="mt-6">
+          <NewsSection />
         </div>
       </div>
     </div>

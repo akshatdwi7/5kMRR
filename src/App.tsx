@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SidebarLayout } from "./components/layout/SidebarLayout";
 import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
+import { Watchlist } from "./pages/Watchlist";
 import { Screener } from "./pages/Screener";
 import { StockDetail } from "./pages/StockDetail";
 import { Premium } from "./pages/Premium";
@@ -65,7 +66,7 @@ function App() {
             path="/watchlist"
             element={
               <SidebarLayout>
-                <Dashboard />
+                <Watchlist />
               </SidebarLayout>
             }
           />
