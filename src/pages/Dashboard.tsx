@@ -30,7 +30,7 @@ export const Dashboard: React.FC = () => {
         <Dashnavcard />
         <div className="flex gap-6 mb-6">
           <div className="w-1/3">
-            <ChartRadialSimple />
+            <NiftyChartsDash />
           </div>
           <div className="flex-1">
             <div className="w-full">
@@ -40,13 +40,13 @@ export const Dashboard: React.FC = () => {
         </div>
         <div className="flex gap-6">
           <div className="w-1/3">
-            <NiftyChartsDash />
+            <ChartRadialSimple />
             <div className="mt-6">
               {" "}
               <WatchlistSection />
             </div>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 -mt-8">
             <StockStack />
           </div>
         </div>

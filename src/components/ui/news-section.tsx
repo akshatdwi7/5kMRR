@@ -138,23 +138,25 @@ export default function NewsSection() {
   };
 
   return (
-    <div className="bg-black border border-neutral-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-white text-xl font-bold flex items-center">
+          <h2 className="text-neutral-900 dark:text-white text-xl font-bold flex items-center">
             <Star className="w-5 h-5 mr-2 text-blue-400" />
             Market News
           </h2>
-          <p className="text-neutral-400 text-sm">
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm">
             Latest updates for your stocks
           </p>
         </div>
         <div className="text-right">
-          <div className="text-white text-sm font-medium">
+          <div className="text-neutral-900 dark:text-white text-sm font-medium">
             {filteredNews.length} articles
           </div>
-          <p className="text-neutral-400 text-xs">Updated 2h ago</p>
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+            Updated 2h ago
+          </p>
         </div>
       </div>
 
@@ -168,7 +170,7 @@ export default function NewsSection() {
               "px-3 py-1.5 rounded-full text-xs font-medium transition-colors",
               selectedFilter === filter.key
                 ? "bg-pink-600 text-white"
-                : "bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-300"
+                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-300"
             )}
           >
             {filter.label}
@@ -181,7 +183,7 @@ export default function NewsSection() {
         {filteredNews.map((news) => (
           <div
             key={news.id}
-            className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 hover:bg-neutral-800 transition-colors duration-200 cursor-pointer group"
+            className="bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200 cursor-pointer group"
           >
             <div className="flex items-start justify-between">
               {/* Left side - News content */}
@@ -190,11 +192,11 @@ export default function NewsSection() {
                   <div className="w-6 h-6 bg-red-500 rounded flex items-center justify-center text-white text-xs font-bold">
                     {news.logo}
                   </div>
-                  <span className="text-neutral-400 text-xs font-medium">
+                  <span className="text-neutral-600 dark:text-neutral-400 text-xs font-medium">
                     {news.stockSymbol}
                   </span>
                   <span className="text-neutral-500 text-xs">•</span>
-                  <span className="text-neutral-400 text-xs">
+                  <span className="text-neutral-600 dark:text-neutral-400 text-xs">
                     {news.category}
                   </span>
                   <div className="flex items-center space-x-1">
@@ -210,15 +212,15 @@ export default function NewsSection() {
                   </div>
                 </div>
 
-                <h3 className="text-white font-semibold text-sm mb-2 group-hover:text-pink-300 transition-colors">
+                <h3 className="text-neutral-900 dark:text-white font-semibold text-sm mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
                   {news.title}
                 </h3>
 
-                <p className="text-neutral-400 text-xs mb-3 line-clamp-2">
+                <p className="text-neutral-600 dark:text-neutral-400 text-xs mb-3 line-clamp-2">
                   {news.summary}
                 </p>
 
-                <div className="flex items-center space-x-4 text-xs text-neutral-500">
+                <div className="flex items-center space-x-4 text-xs text-neutral-500 dark:text-neutral-500">
                   <div className="flex items-center space-x-1">
                     <Clock className="w-3 h-3" />
                     <span>{news.publishedAt}</span>
@@ -231,8 +233,8 @@ export default function NewsSection() {
 
               {/* Right side - External link */}
               <div className="ml-4 flex-shrink-0">
-                <button className="p-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
-                  <ExternalLink className="w-4 h-4 text-neutral-400" />
+                <button className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <ExternalLink className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
                 </button>
               </div>
             </div>
@@ -241,8 +243,8 @@ export default function NewsSection() {
       </div>
 
       {/* View More */}
-      <div className="mt-6 pt-4 border-t border-neutral-700">
-        <button className="w-full text-center text-pink-400 hover:text-pink-300 text-sm font-medium transition-colors">
+      <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+        <button className="w-full text-center text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 text-sm font-medium transition-colors">
           View all market news →
         </button>
       </div>

@@ -52,58 +52,11 @@ const indianIndices = [
   },
 ];
 
-const stockData = [
-  {
-    symbol: "TSLA",
-    company: "Tesla Inc.",
-    currentPrice: 801.0,
-    priceChange: 0.92,
-    percentageChange: 1.24,
-    isPositive: true,
-    logo: "🚗", // Using emoji as placeholder for logo
-    updated: "2m ago",
-  },
-  {
-    symbol: "AAPL",
-    company: "Apple Inc.",
-    currentPrice: 185.5,
-    priceChange: -2.3,
-    percentageChange: -1.22,
-    isPositive: false,
-    logo: "🍎",
-    updated: "1m ago",
-  },
-  {
-    symbol: "MSFT",
-    company: "Microsoft Corp.",
-    currentPrice: 420.75,
-    priceChange: 8.45,
-    percentageChange: 2.05,
-    isPositive: true,
-    logo: "🪟",
-    updated: "3m ago",
-  },
-];
-
-// Mock chart data for the line chart
-const generateChartData = (isPositive: boolean) => {
-  const baseValue = 100;
-  const data = [];
-
-  for (let i = 0; i < 20; i++) {
-    const randomChange = (Math.random() - 0.5) * 10;
-    const value = baseValue + randomChange + (isPositive ? 5 : -5);
-    data.push({ value: Math.max(0, value) });
-  }
-
-  return data;
-};
-
 export default function Dashnavcard() {
   return (
     <>
       {/* Moving Ticker for Indian Indices */}
-      <div className="bg-black border border-neutral-800 rounded-lg mb-4 -mt-2 overflow-hidden">
+      <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg mb-4 -mt-2 overflow-hidden">
         <div
           className="flex"
           style={{
@@ -114,17 +67,19 @@ export default function Dashnavcard() {
           {[...indianIndices, ...indianIndices].map((index, idx) => (
             <div
               key={`${index.symbol}-${idx}`}
-              className="flex items-center space-x-4 px-6 py-3 whitespace-nowrap border-r border-neutral-800"
+              className="flex items-center space-x-4 px-6 py-3 whitespace-nowrap border-r border-neutral-200 dark:border-neutral-800"
             >
-              <div className="text-white font-semibold text-sm">
+              <div className="text-neutral-900 dark:text-white font-semibold text-sm">
                 {index.symbol}
               </div>
-              <div className="text-white text-sm font-bold">
+              <div className="text-neutral-900 dark:text-white text-sm font-bold">
                 ₹{index.currentPrice.toFixed(2)}
               </div>
               <div
                 className={classNames(
-                  index.isPositive ? "text-emerald-400" : "text-red-400",
+                  index.isPositive
+                    ? "text-emerald-600 dark:text-emerald-400"
+                    : "text-red-600 dark:text-red-400",
                   "text-sm font-medium flex items-center"
                 )}
               >

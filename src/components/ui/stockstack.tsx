@@ -86,15 +86,19 @@ export default function StockStack() {
   const totalPercentageChange = (totalProfitLoss / totalInvested) * 100;
 
   return (
-    <div className="bg-black border border-neutral-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-white text-xl font-bold">Your Holdings</h2>
-          <p className="text-neutral-400 text-sm">Portfolio overview</p>
+          <h2 className="text-neutral-900 dark:text-white text-xl font-bold">
+            Your Holdings
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+            Portfolio overview
+          </p>
         </div>
         <div className="text-right">
-          <div className="text-white text-lg font-bold">
+          <div className="text-neutral-900 dark:text-white text-lg font-bold">
             £
             {totalCurrentValue.toLocaleString("en-US", {
               minimumFractionDigits: 2,
@@ -103,7 +107,9 @@ export default function StockStack() {
           </div>
           <div
             className={classNames(
-              totalProfitLoss >= 0 ? "text-emerald-400" : "text-red-400",
+              totalProfitLoss >= 0
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-red-600 dark:text-red-400",
               "text-sm font-medium flex items-center justify-end"
             )}
           >
@@ -130,7 +136,7 @@ export default function StockStack() {
         {userHoldings.map((stock) => (
           <div
             key={stock.symbol}
-            className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 hover:bg-neutral-800 transition-colors duration-200"
+            className="bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
           >
             <div className="flex items-center justify-between">
               {/* Left side - Company info */}
@@ -139,10 +145,10 @@ export default function StockStack() {
                   {stock.logo}
                 </div>
                 <div>
-                  <div className="text-white font-semibold">
+                  <div className="text-neutral-900 dark:text-white font-semibold">
                     {stock.company}
                   </div>
-                  <div className="text-neutral-400 text-sm">
+                  <div className="text-neutral-600 dark:text-neutral-400 text-sm">
                     {stock.symbol} • {stock.shares} shares • {stock.sector}
                   </div>
                 </div>
@@ -150,14 +156,14 @@ export default function StockStack() {
 
               {/* Right side - Financial info */}
               <div className="text-right">
-                <div className="text-white font-bold">
+                <div className="text-neutral-900 dark:text-white font-bold">
                   £
                   {stock.currentValue.toLocaleString("en-US", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
                 </div>
-                <div className="text-neutral-400 text-sm">
+                <div className="text-neutral-600 dark:text-neutral-400 text-sm">
                   Invested: £
                   {stock.investedAmount.toLocaleString("en-US", {
                     minimumFractionDigits: 2,
@@ -166,7 +172,9 @@ export default function StockStack() {
                 </div>
                 <div
                   className={classNames(
-                    stock.isPositive ? "text-emerald-400" : "text-red-400",
+                    stock.isPositive
+                      ? "text-emerald-600 dark:text-emerald-400"
+                      : "text-red-600 dark:text-red-400",
                     "text-sm font-medium flex items-center justify-end"
                   )}
                 >
@@ -190,11 +198,11 @@ export default function StockStack() {
 
             {/* Progress bar showing profit/loss */}
             <div className="mt-3">
-              <div className="flex justify-between text-xs text-neutral-400 mb-1">
+              <div className="flex justify-between text-xs text-neutral-600 dark:text-neutral-400 mb-1">
                 <span>Invested: £{stock.investedAmount.toLocaleString()}</span>
                 <span>Current: £{stock.currentValue.toLocaleString()}</span>
               </div>
-              <div className="w-full bg-neutral-700 rounded-full h-2">
+              <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
                   className={classNames(
                     stock.isPositive ? "bg-emerald-500" : "bg-red-500",
@@ -217,11 +225,13 @@ export default function StockStack() {
       </div>
 
       {/* Summary Footer */}
-      <div className="mt-6 pt-4 border-t border-neutral-700">
+      <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-700">
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <div className="text-neutral-400 text-sm">Total Invested</div>
-            <div className="text-white font-bold">
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Total Invested
+            </div>
+            <div className="text-neutral-900 dark:text-white font-bold">
               £
               {totalInvested.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
@@ -230,8 +240,10 @@ export default function StockStack() {
             </div>
           </div>
           <div>
-            <div className="text-neutral-400 text-sm">Current Value</div>
-            <div className="text-white font-bold">
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Current Value
+            </div>
+            <div className="text-neutral-900 dark:text-white font-bold">
               £
               {totalCurrentValue.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
@@ -240,10 +252,14 @@ export default function StockStack() {
             </div>
           </div>
           <div>
-            <div className="text-neutral-400 text-sm">Total P&L</div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Total P&L
+            </div>
             <div
               className={classNames(
-                totalProfitLoss >= 0 ? "text-emerald-400" : "text-red-400",
+                totalProfitLoss >= 0
+                  ? "text-emerald-600 dark:text-emerald-400"
+                  : "text-red-600 dark:text-red-400",
                 "font-bold"
               )}
             >

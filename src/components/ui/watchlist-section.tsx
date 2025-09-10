@@ -48,7 +48,7 @@ export default function WatchlistSection() {
   };
 
   return (
-    <div className="bg-black border border-neutral-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div
@@ -57,15 +57,19 @@ export default function WatchlistSection() {
         >
           <div className="flex items-center">
             <Star className="w-5 h-5 mr-2 text-yellow-400" />
-            <h2 className="text-white text-xl font-bold">Watchlist</h2>
+            <h2 className="text-neutral-900 dark:text-white text-xl font-bold">
+              Watchlist
+            </h2>
           </div>
-          <ChevronRight className="w-4 h-4 ml-2 text-neutral-400" />
+          <ChevronRight className="w-4 h-4 ml-2 text-neutral-600 dark:text-neutral-400" />
         </div>
         <div className="text-right">
-          <div className="text-white text-sm font-medium">
+          <div className="text-neutral-900 dark:text-white text-sm font-medium">
             {watchlistStocks.length} stocks
           </div>
-          <p className="text-neutral-400 text-xs">Track favorites</p>
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+            Track favorites
+          </p>
         </div>
       </div>
 
@@ -74,7 +78,7 @@ export default function WatchlistSection() {
         {watchlistStocks.map((stock) => (
           <div
             key={stock.symbol}
-            className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 hover:bg-neutral-800 transition-colors duration-200"
+            className="bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
           >
             <div className="flex items-center justify-between">
               {/* Left side - Company info */}
@@ -83,10 +87,10 @@ export default function WatchlistSection() {
                   {stock.logo}
                 </div>
                 <div>
-                  <div className="text-white font-semibold">
+                  <div className="text-neutral-900 dark:text-white font-semibold">
                     {stock.company}
                   </div>
-                  <div className="text-neutral-400 text-sm">
+                  <div className="text-neutral-600 dark:text-neutral-400 text-sm">
                     {stock.symbol} • {stock.sector}
                   </div>
                 </div>
@@ -94,12 +98,14 @@ export default function WatchlistSection() {
 
               {/* Right side - Price and change info */}
               <div className="text-right">
-                <div className="text-white font-bold">
+                <div className="text-neutral-900 dark:text-white font-bold">
                   £{stock.currentPrice.toFixed(2)}
                 </div>
                 <div
                   className={classNames(
-                    stock.isPositive ? "text-emerald-400" : "text-red-400",
+                    stock.isPositive
+                      ? "text-emerald-600 dark:text-emerald-400"
+                      : "text-red-600 dark:text-red-400",
                     "text-sm font-medium flex items-center justify-end"
                   )}
                 >
@@ -121,21 +127,29 @@ export default function WatchlistSection() {
       </div>
 
       {/* Summary Footer */}
-      <div className="mt-6 pt-4 border-t border-neutral-700">
+      <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-700">
         <div className="grid grid-cols-2 gap-4 text-center">
           <div>
-            <div className="text-neutral-400 text-sm">Total Stocks</div>
-            <div className="text-white font-bold">{watchlistStocks.length}</div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Total Stocks
+            </div>
+            <div className="text-neutral-900 dark:text-white font-bold">
+              {watchlistStocks.length}
+            </div>
           </div>
           <div>
-            <div className="text-neutral-400 text-sm">Avg Change</div>
-            <div className="text-emerald-400 font-bold">+1.23%</div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Avg Change
+            </div>
+            <div className="text-emerald-600 dark:text-emerald-400 font-bold">
+              +1.23%
+            </div>
           </div>
         </div>
         <div className="mt-4">
           <button
             onClick={handleWatchlistClick}
-            className="w-full text-center text-pink-400 hover:text-pink-300 text-sm font-medium transition-colors"
+            className="w-full text-center text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 text-sm font-medium transition-colors"
           >
             View all watchlist stocks →
           </button>

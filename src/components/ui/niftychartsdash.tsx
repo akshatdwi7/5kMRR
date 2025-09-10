@@ -127,7 +127,7 @@ export function NiftyChartsDash() {
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   selectedPeriod === period.key
                     ? "bg-pink-600 text-white"
-                    : "bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-300"
+                    : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-300"
                 }`}
               >
                 {period.label}
