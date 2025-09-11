@@ -676,7 +676,7 @@ export const Screener: React.FC = () => {
           {filteredSectors.map((sector, index) => (
             <div
               key={index}
-              className="bg-gradient-to-b from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-blue-200 dark:border-blue-700"
+              className="bg-gradient-to-b from-blue-200 to-white dark:from-blue-900 dark:to-blue-800 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-blue-200 dark:border-blue-700"
             >
               {/* Icon Section (Material Icons) */}
               <div className="flex justify-center mb-4">
