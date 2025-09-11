@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
+import { Breadcrumb } from "../components/ui/breadcrumb";
 
 export const Screener: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   // Ensure Material Symbols font is loaded once
   useEffect(() => {
@@ -638,11 +641,19 @@ export const Screener: React.FC = () => {
       sector.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Breadcrumb items for Screener
+  const breadcrumbItems = [{ label: "Screener", isActive: true }];
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Breadcrumb Navigation */}
+          <div className="mb-6">
+            <Breadcrumb items={breadcrumbItems} />
+          </div>
+
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -676,7 +687,7 @@ export const Screener: React.FC = () => {
           {filteredSectors.map((sector, index) => (
             <div
               key={index}
-              className="bg-gradient-to-b from-blue-200 to-white dark:from-blue-900 dark:to-blue-800 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-blue-200 dark:border-blue-700"
+              className="bg-gradient-to-b from-blue-200 to-white dark:from-blue-400 dark:to-blue-100 rounded-xl p-6 hover:shadow-2xl hover:bg-inherit transition-all duration-300 cursor-pointer border shadow-md "
             >
               {/* Icon Section (Material Icons) */}
               <div className="flex justify-center mb-4">
@@ -742,7 +753,12 @@ export const Screener: React.FC = () => {
 
               {/* Details Button */}
               <div className="flex justify-center">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200">
+                <button
+                  onClick={() =>
+                    navigate(`/sector/${encodeURIComponent(sector.name)}`)
+                  }
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+                >
                   Details
                 </button>
               </div>

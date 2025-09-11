@@ -1,10 +1,10 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SidebarLayout } from "./components/layout/SidebarLayout";
 import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
 import { Watchlist } from "./pages/Watchlist";
 import { Screener } from "./pages/Screener";
+import Sector from "./pages/Sector";
 import { StockDetail } from "./pages/StockDetail";
 import { Premium } from "./pages/Premium";
 import { Chat } from "./pages/Chat";
@@ -35,6 +35,14 @@ function App() {
             element={
               <SidebarLayout>
                 <Screener />
+              </SidebarLayout>
+            }
+          />
+          <Route
+            path="/sector/:sectorName"
+            element={
+              <SidebarLayout>
+                <Sector />
               </SidebarLayout>
             }
           />
