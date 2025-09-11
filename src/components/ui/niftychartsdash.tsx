@@ -61,7 +61,7 @@ const chartDataSets = {
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "red",
+    color: "#2563eb",
   },
 } satisfies ChartConfig;
 

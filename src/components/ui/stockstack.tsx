@@ -86,7 +86,56 @@ export default function StockStack() {
   const totalPercentageChange = (totalProfitLoss / totalInvested) * 100;
 
   return (
-    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-gray-500 rounded-lg p-6">
+      {/* Summary Section - Moved to Top */}
+      <div className="mb-6 pb-4 border-b border-neutral-200 dark:border-neutral-700">
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Total Invested
+            </div>
+            <div className="text-neutral-900 dark:text-white font-bold">
+              £
+              {totalInvested.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Current Value
+            </div>
+            <div className="text-neutral-900 dark:text-white font-bold">
+              £
+              {totalCurrentValue.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
+              Total P&L
+            </div>
+            <div
+              className={classNames(
+                totalProfitLoss >= 0
+                  ? "text-emerald-600 dark:text-emerald-400"
+                  : "text-red-600 dark:text-red-400",
+                "font-bold"
+              )}
+            >
+              {totalProfitLoss >= 0 ? "+" : ""}£
+              {totalProfitLoss.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -222,55 +271,6 @@ export default function StockStack() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Summary Footer */}
-      <div className="mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-700">
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
-            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
-              Total Invested
-            </div>
-            <div className="text-neutral-900 dark:text-white font-bold">
-              £
-              {totalInvested.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </div>
-          </div>
-          <div>
-            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
-              Current Value
-            </div>
-            <div className="text-neutral-900 dark:text-white font-bold">
-              £
-              {totalCurrentValue.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </div>
-          </div>
-          <div>
-            <div className="text-neutral-600 dark:text-neutral-400 text-sm">
-              Total P&L
-            </div>
-            <div
-              className={classNames(
-                totalProfitLoss >= 0
-                  ? "text-emerald-600 dark:text-emerald-400"
-                  : "text-red-600 dark:text-red-400",
-                "font-bold"
-              )}
-            >
-              {totalProfitLoss >= 0 ? "+" : ""}£
-              {totalProfitLoss.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -102,7 +102,7 @@ export const Watchlist: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-black border border-neutral-800 rounded-lg p-6">
+      <div className="bg-black border border-neutral-200 rounded-lg p-6">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-white text-2xl font-bold flex items-center">

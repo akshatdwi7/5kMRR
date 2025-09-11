@@ -30,23 +30,23 @@ export const Dashboard: React.FC = () => {
         <Dashnavcard />
         <div className="flex gap-6 mb-6">
           <div className="w-1/3">
-            <NiftyChartsDash />
+            <ChartRadialSimple />
           </div>
           <div className="flex-1">
-            <div className="w-full">
+            <div className="w-full ">
               <ChartAreaInteractive101 />
             </div>
           </div>
         </div>
         <div className="flex gap-6">
           <div className="w-1/3">
-            <ChartRadialSimple />
+            <NiftyChartsDash />
             <div className="mt-6">
               {" "}
               <WatchlistSection />
             </div>
           </div>
-          <div className="flex-1 -mt-8">
+          <div className="flex-1 ">
             <StockStack />
           </div>
         </div>

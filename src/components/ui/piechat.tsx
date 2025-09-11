@@ -21,11 +21,11 @@ import {
 export const description = "A radial chart";
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "#F8BBD0" },
-  { browser: "safari", visitors: 200, fill: "#D81B60" },
-  { browser: "firefox", visitors: 187, fill: "#E91E63" },
-  { browser: "edge", visitors: 173, fill: "#C2185B" },
-  { browser: "other", visitors: 90, fill: "red" },
+  { browser: "chrome", visitors: 275, fill: "#93c5fd" },
+  { browser: "safari", visitors: 200, fill: "#3b82f6" },
+  { browser: "firefox", visitors: 187, fill: "#6366f1" },
+  { browser: "edge", visitors: 173, fill: "#1d4ed8" },
+  { browser: "other", visitors: 90, fill: "#4338ca" },
 ];
 
 const chartConfig = {

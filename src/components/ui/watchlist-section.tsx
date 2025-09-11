@@ -38,6 +38,16 @@ const watchlistStocks = [
     logo: "🎬",
     sector: "Entertainment",
   },
+  {
+    symbol: "AAPL",
+    company: "Apple Inc.",
+    currentPrice: 150.75,
+    change: -2.12,
+    percentageChange: -1.38,
+    isPositive: false,
+    logo: "🍎",
+    sector: "Technology",
+  },
 ];
 
 export default function WatchlistSection() {
@@ -48,7 +58,7 @@ export default function WatchlistSection() {
   };
 
   return (
-    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
+    <div className="bg-white dark:bg-black border border-neutral-200 dark:border-gray-500 rounded-lg p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div
