@@ -645,12 +645,12 @@ export const Screener: React.FC = () => {
   const breadcrumbItems = [{ label: "Screener", isActive: true }];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb Navigation */}
-          <div className="mb-6">
+          <div className="mb-2 -mt-12">
             <Breadcrumb items={breadcrumbItems} />
           </div>
 
@@ -687,12 +687,12 @@ export const Screener: React.FC = () => {
           {filteredSectors.map((sector, index) => (
             <div
               key={index}
-              className="bg-gradient-to-b from-blue-200 to-white dark:from-blue-400 dark:to-blue-100 rounded-xl p-6 hover:shadow-2xl hover:bg-inherit transition-all duration-300 cursor-pointer border shadow-md "
+              className="bg-gradient-to-b from-blue-200 to-white dark:from-blue-950 dark:to-blue-300 rounded-xl p-6 hover:shadow-2xl dark:hover:shadow-lg hover:bg-inherit transition-all duration-300 cursor-pointer border shadow-md  dark:hover:shadow-blue-400  dark:border-blue-950 "
             >
               {/* Icon Section (Material Icons) */}
               <div className="flex justify-center mb-4">
-                <div className="w-20 h-20 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-sm">
-                  <span className="material-symbols-outlined text-4xl text-gray-800 dark:text-gray-100">
+                <div className="w-20 h-20 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-sm">
+                  <span className="material-symbols-outlined text-4xl text-gray-800 dark:text-slate-300">
                     {getIconName(sector.name)}
                   </span>
                 </div>
@@ -700,17 +700,17 @@ export const Screener: React.FC = () => {
 
               {/* Title and Description */}
               <div className="text-center mb-4">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl   font-arimo  text-gray-900 dark:text-gray-100 mb-2">
                   {sector.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-100">
                   {sector.description}
                 </p>
               </div>
 
               {/* Company Count - Pill Shape */}
               <div className="flex justify-center mb-6">
-                <div className="bg-blue-200 dark:bg-blue-700 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-full text-sm font-medium">
+                <div className="bg-blue-200 dark:bg-blue-950 text-blue-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium">
                   {sector.companies} Listed Companies
                 </div>
               </div>
@@ -718,7 +718,7 @@ export const Screener: React.FC = () => {
               {/* Market Cap Breakdown - Horizontal */}
               <div className="grid grid-cols-4 gap-2 mb-6">
                 <div className="text-center">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  <div className="text-xs text-gray-600 dark:text-gray-200  mb-1">
                     MICRO
                   </div>
                   <div className="text-lg font-bold text-gray-900 dark:text-white">
@@ -726,7 +726,7 @@ export const Screener: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  <div className="text-xs text-gray-600 dark:text-gray-200 mb-1">
                     SMALL
                   </div>
                   <div className="text-lg font-bold text-gray-900 dark:text-white">
@@ -734,7 +734,7 @@ export const Screener: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  <div className="text-xs text-gray-600 dark:text-gray-200   mb-1">
                     MID
                   </div>
                   <div className="text-lg font-bold text-gray-900 dark:text-white">
@@ -742,7 +742,7 @@ export const Screener: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  <div className="text-xs text-gray-600 dark:text-gray-200 mb-1">
                     LARGE
                   </div>
                   <div className="text-lg font-bold text-gray-900 dark:text-white">
@@ -757,7 +757,7 @@ export const Screener: React.FC = () => {
                   onClick={() =>
                     navigate(`/sector/${encodeURIComponent(sector.name)}`)
                   }
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+                  className="bg-blue-500 hover:bg-blue-300 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 dark:bg-blue-950  dark:hover:bg-blue-900"
                 >
                   Details
                 </button>
